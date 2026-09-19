@@ -3,6 +3,7 @@ import { Link, useLocation } from "wouter";
 import { CircleHelp, Grid2X2, Home, MessageCircle, Palette, UserRound } from "lucide-react";
 import { BrandMark } from "./BrandMark";
 import { InstallPrompt } from "./InstallPrompt";
+import { StandaloneSplash } from "./StandaloneSplash";
 
 export const WHATSAPP_NUMBER = "2349014350492";
 
@@ -28,13 +29,7 @@ export function AmplifyShell({ children }: { children: ReactNode }) {
         <Link href="/" aria-label="Amplify Studio home">
           <BrandMark />
         </Link>
-        <a
-          className="header-whatsapp"
-          href={whatsappUrl()}
-          target="_blank"
-          rel="noreferrer"
-          aria-label="Chat with Amplify Studio on WhatsApp"
-        >
+        <a className="header-whatsapp" href={whatsappUrl()} target="_blank" rel="noreferrer" aria-label="Chat with Amplify Studio on WhatsApp">
           <MessageCircle size={17} strokeWidth={1.8} />
           <span>Let’s talk</span>
         </a>
@@ -56,6 +51,7 @@ export function AmplifyShell({ children }: { children: ReactNode }) {
         </div>
       </nav>
       <InstallPrompt />
+      <StandaloneSplash />
     </div>
   );
 }

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#D4AF37" />
+    <title>Amplify Studio — Offline</title>
+    <style>
+      :root { color-scheme: dark; --wine: #170D1A; --surface: #2B1830; --gold: #D4AF37; --bright: #F0CE6E; --cream: #F7F0E8; --mauve: #A997A3; }
+      * { box-sizing: border-box; }
+      body { min-height: 100svh; margin: 0; padding: 28px; background: var(--wine); color: var(--cream); font-family: Arial, sans-serif; display: grid; place-items: center; text-align: center; }
+      main { width: min(100%, 430px); padding: 48px 28px; border: 1px solid rgba(240,206,110,.24); background: radial-gradient(circle at 50% 0%, rgba(212,175,55,.17), transparent 42%), var(--surface); }
+      .mark { width: 68px; height: 68px; margin: 0 auto 24px; }
+      .mark path:first-of-type, .mark path:nth-of-type(2) { fill: #A97719; }
+      .mark path:nth-of-type(3) { fill: #F2CE6B; }
+      p { margin: 0; }
+      .eyebrow { color: var(--bright); font-size: 10px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
+      h1 { margin: 16px 0 12px; font-family: Georgia, serif; font-size: clamp(40px, 12vw, 68px); font-weight: 400; letter-spacing: -.05em; line-height: .95; }
+      h1 em { color: var(--bright); }
+      .copy { color: var(--mauve); font-size: 15px; line-height: 1.6; }
+      .retry { display: inline-block; margin-top: 28px; padding: 13px 18px; border-radius: 999px; background: var(--gold); color: var(--wine); font-size: 12px; font-weight: 700; text-decoration: none; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <svg class="mark" viewBox="0 0 240 240" aria-hidden="true">
+        <path d="M46,214 L72,214 L118,66 L94,66 Z" />
+        <path d="M86.9,166 L153.1,166 L148.1,150 L91.9,150 Z" />
+        <path d="M194,214 L168,214 L122,66 L113,73 L117,14 L155,59 L146,66 Z" />
+      </svg>
+      <p class="eyebrow">Signal paused</p>
+      <h1>You&apos;re <em>offline.</em></h1>
+      <p class="copy">The connection dropped, but the studio is still here. Check your network and try again when you&apos;re ready.</p>
+      <a class="retry" href="/">Try again</a>
+    </main>
+  </body>
+</html>

@@ -162,3 +162,16 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .install-prompt-dismiss:hover { color: var(--cream); }
 @keyframes installIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 @media (max-width: 780px) { .install-prompt { right: 12px; bottom: 93px; max-width: 220px; } }
+
+/* Native-feeling splash shown only when the PWA opens in standalone mode. */
+.standalone-splash { position: fixed; inset: 0; z-index: 30; background: radial-gradient(circle at 50% 38%, rgba(212,175,55,.16), transparent 27%), var(--wine); display: grid; place-items: center; align-content: center; animation: splashOut 420ms 1020ms var(--ease-out) both; }
+.standalone-splash-mark { width: 84px; height: 84px; margin-bottom: 18px; padding: 13px; border: 1px solid rgba(240,206,110,.25); background: rgba(43,24,48,.7); display: grid; place-items: center; animation: splashMarkIn 620ms var(--ease-out) both; }
+.standalone-splash-mark .brand-mark { width: 100%; height: 100%; }
+.standalone-splash-name { margin: 0; color: var(--cream); font-size: 13px; font-weight: 600; letter-spacing: .24em; line-height: 1; animation: splashTextIn 520ms 120ms var(--ease-out) both; }
+.standalone-splash-name span { display: block; margin-top: 7px; color: var(--gold-bright); font-size: 8px; letter-spacing: .4em; text-align: center; }
+.standalone-splash-tagline { margin: 24px 0 0; color: var(--mauve); font-family: "DM Serif Display", Georgia, serif; font-size: 16px; font-style: italic; animation: splashTextIn 520ms 200ms var(--ease-out) both; }
+.standalone-splash-line { width: 38px; height: 1px; margin-top: 24px; background: var(--gold); animation: splashLineIn 520ms 280ms var(--ease-out) both; }
+@keyframes splashMarkIn { from { opacity: 0; transform: translateY(12px) scale(.94); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes splashTextIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes splashLineIn { from { opacity: 0; transform: scaleX(0); } to { opacity: 1; transform: scaleX(1); } }
+@keyframes splashOut { to { opacity: 0; visibility: hidden; pointer-events: none; } }
