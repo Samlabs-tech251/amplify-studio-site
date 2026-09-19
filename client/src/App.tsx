@@ -1,42 +1,50 @@
-import { Toaster } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import NotFound from "@/pages/NotFound";
-import { Route, Switch } from "wouter";
-import ErrorBoundary from "./components/ErrorBoundary";
-import { ThemeProvider } from "./contexts/ThemeContext";
+import { useEffect } from "react";
+import { Route, Switch, useLocation } from "wouter";
+import { AmplifyShell } from "./components/AmplifyShell";
 import Home from "./pages/Home";
+import Services from "./pages/Services";
+import Portfolio from "./pages/Portfolio";
+import About from "./pages/About";
+import FAQ from "./pages/FAQ";
 
+function RouteScrollReset() {
+  const [location] = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }, [location]);
+
+  return null;
+}
 
 function Router() {
   return (
     <Switch>
-      <Route path={"/"} component={Home} />
-      <Route path={"/404"} component={NotFound} />
-      {/* Final fallback route */}
-      <Route component={NotFound} />
+      <Route path="/" component={Home} />
+      <Route path="/services" component={Services} />
+      <Route path="/portfolio" component={Portfolio} />
+      <Route path="/about" component={About} />
+      <Route path="/faq" component={FAQ} />
+      <Route>
+        {() => (
+          <div className="min-h-screen grid place-items-center p-8 text-center">
+            <div>
+              <p className="eyebrow mb-4">404 / lost signal</p>
+              <h1 className="display-title text-4xl">This page went quiet.</h1>
+              <a className="button button-primary mt-8" href="/">Back to the studio <span>↗</span></a>
+            </div>
+          </div>
+        )}
+      </Route>
     </Switch>
   );
 }
 
-// NOTE: About Theme
-// - First choose a default theme according to your design style (dark or light bg), than change color palette in index.css
-//   to keep consistent foreground/background color across components
-// - If you want to make theme switchable, pass `switchable` ThemeProvider and use `useTheme` hook
-
-function App() {
+export default function App() {
   return (
-    <ErrorBoundary>
-      <ThemeProvider
-        defaultTheme="light"
-        // switchable
-      >
-        <TooltipProvider>
-          <Toaster />
-          <Router />
-        </TooltipProvider>
-      </ThemeProvider>
-    </ErrorBoundary>
+    <AmplifyShell>
+      <RouteScrollReset />
+      <Router />
+    </AmplifyShell>
   );
 }
-
-export default App;
