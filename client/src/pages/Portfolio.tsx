@@ -9,13 +9,13 @@ const projects = [
     className: "portfolio-card-tall",
   },
   {
-    image: "https://raw.githubusercontent.com/Samlabs-tech251/Amplify-studio-assets/main/justeatandchill.jpg",
+    image: "https://raw.githubusercontent.com/Samlabs-tech251/Amplify-studio-assets/main/justeatchill.jpg",
     title: "Just Eat & Chill",
     description: "Four-tier festive food package flyer, priced and easy to compare.",
     className: "portfolio-card-wide",
   },
   {
-    image: "https://raw.githubusercontent.com/Samlabs-tech251/Amplify-studio-assets/main/mayorbeautyplace.jpg",
+    image: "https://raw.githubusercontent.com/Samlabs-tech251/Amplify-studio-assets/main/mayorbeauty.jpg",
     title: "Mayor Beauty Place",
     description: "Before/after lash flyer with UK and Nigeria pricing side by side.",
     className: "",

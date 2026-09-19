@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import { Link, useLocation } from "wouter";
 import { CircleHelp, Grid2X2, Home, MessageCircle, Palette, UserRound } from "lucide-react";
 import { BrandMark } from "./BrandMark";
+import { InstallPrompt } from "./InstallPrompt";
 
 export const WHATSAPP_NUMBER = "2349014350492";
 
@@ -54,6 +55,7 @@ export function AmplifyShell({ children }: { children: ReactNode }) {
           })}
         </div>
       </nav>
+      <InstallPrompt />
     </div>
   );
 }

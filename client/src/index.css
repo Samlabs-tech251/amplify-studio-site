@@ -137,3 +137,28 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .portfolio-fallback strong { max-width: 70%; color: var(--cream); font-family: "DM Serif Display", Georgia, serif; font-size: clamp(1.6rem, 3vw, 3rem); font-weight: 400; line-height: .95; }
 .portfolio-image-wrap img { position: relative; z-index: 1; }
 .image-error::after { display: none; }
+
+/* Fast liquid-settling page cascade: direct page sections arrive in sequence. */
+.page { animation: none; }
+.page > * { animation: cascadeIn 460ms var(--ease-out) both; }
+.page > *:nth-child(1) { animation-delay: 0ms; }
+.page > *:nth-child(2) { animation-delay: 68ms; }
+.page > *:nth-child(3) { animation-delay: 136ms; }
+.page > *:nth-child(4) { animation-delay: 204ms; }
+.page > *:nth-child(5) { animation-delay: 272ms; }
+@keyframes cascadeIn {
+  from { opacity: 0; transform: translateY(-14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.install-prompt { position: fixed; right: 18px; bottom: 95px; z-index: 11; max-width: 245px; padding: 7px 7px 7px 10px; border: 1px solid rgba(240,206,110,.35); border-radius: 13px; background: rgba(43,24,48,.96); box-shadow: 0 12px 35px rgba(0,0,0,.34); backdrop-filter: blur(18px); display: flex; align-items: center; gap: 3px; animation: installIn 360ms var(--ease-out) both; }
+.install-prompt-main { padding: 2px 8px 2px 0; border: 0; background: transparent; color: var(--cream); display: flex; align-items: center; gap: 9px; text-align: left; cursor: pointer; }
+.install-prompt-main:hover strong { color: var(--gold-bright); }
+.install-prompt-icon { width: 27px; height: 27px; border-radius: 9px; background: var(--gold); color: var(--wine-deep); display: grid; place-items: center; flex: 0 0 auto; }
+.install-prompt-main strong, .install-prompt-main small { display: block; }
+.install-prompt-main strong { font-size: 11px; font-weight: 600; line-height: 1.15; transition: color 160ms ease; }
+.install-prompt-main small { margin-top: 3px; color: var(--mauve); font-size: 9px; line-height: 1; }
+.install-prompt-dismiss { width: 25px; height: 25px; padding: 0; border: 0; background: transparent; color: var(--mauve); display: grid; place-items: center; cursor: pointer; }
+.install-prompt-dismiss:hover { color: var(--cream); }
+@keyframes installIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 780px) { .install-prompt { right: 12px; bottom: 93px; max-width: 220px; } }

@@ -1,0 +1,24 @@
+{
+  "name": "Amplify Studio",
+  "short_name": "Amplify",
+  "description": "A Nigerian creative studio helping small businesses grow online.",
+  "display": "standalone",
+  "start_url": "./",
+  "scope": "./",
+  "theme_color": "#D4AF37",
+  "background_color": "#170D1A",
+  "icons": [
+    {
+      "src": "./icons/amplify-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icons/amplify-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
