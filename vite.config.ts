@@ -15,6 +15,9 @@ const PROJECT_ROOT = import.meta.dirname;
 const LOG_DIR = path.join(PROJECT_ROOT, ".manus-logs");
 const MAX_LOG_SIZE_BYTES = 1 * 1024 * 1024; // 1MB per log file
 const TRIM_TARGET_BYTES = Math.floor(MAX_LOG_SIZE_BYTES * 0.6); // Trim to 60% to avoid constant re-trimming
+const githubPagesBase = process.env.GITHUB_ACTIONS === "true"
+  ? `/${process.env.GITHUB_REPOSITORY?.split("/")[1] ?? "amplify-studio-site"}/`
+  : "/";
 
 type LogSource = "browserConsole" | "networkRequests" | "sessionReplay";
 
@@ -207,6 +210,7 @@ const plugins = [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime(
 
 export default defineConfig({
   plugins,
+  base: githubPagesBase,
   resolve: {
     alias: {
       "@": path.resolve(import.meta.dirname, "client", "src"),

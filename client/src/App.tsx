@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Route, Switch, useLocation } from "wouter";
+import { Route, Router as WouterRouter, Switch, useLocation } from "wouter";
 import { AmplifyShell } from "./components/AmplifyShell";
 import Home from "./pages/Home";
 import Services from "./pages/Services";
@@ -40,11 +40,17 @@ function Router() {
   );
 }
 
+const ROUTER_BASE = import.meta.env.BASE_URL === "/"
+  ? ""
+  : import.meta.env.BASE_URL.replace(/\/$/, "");
+
 export default function App() {
   return (
-    <AmplifyShell>
-      <RouteScrollReset />
-      <Router />
-    </AmplifyShell>
+    <WouterRouter base={ROUTER_BASE}>
+      <AmplifyShell>
+        <RouteScrollReset />
+        <Router />
+      </AmplifyShell>
+    </WouterRouter>
   );
 }
