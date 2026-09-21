@@ -34,11 +34,6 @@ const projects = [
   },
 ];
 
-function markImageUnavailable(event: React.SyntheticEvent<HTMLImageElement>) {
-  event.currentTarget.style.display = "none";
-  event.currentTarget.parentElement?.classList.add("image-error");
-}
-
 export default function Portfolio() {
   return (
     <div className="page inner-page portfolio-page">
@@ -47,8 +42,7 @@ export default function Portfolio() {
         {projects.map(({ image, title, description, className }) => (
           <figure className={`portfolio-card ${className}`} key={title}>
             <div className="portfolio-image-wrap">
-              <div className="portfolio-fallback" aria-hidden="true"><span>AMP / {title.slice(0, 2).toUpperCase()}</span><strong>{title}</strong></div>
-              <img src={image} alt={title} loading="lazy" onError={markImageUnavailable} />
+              <img src={image} alt={title} loading="lazy" />
               <span className="portfolio-view">View <ArrowUpRight size={15} /></span>
             </div>
             <figcaption><div><h2>{title}</h2><p>{description}</p></div><span className="portfolio-caption-mark">✳</span></figcaption>

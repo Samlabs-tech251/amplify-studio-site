@@ -71,9 +71,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .header-whatsapp:hover { color: var(--cream); transform: translateY(-1px); }
 .site-main { min-height: calc(100svh - 82px); padding-bottom: 110px; }
 
-.page { max-width: 1280px; margin: 0 auto; padding: 0 28px; animation: pageIn 420ms var(--ease-out) both; }
+.page { max-width: 1280px; margin: 0 auto; padding: 0 28px; }
 .inner-page { padding-top: clamp(40px, 7vw, 92px); }
-@keyframes pageIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 .eyebrow { margin: 0; color: var(--gold-bright); font-size: 10px; font-weight: 600; letter-spacing: .22em; line-height: 1.2; text-transform: uppercase; }
 .display-title, .section-title, h1, h2, h3, p { margin-top: 0; }
 .display-title { margin-bottom: 0; color: var(--cream); font-family: "DM Serif Display", Georgia, serif; font-size: clamp(3.25rem, 8vw, 7.8rem); font-weight: 400; letter-spacing: -.055em; line-height: .93; }
@@ -131,24 +130,17 @@ button, a { -webkit-tap-highlight-color: transparent; }
 }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; } }
 
-/* Remote portfolio assets can be unavailable; keep the card intentional instead of showing a broken image. */
-.portfolio-fallback { position: absolute; inset: 0; padding: 18px; background: radial-gradient(circle at 80% 18%, rgba(240,206,110,.35), transparent 31%), linear-gradient(135deg, #3d2340, #1c101f 76%); display: flex; flex-direction: column; justify-content: space-between; color: var(--gold-bright); }
-.portfolio-fallback span { font-size: 9px; letter-spacing: .16em; }
-.portfolio-fallback strong { max-width: 70%; color: var(--cream); font-family: "DM Serif Display", Georgia, serif; font-size: clamp(1.6rem, 3vw, 3rem); font-weight: 400; line-height: .95; }
-.portfolio-image-wrap img { position: relative; z-index: 1; }
-.image-error::after { display: none; }
-
-/* Fast liquid-settling page cascade: direct page sections arrive in sequence. */
+/* Horizontal wave cascade: every page block slides in from the right, never vertically. */
 .page { animation: none; }
-.page > * { animation: cascadeIn 460ms var(--ease-out) both; }
+.page > * { animation: horizontalWaveIn 350ms ease-out both; }
 .page > *:nth-child(1) { animation-delay: 0ms; }
-.page > *:nth-child(2) { animation-delay: 68ms; }
-.page > *:nth-child(3) { animation-delay: 136ms; }
-.page > *:nth-child(4) { animation-delay: 204ms; }
-.page > *:nth-child(5) { animation-delay: 272ms; }
-@keyframes cascadeIn {
-  from { opacity: 0; transform: translateY(-14px); }
-  to { opacity: 1; transform: translateY(0); }
+.page > *:nth-child(2) { animation-delay: 90ms; }
+.page > *:nth-child(3) { animation-delay: 180ms; }
+.page > *:nth-child(4) { animation-delay: 270ms; }
+.page > *:nth-child(5) { animation-delay: 360ms; }
+@keyframes horizontalWaveIn {
+  from { opacity: 0; transform: translateX(40px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
 .install-prompt { position: fixed; right: 18px; bottom: 95px; z-index: 11; max-width: 245px; padding: 7px 7px 7px 10px; border: 1px solid rgba(240,206,110,.35); border-radius: 13px; background: rgba(43,24,48,.96); box-shadow: 0 12px 35px rgba(0,0,0,.34); backdrop-filter: blur(18px); display: flex; align-items: center; gap: 3px; animation: installIn 360ms var(--ease-out) both; }
