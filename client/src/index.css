@@ -273,3 +273,37 @@ html.lenis, html.lenis body { height: auto; }
 @media (max-width: 980px) { .contact-options { grid-template-columns: 1fr 1fr; }.contact-option-email { grid-column: 1 / -1; min-height: auto; }.contact-option-email .contact-form { max-width: 680px; } }
 @media (max-width: 780px) { .hero-minimal { min-height: calc(100svh - 70px); padding-top: 30px; padding-bottom: 83px; }.hero-minimal .hero-title { font-size: clamp(3.3rem, 15.5vw, 6rem); }.hero-glow { right: -35%; top: -12%; }.inner-page::before { width: 130vw; height: 130vw; top: -8%; right: -45%; }.service-full-section { min-height: calc(100svh - 78px); padding: 48px 20px; }.service-full-section .service-card-trigger { min-height: 200px; grid-template-columns: 33px 46px minmax(0, 1fr) 20px; gap: 11px; padding: 21px 0; }.service-full-section .service-title-line h2 { font-size: clamp(2rem, 10vw, 3.3rem); }.service-full-section .service-body p { font-size: 13px; }.service-watermark { width: 85vw; height: 85vw; right: -20%; opacity: .055; }.service-full-section:nth-child(even) .service-watermark { left: auto; right: -20%; }.service-full-section .service-detail { display: block; width: 100%; }.service-full-section.is-open .service-detail { max-height: 330px; padding: 0 14px 26px 90px; }.service-full-section .service-detail p { font-size: 14px; }.contact-options { display: block; }.contact-option, .contact-option-calendar, .contact-option-email { min-height: 0; margin-bottom: 16px; }.contact-option-email .contact-form { max-width: none; }.bottom-nav-inner { grid-template-columns: repeat(6, 1fr); } }
 @media (prefers-reduced-motion: reduce) { .inner-page::before, .hero-glow, .service-watermark { animation: none; opacity: .75; } }
+
+/* Full-viewport container correction: eliminate fixed right gaps while preserving intentional inner gutters. */
+:root { --page-gutter: clamp(20px, 3.25vw, 52px); }
+.site-header, .page, .hero-section, .proof-section, .home-services-preview, .website-focus, .home-cta { width: 100%; max-width: none; margin-left: 0; margin-right: 0; }
+.site-header { padding-left: var(--page-gutter); padding-right: var(--page-gutter); }
+.page { padding-left: var(--page-gutter); padding-right: var(--page-gutter); }
+.hero-section { padding-left: var(--page-gutter); padding-right: var(--page-gutter); }
+.proof-section, .home-services-preview { padding-left: var(--page-gutter); padding-right: var(--page-gutter); }
+.website-focus, .home-cta { margin-left: 0; margin-right: 0; }
+.website-focus { width: 100%; }
+.home-cta { width: 100%; }
+.page-intro { width: 100%; }
+.service-list, .portfolio-grid, .contact-options, .about-story, .faq-list, .faq-footer-card, .portfolio-note, .page-note { width: 100%; }
+.portfolio-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.contact-options { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+@media (min-width: 781px) {
+  .inner-page { padding-top: clamp(40px, 7vw, 92px); }
+  .service-full-section { margin-left: calc(var(--page-gutter) * -1); margin-right: calc(var(--page-gutter) * -1); padding-left: max(var(--page-gutter), 7vw); padding-right: max(var(--page-gutter), 7vw); }
+}
+
+@media (max-width: 780px) {
+  :root { --page-gutter: 16px; }
+  .site-header { padding-left: var(--page-gutter); padding-right: var(--page-gutter); }
+  .page, .hero-section, .proof-section, .home-services-preview { padding-left: var(--page-gutter); padding-right: var(--page-gutter); }
+  .hero-section { width: 100%; }
+  .website-focus, .home-cta { width: calc(100% + (var(--page-gutter) * 2)); margin-left: calc(var(--page-gutter) * -1); margin-right: calc(var(--page-gutter) * -1); }
+  .website-focus { padding-left: var(--page-gutter); padding-right: var(--page-gutter); }
+  .home-cta { padding-left: var(--page-gutter); padding-right: var(--page-gutter); }
+  .about-cta, .faq-footer-card { width: 100%; }
+  .portfolio-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .contact-options { width: 100%; }
+  .service-full-section { width: calc(100% + (var(--page-gutter) * 2)); margin-left: calc(var(--page-gutter) * -1); margin-right: calc(var(--page-gutter) * -1); padding-left: var(--page-gutter); padding-right: var(--page-gutter); }
+}
