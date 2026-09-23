@@ -18,7 +18,8 @@ export default function Services() {
         {services.map(({ number, title, icon: Icon, description, detail, message, tag, featured }, index) => {
           const isOpen = open === index;
           return (
-            <article className={`service-card ${featured ? "service-card-featured" : ""} ${isOpen ? "is-open" : ""}`} data-reveal key={title}>
+            <article className={`service-card service-full-section ${featured ? "service-card-featured" : ""} ${isOpen ? "is-open" : ""}`} data-reveal key={title}>
+              <Icon className="service-watermark" aria-hidden="true" strokeWidth={0.7} />
               <button className="service-card-trigger" type="button" aria-expanded={isOpen} onClick={() => setOpen(isOpen ? -1 : index)}>
                 <span className="service-number">{number}</span>
                 <span className="service-icon service-icon-animated"><Icon size={25} strokeWidth={1.35} /></span>
