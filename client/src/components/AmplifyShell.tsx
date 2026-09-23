@@ -58,10 +58,10 @@ export function AmplifyShell({ children }: { children: ReactNode }) {
 
 export function PageIntro({ kicker, title, description }: { kicker: string; title: ReactNode; description?: ReactNode }) {
   return (
-    <div className="page-intro">
-      <p className="eyebrow">{kicker}</p>
-      <h1 className="display-title">{title}</h1>
-      {description && <p className="intro-copy">{description}</p>}
+    <div className="page-intro motion-section">
+      <p className="eyebrow" data-reveal>{kicker}</p>
+      <h1 className="display-title" data-reveal>{title}</h1>
+      {description && <p className="intro-copy" data-reveal>{description}</p>}
     </div>
   );
 }

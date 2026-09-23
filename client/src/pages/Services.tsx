@@ -37,9 +37,9 @@ export default function Services() {
   return (
     <div className="page inner-page">
       <PageIntro kicker="Services / 04 ways to be seen" title={<>Make the right<br /><em>kind</em> of noise.</>} description="Pick the piece you need, tap through, and let’s start a conversation. Everything stays personal, straightforward and on WhatsApp." />
-      <section className="service-list" aria-label="Amplify Studio services">
+      <section className="service-list motion-section" aria-label="Amplify Studio services">
         {services.map(({ number, title, icon: Icon, description, message, tag }) => (
-          <a className="service-row" href={whatsappUrl(message)} target="_blank" rel="noreferrer" key={title}>
+          <a className="service-row" data-reveal href={whatsappUrl(message)} target="_blank" rel="noreferrer" key={title}>
             <span className="service-number">{number}</span>
             <span className="service-icon"><Icon size={21} strokeWidth={1.5} /></span>
             <span className="service-body"><span className="service-title-line"><h2>{title}</h2>{tag && <span className="tag">{tag}</span>}</span><p>{description}</p></span>
@@ -47,7 +47,7 @@ export default function Services() {
           </a>
         ))}
       </section>
-      <div className="page-note"><span>Tap any service to open WhatsApp with a ready-made message.</span><span className="note-rule" /></div>
+      <div className="page-note" data-reveal><span>Tap any service to open WhatsApp with a ready-made message.</span><span className="note-rule" /></div>
     </div>
   );
 }

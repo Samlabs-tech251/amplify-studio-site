@@ -38,9 +38,9 @@ export default function Portfolio() {
   return (
     <div className="page inner-page portfolio-page">
       <PageIntro kicker="Selected work / 05 pieces" title={<>Proof, not<br /><em>promises.</em></>} description="A few ways we’ve helped small businesses show up with more clarity, confidence and character." />
-      <section className="portfolio-grid" aria-label="Selected Amplify Studio work">
+      <section className="portfolio-grid motion-section" aria-label="Selected Amplify Studio work">
         {projects.map(({ image, title, description, className }) => (
-          <figure className={`portfolio-card ${className}`} key={title}>
+          <figure className={`portfolio-card ${className}`} data-reveal key={title}>
             <div className="portfolio-image-wrap">
               <img src={image} alt={title} loading="lazy" />
               <span className="portfolio-view">View <ArrowUpRight size={15} /></span>
@@ -49,7 +49,7 @@ export default function Portfolio() {
           </figure>
         ))}
       </section>
-      <div className="portfolio-note"><p>Website, caption and video samples are shared directly — message us to see more.</p><a className="text-link" href={whatsappUrl()} target="_blank" rel="noreferrer">Ask for more <ArrowUpRight size={15} /></a></div>
+      <div className="portfolio-note" data-reveal><p>Website, caption and video samples are shared directly — message us to see more.</p><a className="text-link" href={whatsappUrl()} target="_blank" rel="noreferrer">Ask for more <ArrowUpRight size={15} /></a></div>
     </div>
   );
 }

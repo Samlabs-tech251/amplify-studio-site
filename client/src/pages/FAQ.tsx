@@ -13,15 +13,15 @@ export default function FAQ() {
   return (
     <div className="page inner-page faq-page">
       <PageIntro kicker="FAQ / Good questions" title={<>Let’s clear<br /><em>the air.</em></>} description="The short version of what you need to know before we make something good together." />
-      <section className="faq-list" aria-label="Frequently asked questions">
+      <section className="faq-list motion-section" aria-label="Frequently asked questions">
         {questions.map(([question, answer], index) => (
-          <details className="faq-item" key={question} open={index === 0}>
+          <details className="faq-item" data-reveal key={question} open={index === 0}>
             <summary><span className="faq-number">0{index + 1}</span><span>{question}</span><span className="faq-plus">+</span></summary>
             <div className="faq-answer"><p>{answer}</p></div>
           </details>
         ))}
       </section>
-      <section className="faq-footer-card"><div><p className="eyebrow">Still curious?</p><h2>Let’s talk it<br /><em>through.</em></h2></div><a className="text-link" href={whatsappUrl()} target="_blank" rel="noreferrer">Message us on WhatsApp <ArrowUpRight size={16} /></a></section>
+      <section className="faq-footer-card motion-section"><div data-reveal><p className="eyebrow">Still curious?</p><h2>Let’s talk it<br /><em>through.</em></h2></div><a className="text-link" data-reveal href={whatsappUrl()} target="_blank" rel="noreferrer">Message us on WhatsApp <ArrowUpRight size={16} /></a></section>
     </div>
   );
 }

@@ -6,6 +6,7 @@ import Services from "./pages/Services";
 import Portfolio from "./pages/Portfolio";
 import About from "./pages/About";
 import FAQ from "./pages/FAQ";
+import { MotionSystem } from "./components/MotionSystem";
 
 function RouteScrollReset() {
   const [location] = useLocation();
@@ -48,6 +49,7 @@ export default function App() {
   return (
     <WouterRouter base={ROUTER_BASE}>
       <AmplifyShell>
+        <MotionSystem />
         <RouteScrollReset />
         <Router />
       </AmplifyShell>

@@ -28,7 +28,6 @@ export function StandaloneSplash() {
   return (
     <div className="standalone-splash" role="status" aria-live="polite">
       <div className="standalone-splash-mark"><BrandMark compact /></div>
-      <p className="standalone-splash-name">AMPLIFY <span>STUDIO</span></p>
       <p className="standalone-splash-tagline">Turn up your brand&apos;s volume.</p>
       <span className="standalone-splash-line" />
     </div>

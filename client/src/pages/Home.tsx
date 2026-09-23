@@ -5,8 +5,8 @@ import { whatsappUrl } from "../components/AmplifyShell";
 export default function Home() {
   return (
     <div className="page page-home">
-      <section className="hero-section">
-        <div className="hero-copy">
+      <section className="hero-section motion-section">
+        <div className="hero-copy" data-reveal>
           <div className="status-pill"><span className="status-dot" /> Lagos / working worldwide</div>
           <p className="eyebrow hero-eyebrow">Creative direction for the next chapter</p>
           <h1 className="display-title hero-title">Turn up your brand&apos;s <em>volume.</em></h1>
@@ -19,7 +19,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="hero-art" aria-label="Amplify Studio growth mark">
+        <div className="hero-art" data-reveal aria-label="Amplify Studio growth mark">
           <div className="art-grid" />
           <div className="art-caption">AMPLIFY / 01</div>
           <div className="signal-bars" aria-hidden="true">
@@ -37,14 +37,14 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="home-intro-band">
-        <div className="band-label"><Sparkles size={15} /> What we do</div>
-        <p>Good work deserves a good entrance. We make the digital part feel as considered as the real thing.</p>
-        <Link href="/services" className="text-link">Explore services <ArrowRight size={15} /></Link>
+      <section className="home-intro-band motion-section">
+        <div className="band-label" data-reveal><Sparkles size={15} /> What we do</div>
+        <p data-reveal>Good work deserves a good entrance. We make the digital part feel as considered as the real thing.</p>
+        <Link href="/services" className="text-link" data-reveal>Explore services <ArrowRight size={15} /></Link>
       </section>
 
-      <section className="home-services-preview">
-        <div className="section-heading-row">
+      <section className="home-services-preview motion-section">
+        <div className="section-heading-row" data-reveal>
           <div><p className="eyebrow">The offering</p><h2 className="section-title">A sharper signal.</h2></div>
           <span className="section-index">01 — 04</span>
         </div>
@@ -55,7 +55,7 @@ export default function Home() {
             ["03", "Caption writing", "Say it like you mean it."],
             ["04", "Video editing", "Hold attention longer."],
           ].map(([number, title, line]) => (
-            <Link className="mini-service" href="/services" key={number}>
+            <Link className="mini-service" data-reveal href="/services" key={number}>
               <span className="mini-service-number">{number}</span>
               <div><h3>{title}</h3><p>{line}</p></div>
               <ArrowUpRight size={17} />
