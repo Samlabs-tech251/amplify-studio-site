@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { Link, useLocation } from "wouter";
-import { CircleHelp, Grid2X2, Home, MessageCircle, Palette, UserRound } from "lucide-react";
+import { CalendarDays, CircleHelp, Grid2X2, Home, MessageCircle, Palette, UserRound } from "lucide-react";
 import { BrandMark } from "./BrandMark";
 import { InstallPrompt } from "./InstallPrompt";
 import { StandaloneSplash } from "./StandaloneSplash";
@@ -18,6 +18,7 @@ const navItems = [
   { href: "/portfolio", label: "Portfolio", icon: Grid2X2 },
   { href: "/about", label: "About", icon: UserRound },
   { href: "/faq", label: "FAQ", icon: CircleHelp },
+  { href: "/contact", label: "Contact", icon: CalendarDays },
 ];
 
 export function AmplifyShell({ children }: { children: ReactNode }) {

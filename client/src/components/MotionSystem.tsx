@@ -105,7 +105,7 @@ export function MotionSystem() {
 
     const rippleTargets = Array.from(document.querySelectorAll<HTMLElement>(".button, .text-link, .header-whatsapp"));
     rippleTargets.forEach((target) => target.addEventListener("click", addRipple));
-    const tiltCleanups = Array.from(document.querySelectorAll<HTMLElement>(".mini-service, .service-row, .portfolio-card")).map(addTilt);
+    const tiltCleanups = Array.from(document.querySelectorAll<HTMLElement>(".mini-service, .service-row, .service-card, .portfolio-card, .proof-card, .contact-option")).map(addTilt);
 
     return () => {
       cancelAnimationFrame(frame);

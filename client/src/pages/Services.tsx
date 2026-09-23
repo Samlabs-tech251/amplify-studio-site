@@ -1,53 +1,36 @@
-import { ArrowUpRight, Monitor, Palette, PenLine, Video } from "lucide-react";
+import { ArrowUpRight, ChevronDown, Globe2, MessageCircle, Paintbrush, PlaySquare, Quote } from "lucide-react";
+import { useState } from "react";
 import { PageIntro, whatsappUrl } from "../components/AmplifyShell";
 
 const services = [
-  {
-    number: "01",
-    title: "Graphics Design",
-    icon: Palette,
-    description: "Flyers, posters, motion graphics and social media designs that stop the scroll.",
-    message: "Hi Amplify Studio! I'm interested in graphics design (flyers/posters/social media designs). Can you tell me more?",
-  },
-  {
-    number: "02",
-    title: "Website Design",
-    icon: Monitor,
-    description: "Clean, mobile-friendly static websites built to load fast and turn visitors into customers.",
-    message: "Hi Amplify Studio! I'm interested in getting a website built for my business. Can we talk?",
-  },
-  {
-    number: "03",
-    title: "Caption Writing",
-    icon: PenLine,
-    description: "Captions that sound like your brand and actually get read.",
-    message: "Hi Amplify Studio! I'd like help with caption writing for my business. What's your offer?",
-  },
-  {
-    number: "04",
-    title: "Video Editing",
-    icon: Video,
-    description: "Reels and promo videos edited to hold attention from the first second.",
-    message: "Hi Amplify Studio! I'm interested in your video editing service. What's your offer?",
-    tag: "Now booking",
-  },
+  { number: "01", title: "Website Development", icon: Globe2, description: "Fast, mobile-friendly websites that make your business easier to trust, find and choose.", detail: "We shape the structure, visual rhythm and calls to action around what your customers actually need to know. The result is a focused digital home that feels like your business, not a template.", message: "Hi, I'm interested in your website development services", featured: true },
+  { number: "02", title: "Graphics Design", icon: Paintbrush, description: "Flyers, posters and social designs that stop the scroll without losing the message.", detail: "We turn offers, launches and everyday business moments into visuals with a clear hierarchy. Every piece is made to be understood quickly and remembered longer.", message: "Hi, I'm interested in your graphics design services" },
+  { number: "03", title: "Video Editing", icon: PlaySquare, description: "Reels and promo videos edited to hold attention from the first second.", detail: "We cut for pace, clarity and the platform where the video will live. You bring the raw moments; we help them land with more energy and intention.", message: "Hi, I'm interested in your video editing services", tag: "Now booking" },
+  { number: "04", title: "Caption Writing", icon: Quote, description: "Captions that sound like your brand and actually get read.", detail: "We find the useful angle in what you are offering, then write with enough personality to feel human and enough clarity to move someone to act.", message: "Hi, I'm interested in your caption writing services" },
 ];
 
 export default function Services() {
+  const [open, setOpen] = useState(0);
   return (
-    <div className="page inner-page">
-      <PageIntro kicker="Services / 04 ways to be seen" title={<>Make the right<br /><em>kind</em> of noise.</>} description="Pick the piece you need, tap through, and let’s start a conversation. Everything stays personal, straightforward and on WhatsApp." />
+    <div className="page inner-page services-page">
+      <PageIntro kicker="Services / 04 ways to be seen" title={<>Make the right<br /><em>kind</em> of noise.</>} description="Our focus is building a stronger digital presence from the ground up, then supporting it with the creative pieces that keep your business visible. Choose one service or combine a few into a clearer signal." />
       <section className="service-list motion-section" aria-label="Amplify Studio services">
-        {services.map(({ number, title, icon: Icon, description, message, tag }) => (
-          <a className="service-row" data-reveal href={whatsappUrl(message)} target="_blank" rel="noreferrer" key={title}>
-            <span className="service-number">{number}</span>
-            <span className="service-icon"><Icon size={21} strokeWidth={1.5} /></span>
-            <span className="service-body"><span className="service-title-line"><h2>{title}</h2>{tag && <span className="tag">{tag}</span>}</span><p>{description}</p></span>
-            <ArrowUpRight className="service-arrow" size={22} strokeWidth={1.4} />
-          </a>
-        ))}
+        {services.map(({ number, title, icon: Icon, description, detail, message, tag, featured }, index) => {
+          const isOpen = open === index;
+          return (
+            <article className={`service-card ${featured ? "service-card-featured" : ""} ${isOpen ? "is-open" : ""}`} data-reveal key={title}>
+              <button className="service-card-trigger" type="button" aria-expanded={isOpen} onClick={() => setOpen(isOpen ? -1 : index)}>
+                <span className="service-number">{number}</span>
+                <span className="service-icon service-icon-animated"><Icon size={25} strokeWidth={1.35} /></span>
+                <span className="service-body"><span className="service-title-line"><h2>{title}</h2>{tag && <span className="tag">{tag}</span>}</span><p>{description}</p></span>
+                <ChevronDown className="service-arrow" size={22} strokeWidth={1.4} />
+              </button>
+              <div className="service-detail" aria-hidden={!isOpen}><p>{detail}</p><a className="button button-primary" href={whatsappUrl(message)} target="_blank" rel="noreferrer"><MessageCircle size={16} /> Ask about {title.toLowerCase()} <ArrowUpRight size={15} /></a></div>
+            </article>
+          );
+        })}
       </section>
-      <div className="page-note" data-reveal><span>Tap any service to open WhatsApp with a ready-made message.</span><span className="note-rule" /></div>
+      <div className="page-note" data-reveal><span>Open a service to see the detail, then take the next step on WhatsApp.</span><span className="note-rule" /></div>
     </div>
   );
 }

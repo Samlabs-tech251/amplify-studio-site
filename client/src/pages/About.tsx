@@ -4,7 +4,7 @@ import { PageIntro, whatsappUrl } from "../components/AmplifyShell";
 export default function About() {
   return (
     <div className="page inner-page about-page">
-      <PageIntro kicker="About / The why behind the work" title={<>Small team.<br /><em>Big signal.</em></>} description="Amplify Studio is a Nigerian creative studio helping small businesses grow online — with a little more clarity and a lot more character." />
+      <PageIntro kicker="About / The why behind the work" title={<>Small team.<br /><em>Big signal.</em></>} description="Amplify Studio is a Nigerian creative studio helping small businesses grow online — with a little more clarity and a lot more character. We bring strategy, design and practical digital thinking together so the quality of the business is easier to see." />
       <section className="about-story motion-section">
         <div className="about-pullquote" data-reveal><Quote size={24} /><p>Presentation should be the bridge between how good you are and how good you look online.</p><span>— Amplify Studio</span></div>
         <div className="about-copy" data-reveal>
@@ -13,7 +13,7 @@ export default function About() {
           <p>As it grows, the goal stays the same: make it easy for businesses to look as credible online as they already are in person.</p>
         </div>
       </section>
-      <section className="about-cta motion-section"><div data-reveal><p className="eyebrow">Let’s make your next move count</p><h2>Ready to sound<br /><em>louder?</em></h2></div><a className="button button-primary" data-reveal href={whatsappUrl()} target="_blank" rel="noreferrer"><MessageCircle size={17} /> Talk to us <ArrowUpRight size={16} /></a></section>
+      <section className="about-cta motion-section"><div data-reveal><p className="eyebrow">Let’s make your next move count</p><h2>Ready to sound<br /><em>louder?</em></h2><p className="cta-copy">You do not need a perfect brief to begin. Bring the idea, the problem or the next milestone and we will help turn it into a clearer piece of work.</p></div><a className="button button-primary" data-reveal href={whatsappUrl()} target="_blank" rel="noreferrer"><MessageCircle size={17} /> Talk to us <ArrowUpRight size={16} /></a></section>
     </div>
   );
 }
