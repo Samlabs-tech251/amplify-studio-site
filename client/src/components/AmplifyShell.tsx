@@ -1,6 +1,6 @@
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
+import { CalendarDays, CircleHelp, Grid2X2, Home, Menu, MessageCircle, Palette, UserRound, X } from "lucide-react";
 import { Link, useLocation } from "wouter";
-import { CalendarDays, CircleHelp, Grid2X2, Home, MessageCircle, Palette, UserRound } from "lucide-react";
 import { BrandMark } from "./BrandMark";
 import { InstallPrompt } from "./InstallPrompt";
 import { StandaloneSplash } from "./StandaloneSplash";
@@ -12,45 +12,49 @@ export function whatsappUrl(message?: string) {
   return message ? `${base}?text=${encodeURIComponent(message)}` : base;
 }
 
-const navItems = [
+const directNavItems = [
   { href: "/", label: "Home", icon: Home },
   { href: "/services", label: "Services", icon: Palette },
   { href: "/portfolio", label: "Portfolio", icon: Grid2X2 },
   { href: "/about", label: "About", icon: UserRound },
-  { href: "/faq", label: "FAQ", icon: CircleHelp },
   { href: "/contact", label: "Contact", icon: CalendarDays },
+];
+
+const menuItems = [
+  { href: "/faq", label: "FAQ", icon: CircleHelp },
+  { href: "/reviews", label: "Reviews", icon: MessageCircle },
 ];
 
 export function AmplifyShell({ children }: { children: ReactNode }) {
   const [location] = useLocation();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const closeOnOutside = (event: PointerEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) setMenuOpen(false);
+    };
+    document.addEventListener("pointerdown", closeOnOutside);
+    return () => document.removeEventListener("pointerdown", closeOnOutside);
+  }, []);
 
   return (
     <div className="site-frame">
       <header className="site-header">
-        <Link href="/" aria-label="Amplify Studio home">
-          <BrandMark />
-        </Link>
-        <a className="header-whatsapp" href={whatsappUrl()} target="_blank" rel="noreferrer" aria-label="Chat with Amplify Studio on WhatsApp">
-          <MessageCircle size={17} strokeWidth={1.8} />
-          <span>Let’s talk</span>
-        </a>
+        <Link href="/" aria-label="Amplify Studio home" onClick={() => setMenuOpen(false)}><BrandMark /></Link>
+        <nav className="top-nav-links" aria-label="Primary navigation">
+          {directNavItems.map(({ href, label }) => <Link href={href} key={href} className={location === href ? "active" : undefined} aria-current={location === href ? "page" : undefined}>{label}</Link>)}
+        </nav>
+        <div className="site-header-actions">
+          <a className="header-whatsapp" href={whatsappUrl()} target="_blank" rel="noreferrer" aria-label="Chat with Amplify Studio on WhatsApp"><MessageCircle size={17} strokeWidth={1.8} /><span>Let’s talk</span></a>
+          <div className="menu-wrap" ref={menuRef}>
+            <button className={`menu-toggle ${menuOpen ? "is-open" : ""}`} type="button" aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen((open) => !open)}>{menuOpen ? <X size={20} /> : <Menu size={21} />}</button>
+            {menuOpen && <div className="top-menu" role="menu">{menuItems.map(({ href, label, icon: Icon }) => <Link href={href} key={href} role="menuitem" className={location === href ? "active" : undefined} onClick={() => setMenuOpen(false)}><Icon size={16} /><span>{label}</span></Link>)}</div>}
+          </div>
+        </div>
       </header>
 
       <main className="site-main">{children}</main>
-
-      <nav className="bottom-nav" aria-label="Primary navigation">
-        <div className="bottom-nav-inner">
-          {navItems.map(({ href, label, icon: Icon }) => {
-            const active = location === href;
-            return (
-              <Link href={href} key={href} className={`nav-item ${active ? "active" : ""}`} aria-current={active ? "page" : undefined}>
-                <Icon size={18} strokeWidth={active ? 2.1 : 1.6} />
-                <span>{label}</span>
-              </Link>
-            );
-          })}
-        </div>
-      </nav>
       <InstallPrompt />
       <StandaloneSplash />
     </div>

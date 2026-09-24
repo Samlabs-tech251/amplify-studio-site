@@ -307,3 +307,53 @@ html.lenis, html.lenis body { height: auto; }
   .contact-options { width: 100%; }
   .service-full-section { width: calc(100% + (var(--page-gutter) * 2)); margin-left: calc(var(--page-gutter) * -1); margin-right: calc(var(--page-gutter) * -1); padding-left: var(--page-gutter); padding-right: var(--page-gutter); }
 }
+
+/* Navigation and overflow bug-fix pass. Existing colors and motion definitions remain unchanged. */
+html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
+.site-frame, .site-main, .page, .inner-page { width: 100%; max-width: 100%; overflow-x: clip; }
+.site-header { width: 100%; max-width: 100%; height: 82px; padding-left: var(--page-gutter, 28px); padding-right: var(--page-gutter, 28px); display: flex; gap: 24px; }
+.site-header > a:first-child { flex: 0 0 auto; }
+.site-header-actions { min-width: 0; display: flex; align-items: center; gap: 22px; margin-left: auto; }
+.top-nav-links { min-width: 0; display: flex; align-items: center; justify-content: center; gap: clamp(13px, 2.1vw, 31px); margin-left: auto; }
+.top-nav-links a { color: var(--mauve); font-size: 10px; letter-spacing: .075em; text-transform: uppercase; white-space: nowrap; transition: color 160ms ease; }
+.top-nav-links a:hover, .top-nav-links a.active { color: var(--cream); }
+.menu-wrap { position: relative; flex: 0 0 auto; }
+.menu-toggle { width: 37px; height: 37px; padding: 0; border: 1px solid transparent; border-radius: 50%; background: transparent; color: var(--gold-bright); display: grid; place-items: center; transition: background-color 160ms ease, border-color 160ms ease, transform 160ms var(--ease-out); }
+.menu-toggle:hover, .menu-toggle.is-open { border-color: var(--line-gold); background: rgba(227,166,62,.08); transform: translateY(-1px); }
+.top-menu { position: absolute; z-index: 20; top: calc(100% + 12px); right: 0; width: 170px; padding: 7px; border: 1px solid var(--line-gold); background: rgba(22,19,25,.97); box-shadow: 0 18px 45px rgba(0,0,0,.3); backdrop-filter: blur(16px); }
+.top-menu a { min-height: 38px; padding: 0 10px; color: var(--mauve); display: flex; align-items: center; gap: 9px; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; transition: color 160ms ease, background-color 160ms ease; }
+.top-menu a:hover, .top-menu a.active { background: rgba(227,166,62,.1); color: var(--cream); }
+.top-menu a svg { color: var(--gold); }
+.bottom-nav { display: none !important; }
+.install-prompt { max-width: min(245px, calc(100vw - 32px)); }
+.proof-rail, .proof-track { max-width: 100%; }
+.proof-track { will-change: transform; }
+.service-watermark { max-width: 100%; }
+
+.reviews-layout { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 20px; align-items: stretch; }
+.review-form-card, .reviews-empty { min-width: 0; padding: 38px; border: 1px solid var(--line); background: var(--surface); }
+.review-form-card { background: radial-gradient(circle at 90% 8%, rgba(227,166,62,.14), transparent 34%), var(--surface); }
+.review-form-card .contact-option-icon { margin-bottom: 36px; }
+.review-form-card h2, .reviews-empty h2 { margin: 13px 0 20px; font-family: "DM Serif Display", Georgia, serif; font-size: clamp(2.6rem, 5vw, 5rem); font-weight: 400; letter-spacing: -.055em; line-height: .91; }
+.review-privacy { max-width: 360px; margin: 20px 0 0; color: var(--mauve); font-size: 11px; line-height: 1.55; }
+.reviews-empty { min-height: 560px; display: flex; flex-direction: column; justify-content: center; background: radial-gradient(circle at 85% 15%, rgba(227,166,62,.09), transparent 34%), var(--surface); }
+.reviews-empty > p:last-child { max-width: 430px; margin: 0; color: var(--mauve); font-size: 15px; line-height: 1.65; }
+
+@media (max-width: 900px) {
+  .site-header { gap: 14px; }
+  .top-nav-links { gap: 12px; }
+  .top-nav-links a { font-size: 9px; letter-spacing: .04em; }
+  .site-header-actions { gap: 12px; }
+  .header-whatsapp span { display: none; }
+}
+@media (max-width: 780px) {
+  .site-header { height: auto; min-height: 102px; padding-top: 16px; padding-bottom: 12px; flex-wrap: wrap; align-content: center; }
+  .site-header-actions { margin-left: auto; }
+  .top-nav-links { order: 3; width: 100%; margin: 0; justify-content: space-between; gap: 7px; }
+  .top-nav-links a { font-size: 8px; letter-spacing: .035em; }
+  .site-main { min-height: calc(100svh - 102px); }
+  .top-menu { top: calc(100% + 10px); right: 0; }
+  .reviews-layout { display: block; }
+  .review-form-card, .reviews-empty { padding: 29px 23px; }
+  .reviews-empty { min-height: 380px; margin-top: 16px; }
+}

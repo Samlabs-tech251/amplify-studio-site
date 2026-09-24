@@ -7,6 +7,7 @@ import Portfolio from "./pages/Portfolio";
 import About from "./pages/About";
 import FAQ from "./pages/FAQ";
 import Contact from "./pages/Contact";
+import Reviews from "./pages/Reviews";
 import { MotionSystem } from "./components/MotionSystem";
 
 function RouteScrollReset() {
@@ -28,6 +29,7 @@ function Router() {
       <Route path="/about" component={About} />
       <Route path="/faq" component={FAQ} />
       <Route path="/contact" component={Contact} />
+      <Route path="/reviews" component={Reviews} />
       <Route>
         {() => (
           <div className="min-h-screen grid place-items-center p-8 text-center">
