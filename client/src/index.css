@@ -357,3 +357,33 @@ html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
   .review-form-card, .reviews-empty { padding: 29px 23px; }
   .reviews-empty { min-height: 380px; margin-top: 16px; }
 }
+
+/* Refinement pass: preserve the visual system while improving mobile rhythm and depth. */
+.hero-glow { background: radial-gradient(circle, rgba(227,166,62,.20), rgba(227,166,62,.065) 35%, transparent 70%); }
+.inner-page::before { background: radial-gradient(circle, rgba(212,175,55,.20), rgba(212,175,55,.06) 34%, transparent 70%); }
+.service-full-section { background: radial-gradient(circle at 70% 50%, rgba(212,175,55,.11), transparent 42%); }
+.contact-option-calendar .contact-option-icon { margin-bottom: 48px; }
+.contact-option-whatsapp .button { margin-top: 42px; }
+
+.service-watermark-panel { position: absolute; z-index: 0; right: 4%; top: 50%; width: min(46vw, 520px); aspect-ratio: 1; display: grid; place-items: center; border: 1px solid rgba(212,175,55,.18); background: rgba(34,25,35,.36); box-shadow: 0 22px 70px rgba(0,0,0,.22), inset 0 0 42px rgba(212,175,55,.035); transform: translateY(-50%); animation: servicePanelFloat 7s ease-in-out infinite; pointer-events: none; }
+.service-watermark-panel .service-watermark { position: relative; inset: auto; width: 100%; height: 100%; color: var(--gold); opacity: .085; transform: rotate(-12deg) scale(.97); animation: watermarkRotate 7s ease-in-out infinite alternate; }
+.service-full-section:nth-child(even) .service-watermark-panel { right: auto; left: 4%; }
+.service-full-section:nth-child(even) .service-watermark-panel .service-watermark { animation-name: watermarkRotateAlt; }
+@keyframes servicePanelFloat { 0%, 100% { transform: translateY(calc(-50% - 3px)); } 50% { transform: translateY(calc(-50% + 3px)); } }
+@keyframes watermarkRotate { from { transform: rotate(-12deg) scale(.97); } to { transform: rotate(14deg) scale(1.04); } }
+@keyframes watermarkRotateAlt { from { transform: rotate(12deg) scale(.97); } to { transform: rotate(-14deg) scale(1.04); } }
+
+@media (max-width: 780px) {
+  .service-full-section { min-height: 520px; padding: 30px 16px; }
+  .service-full-section .service-card-trigger { min-height: 164px; }
+  .service-card-featured .service-card-trigger { min-height: 178px; }
+  .service-full-section .service-detail { max-width: 100%; }
+  .service-full-section.is-open .service-detail { max-height: 330px; padding-bottom: 22px; }
+  .service-watermark-panel { right: -12%; width: 78vw; opacity: .9; }
+  .service-full-section:nth-child(even) .service-watermark-panel { left: auto; right: -12%; }
+  .contact-option-calendar .contact-option-icon { margin-bottom: 34px; }
+  .contact-option-whatsapp .button { margin-top: 28px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .service-watermark-panel, .service-watermark-panel .service-watermark { animation: none; }
+}
