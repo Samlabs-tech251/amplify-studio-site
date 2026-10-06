@@ -387,3 +387,9 @@ html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
 @media (prefers-reduced-motion: reduce) {
   .service-watermark-panel, .service-watermark-panel .service-watermark { animation: none; }
 }
+
+/* Web3Forms inline submission states. */
+.contact-form .button:disabled { cursor: wait; opacity: .68; transform: none; }
+.form-status { margin: 15px 0 0; padding: 11px 13px; border: 1px solid var(--line); background: rgba(255,255,255,.035); font-size: 12px; line-height: 1.45; }
+.form-status-success { border-color: rgba(227,166,62,.46); color: var(--gold-bright); }
+.form-status-error { border-color: rgba(224,116,116,.42); color: #e9aaaa; }
