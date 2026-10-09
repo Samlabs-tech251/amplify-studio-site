@@ -69,7 +69,7 @@ export function MotionSystem() {
       gsap.fromTo(heroWords, { autoAlpha: 0, y: 22, rotateX: -18 }, { autoAlpha: 1, y: 0, rotateX: 0, duration: 0.8, ease: "power3.out", stagger: 0.075, delay: 0.18 });
     });
 
-    const rippleTargets = Array.from(document.querySelectorAll<HTMLElement>(".button, .text-link, .header-whatsapp"));
+    const rippleTargets = Array.from(document.querySelectorAll<HTMLElement>(".button, .text-link, .header-whatsapp, .hero-chip"));
     rippleTargets.forEach((target) => target.addEventListener("click", addRipple));
     const tiltCleanups = Array.from(document.querySelectorAll<HTMLElement>(".mini-service, .service-row, .portfolio-card, .proof-card, .contact-option")).map(addTilt);
     const magneticCleanups = Array.from(document.querySelectorAll<HTMLElement>(".magnetic")).map(addMagnetic);
