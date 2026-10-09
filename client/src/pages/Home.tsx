@@ -2,6 +2,7 @@ import { ArrowDown, ArrowRight, ArrowUpRight, Globe2, MessageCircle, Sparkles } 
 import { useEffect, useRef } from "react";
 import { Link } from "wouter";
 import { whatsappUrl } from "../components/AmplifyShell";
+import { FinalCtaFooter, PackagesSection, PremiumFaqSection, ProcessSection, SelectedWorkSection, StatsSection, TestimonialsSection } from "../components/PremiumSections";
 
 const proofImages = [
   ["StyleInLagos", "https://raw.githubusercontent.com/Samlabs-tech251/Amplify-studio-assets/main/styleinlagos.jpg"],
@@ -118,6 +119,13 @@ export default function Home() {
       </section>
 
       <section className="about-cta home-cta motion-section"><div data-reveal><p className="eyebrow">Ready when you are</p><h2>Let’s make your next move count.</h2><p className="cta-copy">Bring the rough idea, the half-finished brief or simply the feeling that your business should look sharper online. We will help turn it into a clear next step.</p></div><a className="button button-primary" data-reveal href={whatsappUrl()} target="_blank" rel="noreferrer"><MessageCircle size={17} /> Start a conversation <ArrowUpRight size={16} /></a></section>
+      <SelectedWorkSection />
+      <StatsSection />
+      <ProcessSection />
+      <TestimonialsSection />
+      <PackagesSection />
+      <PremiumFaqSection />
+      <FinalCtaFooter />
     </div>
   );
 }
