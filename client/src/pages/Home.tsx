@@ -83,12 +83,12 @@ export default function Home() {
   return (
     <div className="page page-home">
       <section className="hero-section hero-minimal motion-section">
-        <div className="hero-glow" aria-hidden="true" />
+        <div className="hero-glow" aria-hidden="true" /><div className="hero-orb hero-orb-one" aria-hidden="true" /><div className="hero-orb hero-orb-two" aria-hidden="true" />
         <div className="hero-minimal-copy" data-reveal>
           <p className="eyebrow hero-eyebrow">Creative direction for the next chapter</p>
-          <h1 className="display-title hero-title">Make your business<br /><em>impossible to miss.</em></h1>
+          <h1 className="display-title hero-title" aria-label="Make your business impossible to miss."><span className="hero-word">Make</span> <span className="hero-word">your</span> <span className="hero-word">business</span><br /><em><span className="hero-word hero-word-gold">impossible</span> <span className="hero-word hero-word-gold">to</span> <span className="hero-word hero-word-gold">miss.</span></em></h1>
           <p className="hero-subtext">Amplify Studio builds the visual and digital presence small businesses need to look credible, clear and ready for what is next.</p>
-          <div className="hero-actions"><a className="button button-primary" href={whatsappUrl()} target="_blank" rel="noreferrer"><MessageCircle size={17} /> Start a project</a></div>
+          <div className="hero-actions"><a className="button button-primary magnetic" href={whatsappUrl()} target="_blank" rel="noreferrer"><MessageCircle size={17} /> Start a project</a><Link className="button button-quiet magnetic" href="/portfolio">View work <ArrowRight size={16} /></Link></div>
         </div>
         <a className="hero-scroll-cue" href="#proof-of-work" aria-label="Scroll to proof of work"><span>Scroll to explore</span><ArrowDown size={15} /></a>
       </section>

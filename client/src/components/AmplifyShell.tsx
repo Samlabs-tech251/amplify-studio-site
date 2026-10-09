@@ -28,6 +28,9 @@ const menuItems = [
 export function AmplifyShell({ children }: { children: ReactNode }) {
   const [location] = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [navHidden, setNavHidden] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [loading, setLoading] = useState(true);
   const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -38,9 +41,30 @@ export function AmplifyShell({ children }: { children: ReactNode }) {
     return () => document.removeEventListener("pointerdown", closeOnOutside);
   }, []);
 
+  useEffect(() => {
+    const finishLoader = window.setTimeout(() => setLoading(false), 820);
+    let lastScroll = window.scrollY;
+    let ticking = false;
+    const updateScroll = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      setProgress(max > 0 ? (window.scrollY / max) * 100 : 0);
+      if (window.scrollY > 100) setNavHidden(window.scrollY > lastScroll);
+      else setNavHidden(false);
+      lastScroll = window.scrollY;
+      ticking = false;
+    };
+    const onScroll = () => {
+      if (!ticking) { window.requestAnimationFrame(updateScroll); ticking = true; }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => { window.clearTimeout(finishLoader); window.removeEventListener("scroll", onScroll); };
+  }, []);
+
   return (
     <div className="site-frame">
-      <header className="site-header">
+      <div className={`site-loader ${loading ? "is-visible" : ""}`} aria-hidden={!loading}><div className="site-loader-wordmark">Amplify<span>Studio</span></div><div className="site-loader-line" /></div>
+      <div className="scroll-progress" style={{ width: `${progress}%` }} aria-hidden="true" />
+      <header className={`site-header ${navHidden ? "nav-hidden" : ""}`}>
         <Link href="/" aria-label="Amplify Studio home" onClick={() => setMenuOpen(false)}><BrandMark /></Link>
         <nav className="top-nav-links" aria-label="Primary navigation">
           {directNavItems.map(({ href, label }) => <Link href={href} key={href} className={location === href ? "active" : undefined} aria-current={location === href ? "page" : undefined}>{label}</Link>)}
