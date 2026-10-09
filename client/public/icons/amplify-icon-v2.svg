@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="halo" cx="78%" cy="72%" r="28%"><stop offset="0" stop-color="#D4A24C" stop-opacity=".9"/><stop offset="1" stop-color="#D4A24C" stop-opacity="0"/></radialGradient>
+    <filter id="soft"><feGaussianBlur stdDeviation="7"/></filter>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="#07060D"/>
+  <circle cx="390" cy="388" r="90" fill="url(#halo)" opacity=".55" filter="url(#soft)"/>
+  <text x="256" y="240" text-anchor="middle" fill="#F2E9DA" font-family="Georgia, 'Times New Roman', serif" font-size="89" font-weight="700" letter-spacing="-5">Amplify</text>
+  <text x="282" y="315" text-anchor="middle" fill="#F2E9DA" font-family="Georgia, 'Times New Roman', serif" font-size="54" letter-spacing="5">Studio</text>
+  <circle cx="414" cy="302" r="8" fill="#D4A24C"/>
+  <circle cx="414" cy="302" r="19" fill="none" stroke="#D4A24C" stroke-opacity=".42" stroke-width="6" filter="url(#soft)"/>
+</svg>

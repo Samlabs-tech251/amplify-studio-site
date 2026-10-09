@@ -71,7 +71,7 @@ export function MotionSystem() {
 
     const rippleTargets = Array.from(document.querySelectorAll<HTMLElement>(".button, .text-link, .header-whatsapp"));
     rippleTargets.forEach((target) => target.addEventListener("click", addRipple));
-    const tiltCleanups = Array.from(document.querySelectorAll<HTMLElement>(".mini-service, .service-row, .service-card, .portfolio-card, .proof-card, .contact-option")).map(addTilt);
+    const tiltCleanups = Array.from(document.querySelectorAll<HTMLElement>(".mini-service, .service-row, .portfolio-card, .proof-card, .contact-option")).map(addTilt);
     const magneticCleanups = Array.from(document.querySelectorAll<HTMLElement>(".magnetic")).map(addMagnetic);
 
     const root = document.documentElement;
