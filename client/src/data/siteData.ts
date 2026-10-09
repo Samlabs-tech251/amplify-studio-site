@@ -39,18 +39,3 @@ export const premiumFaqs = [
   { question: "Can you help with hosting?", answer: "Yes. We can guide you through the right hosting setup for your website and help make the handover feel straightforward." },
   { question: "What do you need from me?", answer: "A rough brief, your business details, any useful images or copy, and a sense of what you want people to notice first is enough to begin." },
 ] as const;
-
-
-export const conversationalHero = {
-  steps: [
-    { key: "goal", question: "Hey, what are you looking to build?", options: [{ label: "Website", value: "website" }, { label: "Flyers & Posters", value: "flyers" }, { label: "Brand Identity", value: "brand" }, { label: "Not sure yet", value: "not-sure" }] },
-    { key: "business", question: "What kind of business is it?", options: [{ label: "Food & Bakery", value: "food" }, { label: "Fashion", value: "fashion" }, { label: "Beauty", value: "beauty" }, { label: "Services", value: "services" }, { label: "Other", value: "other" }] },
-    { key: "timing", question: "When do you need it?", options: [{ label: "This week", value: "week" }, { label: "This month", value: "month" }, { label: "Just exploring", value: "exploring" }] },
-  ],
-  recommendations: {
-    website: { title: "A clear digital home for {business}.", body: "I would build a mobile-first website that makes your offer easy to understand, gives people confidence, and helps them take the next step {timing}.", package: "Professional" },
-    flyers: { title: "A sharper visual signal for {business}.", body: "I would create a focused set of flyers and posters with a stronger hierarchy, clearer offers, and a look people can recognize {timing}.", package: "Starter" },
-    brand: { title: "A visual system people remember.", body: "I would shape the colours, type, and visual direction around {business} so every touchpoint feels connected and intentional {timing}.", package: "Premium" },
-    "not-sure": { title: "A clearer next step for {business}.", body: "I would start with a quick direction session, then recommend the smallest useful set of creative pieces to help you move forward {timing}.", package: "Starter" },
-  },
-} as const;
