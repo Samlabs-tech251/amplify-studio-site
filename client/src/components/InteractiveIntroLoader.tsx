@@ -30,7 +30,7 @@ export function InteractiveIntroLoader() {
     }
 
     setVisible(true);
-    const timeout = window.setTimeout(() => setVisible(false), 4500);
+    const timeout = window.setTimeout(() => setVisible(false), 2000);
     return () => window.clearTimeout(timeout);
   }, []);
 
@@ -88,8 +88,7 @@ export function InteractiveIntroLoader() {
   }, [visible]);
 
   if (!visible) return null;
-  const skip = () => setVisible(false);
-  const updatePointer = (clientX: number, clientY: number) => { pointerRef.current = { x: clientX, y: clientY, active: true }; };
+    const updatePointer = (clientX: number, clientY: number) => { pointerRef.current = { x: clientX, y: clientY, active: true }; };
   return (
     <div className="intro-loader-v2" role="dialog" aria-label="Loading Amplify Studio" onPointerMove={(event) => updatePointer(event.clientX, event.clientY)} onPointerDown={(event) => updatePointer(event.clientX, event.clientY)} onPointerLeave={() => { pointerRef.current.active = false; }}>
       <canvas ref={canvasRef} className="intro-loader-canvas" aria-hidden="true" />
@@ -100,7 +99,6 @@ export function InteractiveIntroLoader() {
         <p>Turn up your brand&apos;s volume.</p>
         <span className="intro-loader-dot" aria-hidden="true" />
       </div>
-      <button className="intro-loader-skip" type="button" onClick={skip}>Tap to skip</button>
     </div>
   );
 }
