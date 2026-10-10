@@ -7,7 +7,8 @@ import { AmbientMotion } from "./AmbientMotion";
 import { InteractiveIntroLoader } from "./InteractiveIntroLoader";
 
 export const WHATSAPP_NUMBER = "2349014350492";
-export function whatsappUrl(message?: string) { const base = `https://wa.me/${WHATSAPP_NUMBER}`; return message ? `${base}?text=${encodeURIComponent(message)}` : base; }
+export const DEFAULT_WHATSAPP_MESSAGE = "Hi Amplify Studio, I'd like to start a project.";
+export function whatsappUrl(message = DEFAULT_WHATSAPP_MESSAGE) { const base = `https://wa.me/${WHATSAPP_NUMBER}`; return `${base}?text=${encodeURIComponent(message)}`; }
 
 const directNavItems = [
   { href: "/", sectionId: "home", label: "Home", icon: Home },
@@ -16,7 +17,7 @@ const directNavItems = [
   { href: "/about", sectionId: "about", label: "About", icon: UserRound },
   { href: "/contact", sectionId: "contact", label: "Contact", icon: CalendarDays },
 ];
-const menuItems = [...directNavItems, { href: "/faq", sectionId: "faq", label: "FAQ", icon: CircleHelp }, { href: "/reviews", sectionId: "reviews", label: "Promise", icon: MessageCircle }];
+const menuItems = [...directNavItems, { href: "/contact#faq", sectionId: "faq", label: "FAQ", icon: CircleHelp }, { href: "/contact#reviews", sectionId: "reviews", label: "Promise", icon: MessageCircle }];
 
 type LenisWindow = Window & { __amplifyLenis?: { scrollTo: (target: HTMLElement, options?: { offset?: number; duration?: number }) => void; start: () => void; stop: () => void } };
 
@@ -30,24 +31,24 @@ export function AmplifyShell({ children }: { children: ReactNode }) {
 
   const goToSection = (event: React.MouseEvent, href: string, sectionId: string) => {
     event.preventDefault();
-    const target = document.getElementById(sectionId);
     const lenis = (window as LenisWindow).__amplifyLenis;
     setMenuOpen(false);
     document.body.classList.remove("menu-open");
     lenis?.start();
 
-    if (target) {
-      window.setTimeout(() => {
-        const currentTarget = document.getElementById(sectionId);
-        const activeLenis = (window as LenisWindow).__amplifyLenis;
-        if (currentTarget && activeLenis) activeLenis.scrollTo(currentTarget, { offset: -90, duration: 1.2 });
-        else if (currentTarget) window.scrollTo({ top: currentTarget.getBoundingClientRect().top + window.scrollY - 90, behavior: "smooth" });
-      }, 350);
+    const [path, hash] = href.split("#");
+    if (!hash) {
+      navigate(path);
       return;
     }
 
-    sessionStorage.setItem("amplify-pending-section", sectionId);
-    navigate(href);
+    sessionStorage.setItem("amplify-pending-hash", hash);
+    if (location === path) {
+      window.history.pushState({}, "", href);
+      window.dispatchEvent(new HashChangeEvent("hashchange"));
+    } else {
+      navigate(href);
+    }
   };
 
   useEffect(() => {
@@ -63,19 +64,32 @@ export function AmplifyShell({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     setMenuOpen(false);
-    const pending = sessionStorage.getItem("amplify-pending-section");
-    if (!pending) return;
-    const frame = requestAnimationFrame(() => {
-      const target = document.getElementById(pending);
-      if (target) {
+    const hash = window.location.hash.slice(1) || sessionStorage.getItem("amplify-pending-hash");
+    if (!hash || location !== "/contact") return;
+    const timer = window.setTimeout(() => {
+      const target = document.getElementById(hash);
+      const lenis = (window as LenisWindow).__amplifyLenis;
+      if (target && lenis) lenis.scrollTo(target, { offset: -90, duration: 1.2 });
+      else if (target) window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 90, behavior: "smooth" });
+      sessionStorage.removeItem("amplify-pending-hash");
+    }, 300);
+    return () => window.clearTimeout(timer);
+  }, [location]);
+
+  useEffect(() => {
+    const onHashChange = () => {
+      const hash = window.location.hash.slice(1);
+      if (!hash || location !== "/contact") return;
+      const timer = window.setTimeout(() => {
+        const target = document.getElementById(hash);
         const lenis = (window as LenisWindow).__amplifyLenis;
-        lenis?.start();
-        if (lenis) lenis.scrollTo(target, { offset: -90, duration: 1.2 });
-        else window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 90, behavior: "smooth" });
-        sessionStorage.removeItem("amplify-pending-section");
-      }
-    });
-    return () => cancelAnimationFrame(frame);
+        if (target && lenis) lenis.scrollTo(target, { offset: -90, duration: 1.2 });
+        else if (target) window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 90, behavior: "smooth" });
+      }, 300);
+      return () => window.clearTimeout(timer);
+    };
+    window.addEventListener("hashchange", onHashChange);
+    return () => window.removeEventListener("hashchange", onHashChange);
   }, [location]);
 
   useEffect(() => {
@@ -108,15 +122,15 @@ export function AmplifyShell({ children }: { children: ReactNode }) {
       <div className="scroll-progress" style={{ width: `${progress}%` }} aria-hidden="true" />
       <header className={`site-header ${navHidden ? "nav-hidden" : ""}`}>
         <Link href="/" aria-label="Amplify Studio home"><BrandMark /></Link>
-          <nav className="top-nav-links" aria-label="Primary navigation">{directNavItems.map(({ href, sectionId, label }) => <Link href={href} key={href} onClick={(event) => goToSection(event, href, sectionId)} className={location === href || activeSection === sectionId ? "active" : undefined} aria-current={location === href || activeSection === sectionId ? "page" : undefined}>{label}</Link>)}</nav>
+        <nav className="top-nav-links" aria-label="Primary navigation">{directNavItems.map(({ href, sectionId, label }) => <Link href={href} key={href} onClick={(event) => goToSection(event, href, sectionId)} className={location === href ? "active" : undefined} aria-current={location === href ? "page" : undefined}>{label}</Link>)}</nav>
         <div className="site-header-actions">
-          <a className="header-project-button" href={whatsappUrl()} target="_blank" rel="noreferrer"><MessageCircle size={15} /> <span>Start a project</span></a>
+          <a className="header-project-button" href={whatsappUrl("Hi Amplify Studio, I'd like to start a project.")} target="_blank" rel="noreferrer"><MessageCircle size={15} /> <span>Start a project</span></a>
           <div className="menu-wrap" ref={menuRef}><button className={`menu-toggle ${menuOpen ? "is-open" : ""}`} type="button" aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen((open) => !open)}>{menuOpen ? <X size={20} /> : <Menu size={21} />}</button></div>
         </div>
       </header>
-      {menuOpen && <div className="menu-overlay" role="dialog" aria-label="Amplify Studio menu"><div className="menu-overlay-inner"><div className="menu-overlay-kicker">Menu / Choose a direction</div><nav className="menu-overlay-links">{menuItems.map(({ href, sectionId, label }, index) => <Link href={href} key={href} onClick={(event) => goToSection(event, href, sectionId)} className={location === href || activeSection === sectionId ? "active" : ""} style={{ "--menu-index": index } as CSSProperties}>{label}<span>↗</span></Link>)}</nav><div className="menu-overlay-footer"><a href={whatsappUrl()} target="_blank" rel="noreferrer">WhatsApp</a><a href="https://www.instagram.com/" target="_blank" rel="noreferrer">Instagram</a><a href="mailto:samstudiohub@gmail.com">samstudiohub@gmail.com</a></div></div></div>}
+      {menuOpen && <div className="menu-overlay" role="dialog" aria-label="Amplify Studio menu"><div className="menu-overlay-inner"><div className="menu-overlay-kicker">Menu / Choose a direction</div><nav className="menu-overlay-links">{menuItems.map(({ href, sectionId, label }, index) => <Link href={href} key={href} onClick={(event) => goToSection(event, href, sectionId)} className={(href.startsWith("/contact#") ? window.location.hash === `#${sectionId}` : location === href) ? "active" : ""} style={{ "--menu-index": index } as CSSProperties}>{label}<span>↗</span></Link>)}</nav><div className="menu-overlay-footer"><a href={whatsappUrl("Hi Amplify Studio, I'd like to start a project.")} target="_blank" rel="noreferrer">WhatsApp</a><a href="https://www.instagram.com/" target="_blank" rel="noreferrer">Instagram</a><a href="mailto:samstudiohub@gmail.com">samstudiohub@gmail.com</a></div></div></div>}
       <main className="site-main">{children}</main>
-      <nav className="mobile-bottom-dock" aria-label="Mobile navigation">{directNavItems.map(({ href, sectionId, label, shortLabel, icon: Icon }) => <Link href={href} key={href} onClick={(event) => goToSection(event, href, sectionId)} className={location === href || activeSection === sectionId ? "active" : ""}><Icon size={16} /><span>{shortLabel || label}</span></Link>)}</nav>
+      <nav className="mobile-bottom-dock" aria-label="Mobile navigation">{directNavItems.map(({ href, sectionId, label, shortLabel, icon: Icon }) => <Link href={href} key={href} onClick={(event) => goToSection(event, href, sectionId)} className={location === href ? "active" : ""}><Icon size={16} /><span>{shortLabel || label}</span></Link>)}</nav>
       <InstallPrompt />
     </div>
   );
