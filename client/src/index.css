@@ -310,6 +310,7 @@ html.lenis, html.lenis body { height: auto; }
 
 /* Navigation and overflow bug-fix pass. Existing colors and motion definitions remain unchanged. */
 html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
+body.menu-open { overflow: hidden; }
 .site-frame, .site-main, .page, .inner-page { width: 100%; max-width: 100%; overflow-x: clip; }
 .site-header { width: 100%; max-width: 100%; height: 82px; padding-left: var(--page-gutter, 28px); padding-right: var(--page-gutter, 28px); display: flex; gap: 24px; }
 .site-header > a:first-child { flex: 0 0 auto; }

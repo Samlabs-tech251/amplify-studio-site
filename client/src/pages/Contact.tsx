@@ -44,7 +44,7 @@ export default function Contact() {
   }
 
   return (
-    <div className="page inner-page contact-page">
+    <div id="contact" className="page inner-page contact-page">
       <PageIntro kicker="Contact / Your next move" title={<>Let’s make<br /><em>it real.</em></>} description="Tell us what you are building, what feels unclear or what you want people to notice first. Choose the route that suits you and we will take it from there." />
       <section className="contact-options motion-section">
         <a className="contact-option contact-option-whatsapp" data-reveal href={whatsappUrl()} target="_blank" rel="noreferrer"><span className="contact-option-icon"><MessageCircle size={23} /></span><p className="eyebrow">Fastest route</p><h2>Message us<br /><em>on WhatsApp.</em></h2><p>Send the rough brief, a link, or just a sentence about what you need. We keep the first conversation simple, direct and personal.</p><span className="button button-primary">Open WhatsApp <span>↗</span></span></a>

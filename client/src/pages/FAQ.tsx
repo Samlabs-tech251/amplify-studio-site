@@ -11,7 +11,7 @@ const questions = [
 
 export default function FAQ() {
   return (
-    <div className="page inner-page faq-page">
+    <div id="faq" className="page inner-page faq-page">
       <PageIntro kicker="FAQ / Good questions" title={<>Let’s clear<br /><em>the air.</em></>} description="The short version of what you need to know before we make something good together. If your question is not here, send it anyway — a quick WhatsApp conversation is usually the fastest way to get a useful answer." />
       <section className="faq-list motion-section" aria-label="Frequently asked questions">
         {questions.map(([question, answer], index) => (

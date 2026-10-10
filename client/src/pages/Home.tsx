@@ -83,7 +83,7 @@ function ProofStrip() {
 export default function Home() {
   return (
     <div className="page page-home">
-      <section className="hero-section hero-minimal motion-section">
+      <section id="home" className="hero-section hero-minimal motion-section">
         <div className="hero-glow" aria-hidden="true" /><div className="hero-orb hero-orb-one" aria-hidden="true" /><div className="hero-orb hero-orb-two" aria-hidden="true" />
         <div className="hero-minimal-copy" data-reveal>
           <p className="eyebrow hero-eyebrow">Creative direction for the next chapter</p>
@@ -96,7 +96,7 @@ export default function Home() {
 
       <div id="proof-of-work"><ProofStrip /></div>
 
-      <section className="home-services-preview motion-section" aria-labelledby="offering-title">
+      <section id="services" className="home-services-preview motion-section" aria-labelledby="offering-title">
         <div className="section-heading-row" data-reveal>
           <div><p className="eyebrow">The offering / 04 ways to be seen</p><h2 id="offering-title" className="section-title">A sharper signal.</h2><p className="section-lede">The right combination depends on where your business is today. We can strengthen one visible touchpoint or build the system that connects all of them.</p></div>
           <Link href="/services" className="text-link">Explore services <ArrowRight size={15} /></Link>
@@ -112,19 +112,19 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="website-focus motion-section" data-reveal>
+      <section id="about" className="website-focus motion-section" data-reveal>
         <div className="website-focus-mark"><Globe2 size={27} /></div>
         <div><p className="eyebrow">Our primary focus / website development</p><h2>Build the place<br /><em>your brand belongs.</em></h2><p>Social media can introduce you, but a website gives people somewhere calm and credible to land. We design fast, mobile-friendly sites that turn attention into understanding, and understanding into action.</p></div>
         <Link className="button button-quiet" href="/services">See website development <ArrowUpRight size={15} /></Link>
       </section>
 
-      <section className="about-cta home-cta motion-section"><div data-reveal><p className="eyebrow">Ready when you are</p><h2>Let’s make your next move count.</h2><p className="cta-copy">Bring the rough idea, the half-finished brief or simply the feeling that your business should look sharper online. We will help turn it into a clear next step.</p></div><a className="button button-primary" data-reveal href={whatsappUrl()} target="_blank" rel="noreferrer"><MessageCircle size={17} /> Start a conversation <ArrowUpRight size={16} /></a></section>
-      <SelectedWorkSection />
+      <section id="contact"><section className="about-cta home-cta motion-section"><div data-reveal><p className="eyebrow">Ready when you are</p><h2>Let’s make your next move count.</h2><p className="cta-copy">Bring the rough idea, the half-finished brief or simply the feeling that your business should look sharper online. We will help turn it into a clear next step.</p></div><a className="button button-primary" data-reveal href={whatsappUrl()} target="_blank" rel="noreferrer"><MessageCircle size={17} /> Start a conversation <ArrowUpRight size={16} /></a></section></section>
+      <section id="portfolio"><SelectedWorkSection /></section>
       <StatsSection />
       <ProcessSection />
       <TestimonialsSection />
       <PackagesSection />
-      <PremiumFaqSection />
+      <section id="faq"><PremiumFaqSection /></section>
       <FinalCtaFooter />
     </div>
   );

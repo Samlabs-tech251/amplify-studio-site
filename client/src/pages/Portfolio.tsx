@@ -11,7 +11,7 @@ const projects = [
 
 export default function Portfolio() {
   return (
-    <div className="page inner-page portfolio-page">
+    <div id="portfolio" className="page inner-page portfolio-page">
       <PageIntro kicker="Selected work / 05 pieces" title={<>Proof, not<br /><em>promises.</em></>} description="A few ways we’ve helped small businesses show up with more clarity, confidence and character. Each piece starts with the same question: what should someone understand or feel within the first few seconds?" />
       <section className="portfolio-grid motion-section" aria-label="Selected Amplify Studio work">
         {projects.map(([image, title, description]) => (

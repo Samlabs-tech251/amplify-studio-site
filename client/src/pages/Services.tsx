@@ -23,7 +23,7 @@ export default function Services() {
   const pause = () => { if (timer.current) window.clearInterval(timer.current); timer.current = null; };
   const resume = () => { if (!timer.current) timer.current = window.setInterval(() => setActive((current) => (current + 1) % services.length), 6500); };
   return (
-    <div className="page inner-page services-page service-carousel-page">
+    <div id="services" className="page inner-page services-page service-carousel-page">
       <PageIntro kicker="Services / 04 ways to be seen" title={<>Make the right<br /><em>kind</em> of noise.</>} description="Our focus is building a stronger digital presence from the ground up, then supporting it with the creative pieces that keep your business visible. Choose one service or combine a few into a clearer signal." />
       <div className="service-marquee" aria-hidden="true"><div>Website Development <span>✦</span> Graphics Design <span>✦</span> Video Editing <span>✦</span> Caption Writing <span>✦</span> Website Development <span>✦</span> Graphics Design <span>✦</span> Video Editing <span>✦</span> Caption Writing <span>✦</span></div></div>
       <section className="service-ring-section motion-section" aria-label="Amplify Studio services" onPointerEnter={pause} onPointerLeave={resume} onTouchStart={pause} onTouchEnd={resume}>

@@ -5,7 +5,7 @@ const FORMSPREE_ENDPOINT = "PASTE-YOUR-FORMSPREE-ENDPOINT-HERE";
 
 export default function Reviews() {
   return (
-    <div className="page inner-page reviews-page">
+    <div id="reviews" className="page inner-page reviews-page">
       <PageIntro kicker="Reviews / From the people we’ve helped" title={<>Good work<br /><em>speaks back.</em></>} description="We are collecting honest feedback from the businesses we work with. Send your experience through the form below and we will review it privately before adding anything to this page." />
       <section className="reviews-layout motion-section">
         <div className="review-form-card" data-reveal>

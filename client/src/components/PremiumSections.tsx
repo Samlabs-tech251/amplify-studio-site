@@ -26,11 +26,8 @@ export function StatsSection() {
   return <section className="premium-section stats-section motion-section" aria-label="Amplify Studio impact"><div className="stats-grid">{impactStats.map((stat) => <Stat key={stat.label} {...stat} />)}</div></section>;
 }
 
-function Stat({ value, suffix, label }: { value: number; suffix: string; label: string }) {
-  const [count, setCount] = useState(0);
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => { const node = ref.current; if (!node) return; const observer = new IntersectionObserver(([entry]) => { if (!entry.isIntersecting) return; let start = 0; const timer = window.setInterval(() => { start += Math.max(1, Math.ceil(value / 22)); if (start >= value) { setCount(value); window.clearInterval(timer); } else setCount(start); }, 38); observer.disconnect(); return () => window.clearInterval(timer); }, { threshold: .45 }); observer.observe(node); return () => observer.disconnect(); }, [value]);
-  return <div className="stat-item" ref={ref} data-reveal><strong>{count}{suffix}</strong><span>{label}</span></div>;
+function Stat({ value, label }: { value: string; label: string }) {
+  return <div className="stat-item" data-reveal><strong>{value}</strong><span>{label}</span></div>;
 }
 
 export function ProcessSection() {

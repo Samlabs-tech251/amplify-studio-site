@@ -7,10 +7,10 @@ export const selectedWork = [
 ] as const;
 
 export const impactStats = [
-  { value: 42, suffix: "+", label: "projects delivered" },
-  { value: 18, suffix: "+", label: "happy clients" },
-  { value: 3, suffix: "+", label: "years learning" },
-  { value: 2, suffix: " days", label: "average delivery time" },
+  { value: "24-48h", label: "Typical turnaround on graphics" },
+  { value: "Mobile-first", label: "Every site built for phones first" },
+  { value: "WhatsApp", label: "Direct line to the person doing the work" },
+  { value: "Free preview", label: "See a sample before you commit" },
 ] as const;
 
 export const processSteps = [

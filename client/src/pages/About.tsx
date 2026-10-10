@@ -3,7 +3,7 @@ import { PageIntro, whatsappUrl } from "../components/AmplifyShell";
 
 export default function About() {
   return (
-    <div className="page inner-page about-page">
+    <div id="about" className="page inner-page about-page">
       <PageIntro kicker="About / The why behind the work" title={<>Small team.<br /><em>Big signal.</em></>} description="Amplify Studio is a Nigerian creative studio helping small businesses grow online — with a little more clarity and a lot more character. We bring strategy, design and practical digital thinking together so the quality of the business is easier to see." />
       <section className="about-story motion-section">
         <div className="about-pullquote" data-reveal><Quote size={24} /><p>Presentation should be the bridge between how good you are and how good you look online.</p><span>— Amplify Studio</span></div>

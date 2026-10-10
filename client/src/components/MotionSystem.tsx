@@ -52,12 +52,15 @@ export function MotionSystem() {
   const [location] = useLocation();
 
   useEffect(() => {
-    if (prefersReducedMotion()) return;
-
-    const lenis = new Lenis({ duration: 1.05, smoothWheel: true, touchMultiplier: 1.1 });
+    const lenis = new Lenis({ duration: 1.05, smoothWheel: !prefersReducedMotion(), touchMultiplier: 1.1 });
+    (window as typeof window & { __amplifyLenis?: Lenis }).__amplifyLenis = lenis;
     let frame = 0;
     const raf = (time: number) => { lenis.raf(time); ScrollTrigger.update(); frame = requestAnimationFrame(raf); };
     frame = requestAnimationFrame(raf);
+
+    if (prefersReducedMotion()) {
+      return () => { cancelAnimationFrame(frame); lenis.destroy(); delete (window as typeof window & { __amplifyLenis?: Lenis }).__amplifyLenis; };
+    }
 
     const context = gsap.context(() => {
       const revealGroups = gsap.utils.toArray<HTMLElement>(".motion-section");
@@ -83,7 +86,7 @@ export function MotionSystem() {
     if (onPointerMove) window.addEventListener("pointermove", onPointerMove, { passive: true });
 
     return () => {
-      cancelAnimationFrame(frame); lenis.destroy(); context.revert();
+      cancelAnimationFrame(frame); lenis.destroy(); delete (window as typeof window & { __amplifyLenis?: Lenis }).__amplifyLenis; context.revert();
       rippleTargets.forEach((target) => target.removeEventListener("click", addRipple));
       tiltCleanups.forEach((cleanup) => cleanup()); magneticCleanups.forEach((cleanup) => cleanup());
       if (onPointerMove) window.removeEventListener("pointermove", onPointerMove);
