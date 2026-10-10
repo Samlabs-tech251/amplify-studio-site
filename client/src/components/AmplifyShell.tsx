@@ -16,7 +16,7 @@ const directNavItems = [
   { href: "/about", sectionId: "about", label: "About", icon: UserRound },
   { href: "/contact", sectionId: "contact", label: "Contact", icon: CalendarDays },
 ];
-const menuItems = [...directNavItems, { href: "/faq", sectionId: "faq", label: "FAQ", icon: CircleHelp }, { href: "/reviews", sectionId: "reviews", label: "Reviews", icon: MessageCircle }];
+const menuItems = [...directNavItems, { href: "/faq", sectionId: "faq", label: "FAQ", icon: CircleHelp }, { href: "/reviews", sectionId: "reviews", label: "Promise", icon: MessageCircle }];
 
 type LenisWindow = Window & { __amplifyLenis?: { scrollTo: (target: HTMLElement, options?: { offset?: number; duration?: number }) => void; start: () => void; stop: () => void } };
 
@@ -30,16 +30,24 @@ export function AmplifyShell({ children }: { children: ReactNode }) {
 
   const goToSection = (event: React.MouseEvent, href: string, sectionId: string) => {
     event.preventDefault();
-    (window as LenisWindow).__amplifyLenis?.start();
     const target = document.getElementById(sectionId);
-    if (target && location === href) {
-      (window as LenisWindow).__amplifyLenis?.scrollTo(target, { offset: -104, duration: 0.8 });
-      if (!(window as LenisWindow).__amplifyLenis) target.scrollIntoView({ behavior: "smooth", block: "start" });
-    } else {
-      sessionStorage.setItem("amplify-pending-section", sectionId);
-      navigate(href);
-    }
+    const lenis = (window as LenisWindow).__amplifyLenis;
     setMenuOpen(false);
+    document.body.classList.remove("menu-open");
+    lenis?.start();
+
+    if (target) {
+      window.setTimeout(() => {
+        const currentTarget = document.getElementById(sectionId);
+        const activeLenis = (window as LenisWindow).__amplifyLenis;
+        if (currentTarget && activeLenis) activeLenis.scrollTo(currentTarget, { offset: -90, duration: 1.2 });
+        else if (currentTarget) window.scrollTo({ top: currentTarget.getBoundingClientRect().top + window.scrollY - 90, behavior: "smooth" });
+      }, 350);
+      return;
+    }
+
+    sessionStorage.setItem("amplify-pending-section", sectionId);
+    navigate(href);
   };
 
   useEffect(() => {
@@ -60,8 +68,10 @@ export function AmplifyShell({ children }: { children: ReactNode }) {
     const frame = requestAnimationFrame(() => {
       const target = document.getElementById(pending);
       if (target) {
-        (window as LenisWindow).__amplifyLenis?.scrollTo(target, { offset: -104, duration: 0.8 });
-        if (!(window as LenisWindow).__amplifyLenis) target.scrollIntoView({ behavior: "smooth", block: "start" });
+        const lenis = (window as LenisWindow).__amplifyLenis;
+        lenis?.start();
+        if (lenis) lenis.scrollTo(target, { offset: -90, duration: 1.2 });
+        else window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 90, behavior: "smooth" });
         sessionStorage.removeItem("amplify-pending-section");
       }
     });

@@ -20,16 +20,17 @@ export const processSteps = [
   { number: "04", title: "Launch", body: "We check the edges, hand things over clearly and help you take the next visible step." },
 ] as const;
 
-export const testimonials = [
-  { name: "Your next client", business: "Placeholder business", quote: "This space is ready for a real story from a business we have helped grow." },
-  { name: "A happy partner", business: "Placeholder brand", quote: "Replace this placeholder with an approved quote when the right words come in." },
-  { name: "Another good result", business: "Placeholder company", quote: "Real feedback belongs here — clear, specific and earned through the work." },
+export const studioPromise = [
+  { title: "Sample first", body: "See a preview of your design before you commit." },
+  { title: "Fast turnaround", body: "Most smaller graphics in 24-48 hours." },
+  { title: "Direct line", body: "You talk to the person doing the work, on WhatsApp." },
+  { title: "Revisions built in", body: "Included in every package." },
 ] as const;
 
 export const packages = [
-  { name: "Starter", hint: "For one clear next step", features: ["One focused creative deliverable", "Mobile-first direction", "One revision round"], message: "Hi, I'm interested in the Starter package" },
-  { name: "Professional", hint: "For a stronger presence", features: ["A connected set of creative deliverables", "Strategic visual direction", "Two revision rounds", "Priority communication"], message: "Hi, I'm interested in the Professional package" },
-  { name: "Premium", hint: "For the full signal", features: ["A complete digital and creative system", "Website-led direction", "Three revision rounds", "Launch support"], message: "Hi, I'm interested in the Premium package" },
+  { name: "Starter", hint: "For one clear next step", price: "35,000", features: ["One focused creative deliverable", "Mobile-first direction", "One revision round"], message: "Hi, I'm interested in the Starter package" },
+  { name: "Professional", hint: "For a stronger presence", price: "75,000", features: ["A connected set of creative deliverables", "Strategic visual direction", "Two revision rounds", "Priority communication"], message: "Hi, I'm interested in the Professional package" },
+  { name: "Premium", hint: "For the full signal", price: "150,000", features: ["A complete digital and creative system", "Website-led direction", "Three revision rounds", "Launch support"], message: "Hi, I'm interested in the Premium package" },
 ] as const;
 
 export const premiumFaqs = [

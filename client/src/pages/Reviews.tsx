@@ -22,7 +22,7 @@ export default function Reviews() {
         <div className="reviews-empty" data-reveal>
           <p className="eyebrow">Published reviews / 00</p>
           <h2>Nothing here<br /><em>yet.</em></h2>
-          <p>We are leaving this space intentionally empty until real feedback comes in. No placeholders, no invented praise — just the words of businesses we have actually helped.</p>
+          <p>We are leaving this space intentionally empty until real feedback comes in. No invented praise — just the words of businesses we have actually helped.</p>
         </div>
       </section>
     </div>

@@ -2,7 +2,7 @@ import { ArrowDown, ArrowRight, ArrowUpRight, Globe2, MessageCircle, Sparkles } 
 import { useEffect, useRef } from "react";
 import { Link } from "wouter";
 import { whatsappUrl } from "../components/AmplifyShell";
-import { FinalCtaFooter, PackagesSection, PremiumFaqSection, ProcessSection, SelectedWorkSection, StatsSection, TestimonialsSection } from "../components/PremiumSections";
+import { FinalCtaFooter, PackagesSection, PremiumFaqSection, ProcessSection, SelectedWorkSection, StatsSection, StudioPromiseSection } from "../components/PremiumSections";
 
 const proofImages = [
   ["StyleInLagos", "https://raw.githubusercontent.com/Samlabs-tech251/Amplify-studio-assets/main/styleinlagos.jpg"],
@@ -122,7 +122,7 @@ export default function Home() {
       <section id="portfolio"><SelectedWorkSection /></section>
       <StatsSection />
       <ProcessSection />
-      <TestimonialsSection />
+      <StudioPromiseSection />
       <PackagesSection />
       <section id="faq"><PremiumFaqSection /></section>
       <FinalCtaFooter />
