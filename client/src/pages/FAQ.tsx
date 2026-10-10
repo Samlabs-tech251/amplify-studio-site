@@ -1,23 +1,16 @@
 import { ArrowUpRight } from "lucide-react";
 import { PageIntro, whatsappUrl } from "../components/AmplifyShell";
-
-const questions = [
-  ["What services do you offer?", "Graphics design, static website design, caption writing, and video editing."],
-  ["How much does it cost?", "Depends on the project — message us on WhatsApp for a direct quote."],
-  ["How long does a project take?", "Most flyers/graphics in 24–48 hours; websites take longer depending on content readiness."],
-  ["I’m not in Nigeria, can I still work with you?", "Yes, everything is handled through WhatsApp."],
-  ["How do I get started?", "Tap any WhatsApp button on this page."],
-];
+import { faqQuestions } from "../data/siteData";
 
 export default function FAQ() {
   return (
     <div id="faq" className="page inner-page faq-page">
       <PageIntro kicker="FAQ / Good questions" title={<>Let’s clear<br /><em>the air.</em></>} description="The short version of what you need to know before we make something good together. If your question is not here, send it anyway — a quick WhatsApp conversation is usually the fastest way to get a useful answer." />
       <section className="faq-list motion-section" aria-label="Frequently asked questions">
-        {questions.map(([question, answer], index) => (
-          <details className="faq-item" data-reveal key={question} open={index === 0}>
-            <summary><span className="faq-number">0{index + 1}</span><span>{question}</span><span className="faq-plus">+</span></summary>
-            <div className="faq-answer"><p>{answer}</p></div>
+        {faqQuestions.map((item, index) => (
+          <details className="faq-item" data-reveal key={item.question} open={index === 0}>
+            <summary><span className="faq-number">0{index + 1}</span><span>{item.question}</span><span className="faq-plus">+</span></summary>
+            <div className="faq-answer"><p>{item.answer}</p></div>
           </details>
         ))}
       </section>

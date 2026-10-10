@@ -1,8 +1,8 @@
-import { useRef, useState, type CSSProperties, type PointerEvent as ReactPointerEvent } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type PointerEvent as ReactPointerEvent } from "react";
 import { ArrowLeft, ArrowRight, ArrowUpRight, Check, Mail, MessageCircle } from "lucide-react";
 import { Link } from "wouter";
 import { whatsappUrl } from "./AmplifyShell";
-import { impactStats, packages, premiumFaqs, processSteps, selectedWork, studioPromise } from "../data/siteData";
+import { impactStats, packages, premiumFaqs, processSteps, selectedWork, studioPromise, trustBar } from "../data/siteData";
 
 export function SelectedWorkSection() {
   const [active, setActive] = useState(0);
@@ -31,7 +31,14 @@ function Stat({ value, label }: { value: string; label: string }) {
 }
 
 export function ProcessSection() {
-  return <section className="premium-section process-section motion-section" aria-labelledby="process-title"><div className="process-intro" data-reveal><p className="eyebrow">The process / Clear by design</p><h2 id="process-title" className="section-title">From rough idea<br /><em>to ready.</em></h2><p className="section-lede">A good process keeps the work feeling focused. Each step gives the next one something stronger to build on.</p></div><div className="process-stack">{processSteps.map((step, index) => <article className="process-card" style={{ "--step-index": index } as CSSProperties} data-reveal key={step.number}><span className="process-number">{step.number}</span><div><h3>{step.title}</h3><p>{step.body}</p></div><span className="process-marker">✦</span></article>)}</div></section>;
+  const timelineRef = useRef<HTMLDivElement>(null);
+  const [progress, setProgress] = useState(0);
+  useEffect(() => {
+    const update = () => { const node = timelineRef.current; if (!node) return; const rect = node.getBoundingClientRect(); setProgress(Math.max(0, Math.min(1, (window.innerHeight * .72 - rect.top) / Math.max(rect.height * .72, 1)))); };
+    update(); window.addEventListener("scroll", update, { passive: true }); window.addEventListener("resize", update);
+    return () => { window.removeEventListener("scroll", update); window.removeEventListener("resize", update); };
+  }, []);
+  return <section className="premium-section process-section motion-section" aria-labelledby="process-title"><div className="process-intro" data-reveal><p className="eyebrow">The process / Clear by design</p><h2 id="process-title" className="section-title">From rough idea<br /><em>to ready.</em></h2><p className="section-lede">A good process keeps the work feeling focused. Each step gives the next one something stronger to build on.</p></div><div className="process-timeline" ref={timelineRef}><div className="process-progress-track" aria-hidden="true"><span style={{ height: `${progress * 100}%` }} /></div><div className="process-stack">{processSteps.map((step, index) => <article className="process-card" style={{ "--step-index": index } as CSSProperties} data-reveal key={step.number}><span className="process-number">{step.number}</span><div><h3>{step.title}</h3><p>{step.body}</p><small className="process-client-action">{step.clientAction}</small></div><span className="process-marker">✦</span></article>)}</div></div></section>;
 }
 
 export function StudioPromiseSection() {
@@ -48,5 +55,5 @@ export function PremiumFaqSection() {
 }
 
 export function FinalCtaFooter() {
-  return <><section className="premium-final-cta motion-section" data-reveal><p className="eyebrow">Ready when you are</p><h2>Let’s build something<br /><em>people remember.</em></h2><a className="button button-primary magnetic" href={whatsappUrl()} target="_blank" rel="noreferrer"><MessageCircle size={17} /> Start a conversation <ArrowUpRight size={16} /></a></section><footer className="premium-footer"><div><Link href="/" className="footer-brand">Amplify<span>Studio</span></Link><p>Visual and digital presence for businesses ready for what is next.</p></div><div className="footer-links"><a href={whatsappUrl()} target="_blank" rel="noreferrer"><MessageCircle size={15} /> WhatsApp</a><a href="https://www.instagram.com/" target="_blank" rel="noreferrer">Instagram <ArrowUpRight size={14} /></a><a href="mailto:samstudiohub@gmail.com"><Mail size={15} /> Email</a></div><small>© {new Date().getFullYear()} Amplify Studio</small></footer></>;
+  return <><section className="premium-final-cta motion-section" data-reveal><p className="eyebrow">Ready when you are</p><h2>Let’s build something<br /><em>people remember.</em></h2><a className="button button-primary magnetic" href={whatsappUrl()} target="_blank" rel="noreferrer"><MessageCircle size={17} /> Start a conversation <ArrowUpRight size={16} /></a></section><div className="trust-bar" data-reveal aria-label="Amplify Studio trust points">{trustBar.map((item) => <span key={item}>{item}</span>)}</div><footer className="premium-footer"><div><Link href="/" className="footer-brand">Amplify<span>Studio</span></Link><p>Visual and digital presence for businesses ready for what is next.</p></div><div className="footer-links"><a href={whatsappUrl()} target="_blank" rel="noreferrer"><MessageCircle size={15} /> WhatsApp</a><a href="https://www.instagram.com/" target="_blank" rel="noreferrer">Instagram <ArrowUpRight size={14} /></a><a href="mailto:samstudiohub@gmail.com"><Mail size={15} /> Email</a></div><small>© {new Date().getFullYear()} Amplify Studio</small></footer></>;
 }

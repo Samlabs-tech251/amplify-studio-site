@@ -1,6 +1,8 @@
 import { ArrowLeft, ArrowRight, ArrowUpRight, ChevronDown, Globe2, MessageCircle, Paintbrush, PlaySquare, Quote } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { Link } from "wouter";
 import { PageIntro, whatsappUrl } from "../components/AmplifyShell";
+import { serviceDetails } from "../data/siteData";
 
 const services = [
   { number: "01", title: "Website Development", icon: Globe2, description: "Fast, mobile-friendly websites that make your business easier to trust, find and choose.", detail: "We shape the structure, visual rhythm and calls to action around what your customers actually need to know. The result is a focused digital home that feels like your business, not a template.", message: "Hi, I'm interested in your website development services", featured: true },
@@ -22,6 +24,8 @@ export default function Services() {
   useEffect(() => { timer.current = window.setInterval(() => setActive((current) => (current + 1) % services.length), 6500); return () => { if (timer.current) window.clearInterval(timer.current); }; }, []);
   const pause = () => { if (timer.current) window.clearInterval(timer.current); timer.current = null; };
   const resume = () => { if (!timer.current) timer.current = window.setInterval(() => setActive((current) => (current + 1) % services.length), 6500); };
+  const activeService = services[active];
+  const activeMeta = serviceDetails[activeService.title as keyof typeof serviceDetails];
   return (
     <div id="services" className="page inner-page services-page service-carousel-page">
       <PageIntro kicker="Services / 04 ways to be seen" title={<>Make the right<br /><em>kind</em> of noise.</>} description="Our focus is building a stronger digital presence from the ground up, then supporting it with the creative pieces that keep your business visible. Choose one service or combine a few into a clearer signal." />
@@ -40,7 +44,7 @@ export default function Services() {
           <button className="service-ring-arrow service-ring-arrow-right" type="button" onClick={() => move(1)} aria-label="Next service"><ArrowRight size={19} /></button>
         </div>
         <div className="service-ring-dots" role="tablist" aria-label="Choose service">{services.map((service, index) => <button key={service.title} type="button" className={index === active ? "is-active" : ""} onClick={() => setActive(index)} aria-label={`Show ${service.title}`} aria-selected={index === active} role="tab" />)}</div>
-        <article className="service-ring-detail" data-reveal><div><p className="eyebrow">{services[active].number} / {services[active].tag || "Available now"}</p><h2>{services[active].title}</h2><p>{services[active].detail}</p></div><div className="service-ring-action"><span className="service-ring-price">From N...</span><a className="button button-primary" href={whatsappUrl(services[active].message)} target="_blank" rel="noreferrer"><MessageCircle size={16} /> Ask about {services[active].title.toLowerCase()} <ArrowUpRight size={15} /></a></div></article>
+        <article className="service-ring-detail" data-reveal><div><p className="eyebrow">{activeService.number} / {activeService.tag || "Available now"}</p><h2>{activeService.title}</h2><p>{activeService.detail}</p><div className="service-meta-lines"><p><strong>Best for</strong>{activeMeta.bestFor}</p><p><strong>What you get</strong>{activeMeta.whatYouGet}</p>{activeMeta.turnaround && <p><strong>Typical turnaround</strong>{activeMeta.turnaround}</p>}</div><Link className="service-examples-link" href={`/portfolio?filter=${activeMeta.portfolioFilter}`}>See examples <ArrowUpRight size={14} /></Link></div><div className="service-ring-action"><span className="service-ring-price">From N...</span><a className="button button-primary" href={whatsappUrl(activeService.message)} target="_blank" rel="noreferrer"><MessageCircle size={16} /> Ask about {activeService.title.toLowerCase()} <ArrowUpRight size={15} /></a></div></article>
       </section>
       <div className="page-note" data-reveal><span>Swipe, drag or choose a card to focus a service, then take the next step on WhatsApp.</span><span className="note-rule" /></div>
     </div>
