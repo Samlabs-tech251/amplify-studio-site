@@ -17,5 +17,444 @@
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
     <script defer src="%VITE_ANALYTICS_ENDPOINT%/umami" data-website-id="%VITE_ANALYTICS_WEBSITE_ID%"></script>
+  <!-- ============================================================
+  Amplify Studio chat widget (v3, gold and violet theme)
+  Paste this whole block right before </body>.
+  Colors: edit the --ams-* values at the top of the <style>.
+  Settings: edit only the CONFIG section inside the <script>.
+============================================================ -->
+<style>
+  #ams-chat, #ams-chat * { box-sizing: border-box; }
+  #ams-chat {
+    /* ---- palette: change these to match the site ---- */
+    --ams-bg: #0b0716;
+    --ams-surface: #150f26;
+    --ams-surface-2: #1e1635;
+    --ams-line: rgba(255, 255, 255, .09);
+    --ams-text: #f3ece0;
+    --ams-muted: #a8a0b8;
+    --ams-accent: #dcae52;
+    --ams-accent-2: #b98530;
+    --ams-on-accent: #1a1208;
+    --ams-online: #34d399;
+    --ams-font: inherit;
+    --ams-display: "Playfair Display", Georgia, serif;
+    --ams-lift: 0px;
+    /* ------------------------------------------------- */
+    --ams-grad: linear-gradient(135deg, var(--ams-accent), var(--ams-accent-2));
+    font-family: var(--ams-font);
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--ams-text);
+  }
+  #ams-chat button, #ams-chat input { font-family: inherit; }
+
+  /* Launcher */
+  #ams-chat .ams-launcher {
+    position: fixed; right: 20px; bottom: calc(20px + var(--ams-lift) + env(safe-area-inset-bottom, 0px));
+    width: 60px; height: 60px; border-radius: 50%; border: 0; padding: 0; cursor: pointer;
+    background: var(--ams-grad); color: var(--ams-on-accent); z-index: 2147483000;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 8px 28px rgba(220, 174, 82, .45), 0 2px 8px rgba(0, 0, 0, .4);
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  #ams-chat .ams-launcher:hover { transform: translateY(-2px) scale(1.06); box-shadow: 0 12px 34px rgba(220, 174, 82, .45), 0 2px 8px rgba(0, 0, 0, .4); }
+  #ams-chat .ams-launcher:active { transform: scale(.96); }
+  #ams-chat .ams-launcher::before {
+    content: ""; position: absolute; inset: 0; border-radius: 50%;
+    border: 2px solid var(--ams-accent); opacity: 0;
+    animation: ams-ring 2.2s ease-out 3; animation-delay: 1.5s;
+  }
+  #ams-chat .ams-launcher svg { width: 26px; height: 26px; position: absolute; transition: transform .25s ease, opacity .2s ease; }
+  #ams-chat .ams-ico-close { opacity: 0; transform: rotate(-90deg) scale(.6); }
+  #ams-chat.ams-is-open .ams-ico-chat { opacity: 0; transform: rotate(90deg) scale(.6); }
+  #ams-chat.ams-is-open .ams-ico-close { opacity: 1; transform: none; }
+  #ams-chat .ams-badge {
+    position: absolute; top: -3px; right: -3px; min-width: 20px; height: 20px; padding: 0 5px;
+    border-radius: 10px; background: #ef4444; color: #fff; font-size: 12px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; border: 2px solid var(--ams-bg);
+  }
+  #ams-chat .ams-badge[hidden] { display: none; }
+  @keyframes ams-ring { 0% { transform: scale(1); opacity: .7; } 100% { transform: scale(1.8); opacity: 0; } }
+
+  /* Teaser bubble */
+  #ams-chat .ams-teaser {
+    position: fixed; right: 20px; bottom: calc(92px + var(--ams-lift) + env(safe-area-inset-bottom, 0px));
+    max-width: 260px; padding: 12px 34px 12px 14px; border-radius: 14px 14px 4px 14px;
+    background: var(--ams-surface-2); color: var(--ams-text); border: 1px solid var(--ams-line);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .45); z-index: 2147483000; cursor: pointer;
+    display: none; animation: ams-pop .35s ease both;
+  }
+  #ams-chat .ams-teaser.ams-show { display: block; }
+  #ams-chat .ams-teaser-x {
+    position: absolute; top: 4px; right: 6px; background: transparent; border: 0;
+    color: var(--ams-muted); font-size: 18px; line-height: 1; cursor: pointer; padding: 4px 6px; border-radius: 6px;
+  }
+
+  /* Panel */
+  #ams-chat .ams-panel {
+    position: fixed; right: 20px; bottom: calc(92px + var(--ams-lift) + env(safe-area-inset-bottom, 0px));
+    width: 380px; max-width: calc(100vw - 24px);
+    height: 580px; max-height: calc(100vh - 116px - var(--ams-lift)); max-height: calc(100dvh - 116px - var(--ams-lift));
+    background: radial-gradient(120% 55% at 100% 0%, rgba(110, 70, 190, .32), transparent 60%), var(--ams-bg);
+    border: 1px solid var(--ams-line); border-radius: 20px; overflow: hidden;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, .6), 0 0 0 1px rgba(220, 174, 82, .12);
+    display: none; flex-direction: column; z-index: 2147483000; transform-origin: bottom right;
+  }
+  #ams-chat .ams-panel.ams-open { display: flex; animation: ams-pop .28s cubic-bezier(.2, .8, .2, 1) both; }
+  @keyframes ams-pop { from { opacity: 0; transform: translateY(14px) scale(.96); } to { opacity: 1; transform: none; } }
+
+  /* Header */
+  #ams-chat .ams-head {
+    display: flex; align-items: center; gap: 12px; padding: 14px 14px 14px 16px;
+    background: rgba(255, 255, 255, .03); border-bottom: 1px solid var(--ams-line);
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  }
+  #ams-chat .ams-avatar {
+    position: relative; flex: none; width: 40px; height: 40px; border-radius: 12px; background: var(--ams-grad);
+    display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 19px; font-family: var(--ams-display); font-style: italic; color: var(--ams-on-accent);
+  }
+  #ams-chat .ams-avatar::after {
+    content: ""; position: absolute; right: -3px; bottom: -3px; width: 12px; height: 12px;
+    border-radius: 50%; background: var(--ams-online); border: 2px solid var(--ams-bg);
+  }
+  #ams-chat .ams-who { flex: 1; min-width: 0; }
+  #ams-chat .ams-title { font-family: var(--ams-display); font-weight: 600; font-size: 18px; line-height: 1.2; }
+  #ams-chat .ams-sub { font-size: 12.5px; color: var(--ams-muted); margin-top: 2px; }
+  #ams-chat .ams-iconbtn {
+    flex: none; width: 36px; height: 36px; border-radius: 10px; border: 1px solid var(--ams-line);
+    background: transparent; color: var(--ams-text); cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: background .15s ease, border-color .15s ease; text-decoration: none;
+  }
+  #ams-chat .ams-iconbtn:hover { background: rgba(255, 255, 255, .08); border-color: rgba(255, 255, 255, .2); }
+  #ams-chat .ams-iconbtn svg { width: 18px; height: 18px; }
+
+  /* Messages */
+  #ams-chat .ams-log { flex: 1; overflow-y: auto; padding: 16px 14px 8px; display: flex; flex-direction: column; gap: 10px; scroll-behavior: smooth; overscroll-behavior: contain; }
+  #ams-chat .ams-log::-webkit-scrollbar { width: 6px; }
+  #ams-chat .ams-log::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, .14); border-radius: 3px; }
+  #ams-chat .ams-msg { max-width: 86%; padding: 10px 14px; border-radius: 16px; white-space: pre-wrap; overflow-wrap: anywhere; animation: ams-in .22s ease both; }
+  @keyframes ams-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  #ams-chat .ams-bot { align-self: flex-start; background: var(--ams-surface-2); border: 1px solid var(--ams-line); border-bottom-left-radius: 5px; }
+  #ams-chat .ams-user { align-self: flex-end; background: var(--ams-grad); color: var(--ams-on-accent); border-bottom-right-radius: 5px; }
+  #ams-chat .ams-msg a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+  #ams-chat .ams-cta {
+    align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px;
+    border-radius: 999px; background: #25d366; color: #052e16; font-weight: 700; font-size: 14px; text-decoration: none;
+    animation: ams-in .22s ease both; transition: transform .15s ease, filter .15s ease;
+  }
+  #ams-chat .ams-cta:hover { transform: translateY(-1px); filter: brightness(1.08); }
+  #ams-chat .ams-dots { display: inline-flex; gap: 5px; align-items: center; height: 20px; }
+  #ams-chat .ams-dots i { width: 7px; height: 7px; border-radius: 50%; background: var(--ams-muted); animation: ams-bounce 1s infinite ease-in-out; }
+  #ams-chat .ams-dots i:nth-child(2) { animation-delay: .15s; }
+  #ams-chat .ams-dots i:nth-child(3) { animation-delay: .3s; }
+  @keyframes ams-bounce { 0%, 80%, 100% { opacity: .3; transform: translateY(0); } 40% { opacity: 1; transform: translateY(-3px); } }
+
+  /* Quick replies */
+  #ams-chat .ams-chips { display: flex; flex-wrap: wrap; gap: 8px; padding: 4px 14px 10px; }
+  #ams-chat .ams-chips[hidden] { display: none; }
+  #ams-chat .ams-chip {
+    background: transparent; color: var(--ams-text); border: 1px solid rgba(220, 174, 82, .5);
+    border-radius: 999px; padding: 7px 13px; font-size: 13.5px; cursor: pointer;
+    transition: background .15s ease, border-color .15s ease, transform .15s ease;
+  }
+  #ams-chat .ams-chip:hover { background: rgba(220, 174, 82, .18); border-color: var(--ams-accent); transform: translateY(-1px); }
+
+  /* Composer */
+  #ams-chat .ams-form { display: flex; gap: 8px; padding: 10px 12px 6px; border-top: 1px solid var(--ams-line); background: rgba(255, 255, 255, .02); }
+  #ams-chat .ams-input {
+    flex: 1; min-width: 0; padding: 12px 14px; border-radius: 12px; font-size: 15px;
+    background: var(--ams-surface); color: var(--ams-text); border: 1px solid var(--ams-line);
+    transition: border-color .15s ease, box-shadow .15s ease;
+  }
+  #ams-chat .ams-input::placeholder { color: var(--ams-muted); }
+  #ams-chat .ams-input:focus { outline: none; border-color: var(--ams-accent); box-shadow: 0 0 0 3px rgba(220, 174, 82, .25); }
+  #ams-chat .ams-send {
+    flex: none; width: 46px; border: 0; border-radius: 12px; background: var(--ams-grad); color: var(--ams-on-accent); cursor: pointer;
+    display: flex; align-items: center; justify-content: center; transition: transform .15s ease, opacity .15s ease;
+  }
+  #ams-chat .ams-send:hover:not(:disabled) { transform: scale(1.05); }
+  #ams-chat .ams-send:disabled { opacity: .4; cursor: not-allowed; }
+  #ams-chat .ams-send svg { width: 20px; height: 20px; }
+  #ams-chat .ams-note { padding: 0 14px calc(10px + env(safe-area-inset-bottom, 0px)); font-size: 11.5px; color: var(--ams-muted); text-align: center; }
+
+  #ams-chat button:focus-visible, #ams-chat a:focus-visible { outline: 3px solid #fbbf24; outline-offset: 2px; }
+
+  /* Clear the site's bottom navigation dock on small screens */
+  @media (max-width: 768px) { #ams-chat { --ams-lift: 84px; } }
+
+  /* Phones: full-screen sheet */
+  @media (max-width: 480px) {
+    #ams-chat .ams-panel { inset: 0; width: auto; max-width: none; height: auto; max-height: none; border-radius: 0; border: 0; }
+    #ams-chat .ams-head { padding-top: calc(14px + env(safe-area-inset-top, 0px)); }
+    #ams-chat.ams-is-open .ams-launcher { display: none; }
+    #ams-chat .ams-input { font-size: 16px; }
+    #ams-chat .ams-teaser { right: 16px; max-width: calc(100vw - 100px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #ams-chat *, #ams-chat *::before { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  }
+</style>
+
+<div id="ams-chat">
+  <div class="ams-teaser" role="status">
+    <span class="ams-teaser-text"></span>
+    <button class="ams-teaser-x" type="button" aria-label="Dismiss">&times;</button>
+  </div>
+
+  <button class="ams-launcher" type="button" aria-label="Open chat" aria-expanded="false" aria-controls="ams-panel">
+    <svg class="ams-ico-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>
+    <svg class="ams-ico-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    <span class="ams-badge" hidden>1</span>
+  </button>
+
+  <div class="ams-panel" id="ams-panel" role="dialog" aria-label="Chat with Amplify Studio">
+    <div class="ams-head">
+      <div class="ams-avatar" aria-hidden="true">A</div>
+      <div class="ams-who">
+        <div class="ams-title">Amplify Studio</div>
+        <div class="ams-sub">AI assistant &middot; online</div>
+      </div>
+      <a class="ams-iconbtn ams-wa" href="#" target="_blank" rel="noopener" aria-label="Chat on WhatsApp" title="Chat on WhatsApp">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+      </a>
+      <button class="ams-iconbtn ams-close" type="button" aria-label="Close chat">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="ams-log" role="log" aria-live="polite"></div>
+    <div class="ams-chips"></div>
+    <form class="ams-form" autocomplete="off">
+      <input class="ams-input" type="text" maxlength="1000" placeholder="Type your question" aria-label="Your message">
+      <button class="ams-send" type="submit" aria-label="Send message">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+      </button>
+    </form>
+    <div class="ams-note">AI assistant. For anything urgent, use WhatsApp.</div>
+  </div>
+</div>
+
+<script>
+(function () {
+  /* ---------------- CONFIG: edit only this part ---------------- */
+  var CONFIG = {
+    url: "https://amplify-outreach-workflow.app.n8n.cloud/webhook/ai-customer-support",
+    apiKey: "yeihsvvdjdvgeggejjdgehhenevveie76366383yggehheyegvdjbeggeyeuuegeheghw",
+    apiKeyHeader: "X-Api-Key",        // must match the Name you set in the n8n credential
+    businessName: "Amplify Studio",
+    whatsapp: "2349014350492",        // digits only, with country code
+    greeting: "Hi, welcome to Amplify Studio. Ask me about our services, packages, or how to get started.",
+    teaser: "Questions about our packages? Ask me here.",
+    teaserDelayMs: 6000,
+    quickReplies: [
+      "What services do you offer?",
+      "How much are your packages?",
+      "How do I get started?",
+      "How can I contact you?"
+    ],
+    errorMessage: "Sorry, I could not reach the assistant just now. Please message us on WhatsApp or email samstudiohub@gmail.com."
+  };
+  /* ------------------------------------------------------------- */
+
+  var root = document.getElementById("ams-chat");
+  var $ = function (s) { return root.querySelector(s); };
+  var launcher = $(".ams-launcher"), panel = $(".ams-panel"), closeBtn = $(".ams-close");
+  var log = $(".ams-log"), chips = $(".ams-chips"), form = $(".ams-form");
+  var input = $(".ams-input"), sendBtn = $(".ams-send"), wa = $(".ams-wa");
+  var badge = $(".ams-badge"), teaser = $(".ams-teaser"), teaserX = $(".ams-teaser-x");
+  var waLink = "https://wa.me/" + CONFIG.whatsapp;
+  wa.href = waLink;
+  $(".ams-teaser-text").textContent = CONFIG.teaser;
+
+  var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var phone = function () { return window.matchMedia && window.matchMedia("(max-width: 480px)").matches; };
+
+  function store(k, v) { try { sessionStorage.setItem(k, v); } catch (e) {} }
+  function load(k) { try { return sessionStorage.getItem(k); } catch (e) { return null; } }
+
+  var sessionId = load("ams_session");
+  if (!sessionId) {
+    sessionId = "web-" + Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
+    store("ams_session", sessionId);
+  }
+
+  var history = [];
+  try { history = JSON.parse(load("ams_history") || "[]"); } catch (e) { history = []; }
+  if (!Array.isArray(history)) history = [];
+  function saveHistory() { store("ams_history", JSON.stringify(history.slice(-30))); }
+
+  var busy = false;
+  var lastSend = 0;
+
+  /* ---------- rendering helpers ---------- */
+  function addText(el, text) {
+    var re = /(https?:\/\/[^\s<>"]+[^\s<>".,;:!?)])/g;
+    var last = 0, m;
+    while ((m = re.exec(text)) !== null) {
+      if (m.index > last) el.appendChild(document.createTextNode(text.slice(last, m.index)));
+      var a = document.createElement("a");
+      a.href = m[0]; a.textContent = m[0]; a.target = "_blank"; a.rel = "noopener noreferrer";
+      el.appendChild(a);
+      last = m.index + m[0].length;
+    }
+    if (last < text.length) el.appendChild(document.createTextNode(text.slice(last)));
+  }
+  function scrollDown() { log.scrollTop = log.scrollHeight; }
+
+  function bubble(text, who) {
+    var el = document.createElement("div");
+    el.className = "ams-msg " + (who === "user" ? "ams-user" : "ams-bot");
+    addText(el, text);
+    log.appendChild(el);
+    scrollDown();
+    return el;
+  }
+  function ctaButton() {
+    var a = document.createElement("a");
+    a.className = "ams-cta"; a.href = waLink; a.target = "_blank"; a.rel = "noopener";
+    a.textContent = "Continue on WhatsApp";
+    log.appendChild(a);
+    scrollDown();
+  }
+  function typing() {
+    var el = document.createElement("div");
+    el.className = "ams-msg ams-bot";
+    el.innerHTML = '<span class="ams-dots" aria-label="Typing"><i></i><i></i><i></i></span>';
+    log.appendChild(el);
+    scrollDown();
+    return el;
+  }
+  function reveal(el, text, done) {
+    if (reduced || text.length > 700) { el.textContent = ""; addText(el, text); scrollDown(); done(); return; }
+    var parts = text.split(/(\s+)/), i = 0;
+    var per = Math.max(10, Math.min(35, 1400 / parts.length));
+    el.textContent = "";
+    (function step() {
+      if (i >= parts.length) { el.textContent = ""; addText(el, text); scrollDown(); done(); return; }
+      el.textContent += parts[i++];
+      scrollDown();
+      setTimeout(step, per);
+    })();
+  }
+
+  function renderChips() {
+    chips.innerHTML = "";
+    var hasUser = history.some(function (h) { return h.who === "user"; });
+    if (hasUser || !CONFIG.quickReplies.length) { chips.hidden = true; return; }
+    chips.hidden = false;
+    CONFIG.quickReplies.forEach(function (q) {
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "ams-chip"; b.textContent = q;
+      b.addEventListener("click", function () { send(q); });
+      chips.appendChild(b);
+    });
+  }
+
+  /* ---------- open / close ---------- */
+  function hideTeaser() { teaser.classList.remove("ams-show"); store("ams_teaser", "1"); }
+  function openPanel() {
+    panel.classList.add("ams-open");
+    root.classList.add("ams-is-open");
+    launcher.setAttribute("aria-expanded", "true");
+    launcher.setAttribute("aria-label", "Close chat");
+    badge.hidden = true; store("ams_seen", "1"); hideTeaser();
+    if (phone()) document.body.style.overflow = "hidden";
+    if (!log.children.length) {
+      history = [{ who: "bot", text: CONFIG.greeting }];
+      saveHistory();
+      bubble(CONFIG.greeting, "bot");
+    }
+    renderChips();
+    scrollDown();
+    if (!phone()) setTimeout(function () { input.focus(); }, 60);
+  }
+  function closePanel() {
+    panel.classList.remove("ams-open");
+    root.classList.remove("ams-is-open");
+    launcher.setAttribute("aria-expanded", "false");
+    launcher.setAttribute("aria-label", "Open chat");
+    document.body.style.overflow = "";
+    launcher.focus();
+  }
+  launcher.addEventListener("click", function () { panel.classList.contains("ams-open") ? closePanel() : openPanel(); });
+  closeBtn.addEventListener("click", closePanel);
+  teaser.addEventListener("click", function (e) { if (e.target !== teaserX) openPanel(); });
+  teaserX.addEventListener("click", function (e) { e.stopPropagation(); hideTeaser(); });
+  root.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && panel.classList.contains("ams-open")) closePanel();
+  });
+
+  /* ---------- restore earlier messages from this visit ---------- */
+  history.forEach(function (h) {
+    if (h.cta) { ctaButton(); } else { bubble(h.text, h.who); }
+  });
+  log.querySelectorAll(".ams-msg, .ams-cta").forEach(function (n) { n.style.animation = "none"; });
+
+  /* ---------- badge and teaser (first visit only) ---------- */
+  if (!load("ams_seen")) badge.hidden = false;
+  if (!load("ams_teaser")) {
+    setTimeout(function () {
+      if (!panel.classList.contains("ams-open") && !load("ams_teaser")) {
+        teaser.classList.add("ams-show");
+        setTimeout(function () { teaser.classList.remove("ams-show"); }, 12000);
+      }
+    }, CONFIG.teaserDelayMs);
+  }
+
+  /* ---------- sending ---------- */
+  function send(text) {
+    text = (text || "").trim();
+    if (!text || busy) return;
+    if (Date.now() - lastSend < 1200) return;
+    lastSend = Date.now();
+    busy = true; sendBtn.disabled = true; input.value = "";
+    history.push({ who: "user", text: text }); saveHistory();
+    bubble(text, "user");
+    chips.hidden = true;
+    var dots = typing();
+
+    var headers = { "Content-Type": "application/json" };
+    if (CONFIG.apiKey) headers[CONFIG.apiKeyHeader] = CONFIG.apiKey;
+    var ctrl = typeof AbortController !== "undefined" ? new AbortController() : null;
+    var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, 60000) : null;
+
+    function finish() {
+      if (timer) clearTimeout(timer);
+      busy = false; sendBtn.disabled = false;
+      if (!phone()) input.focus();
+    }
+
+    fetch(CONFIG.url, {
+      method: "POST",
+      headers: headers,
+      body: JSON.stringify({ message: text, business_name: CONFIG.businessName, session_id: sessionId }),
+      signal: ctrl ? ctrl.signal : undefined
+    })
+      .then(function (res) { if (!res.ok) throw new Error("HTTP " + res.status); return res.json(); })
+      .then(function (data) {
+        var reply = data && typeof data.reply === "string" && data.reply.trim() ? data.reply : CONFIG.errorMessage;
+        var human = data && (data.needs_human === true || data.needs_human === "true" || data.category === "escalation");
+        dots.remove();
+        var el = bubble("", "bot");
+        reveal(el, reply, function () {
+          history.push({ who: "bot", text: reply });
+          if (human) { ctaButton(); history.push({ who: "bot", text: "", cta: true }); }
+          saveHistory();
+          finish();
+        });
+      })
+      .catch(function () {
+        dots.remove();
+        bubble(CONFIG.errorMessage, "bot");
+        history.push({ who: "bot", text: CONFIG.errorMessage }); saveHistory();
+        finish();
+      });
+  }
+
+  form.addEventListener("submit", function (e) { e.preventDefault(); send(input.value); });
+})();
+</script>
+
+
   </body>
 </html>
