@@ -236,25 +236,64 @@
 
 <script>
 (function () {
-  /* ---------------- CONFIG: edit only this part ---------------- */
+  /* ---------------- LOCAL CONFIG ---------------- */
   var CONFIG = {
-    url: "https://amplify-outreach-workflow.app.n8n.cloud/webhook/ai-customer-support",
-    apiKey: "yeihsvvdjdvgeggejjdgehhenevveie76366383yggehheyegvdjbeggeyeuuegeheghw",
-    apiKeyHeader: "X-Api-Key",        // must match the Name you set in the n8n credential
     businessName: "Amplify Studio",
-    whatsapp: "2349014350492",        // digits only, with country code
+    whatsapp: "2349014350492",
     greeting: "Hi, welcome to Amplify Studio. Ask me about our services, packages, or how to get started.",
     teaser: "Questions about our packages? Ask me here.",
     teaserDelayMs: 6000,
     quickReplies: [
       "What services do you offer?",
-      "How much are your packages?",
+      "How much is a website?",
+      "How much are your creative packages?",
       "How do I get started?",
+      "What is your refund policy?",
       "How can I contact you?"
     ],
-    errorMessage: "Sorry, I could not reach the assistant just now. Please message us on WhatsApp or email samstudiohub@gmail.com."
+    errorMessage: "I do not have that detail. The team will confirm it for you. You can reach them on WhatsApp (+2349014350492) or email (samstudiohub@gmail.com)."
   };
-  /* ------------------------------------------------------------- */
+  /* ------------------------------------------------ */
+
+  /* Knowledge-base sections 1-13. Answers are kept in the wording of the supplied source. */
+  var ENTRIES = [
+    { id: "business-overview", triggers: ["what does amplify studio do", "what is amplify studio", "business overview", "what kind of business", "what is your tagline"], answer: "Amplify Studio is a creative design and digital marketing agency in Lagos. It helps small businesses look credible and grow online with design, video, content and websites.", related: ["Who runs Amplify Studio?", "Where are you based?", "What services do you offer?"] },
+    { id: "founder", triggers: ["who runs amplify studio", "who is the founder", "who founded amplify studio"], answer: "The founder is Samuel Sunday.", related: ["Where are you based?", "What services do you offer?", "How can I contact you?"] },
+    { id: "location", triggers: ["where are you based", "where is amplify studio", "what city are you in", "location"], answer: "Lagos, Nigeria.", related: ["Who runs Amplify Studio?", "What are your working hours?", "How can I contact you?"] },
+    { id: "contact", triggers: ["how can i contact you", "contact details", "what is your whatsapp", "what is your email", "phone number", "how do i reach you"], answer: "WhatsApp +2349014350492, phone 09014350492, or email samstudiohub@gmail.com.", related: ["How do I start a project?", "What are your working hours?", "Can I get a custom quote?"] },
+    { id: "hours", triggers: ["what are your working hours", "what time do you open", "what time are you open", "are you open on sundays", "when are you open", "opening hours"], answer: "Monday to Saturday, 9am to 7pm. We are closed on Sundays.", related: ["How can I contact you?", "I have an urgent request", "Where are you based?"] },
+    { id: "urgent", triggers: ["urgent request", "urgent", "need it urgently", "emergency project"], answer: "Send a WhatsApp message to +2349014350492. Urgent WhatsApp messages are answered at any time.", handoff: true, related: ["How can I contact you?", "How do I start a project?", "What are your working hours?"] },
+    { id: "services", triggers: ["what services do you offer", "list your services", "services", "what can you do"], answer: "Graphic design, flyer and poster design, logo design, social media graphics, video editing, UGC content creation, caption writing, website development, online awareness and social media management, and short AI video ads.", related: ["Do you design logos?", "Do you edit videos?", "How much is a website?"] },
+    { id: "logo", triggers: ["do you design logos", "logo design", "can you make a logo", "do u do logos", "logos"], answer: "Yes. Logo design is one of our services.", related: ["Do you design flyers and posters?", "What services do you offer?", "How do I start a project?"] },
+    { id: "flyers", triggers: ["do you design flyers and posters", "flyer design", "poster design", "do you make flyers", "flyers and posters"], answer: "Yes, we do flyer and poster design.", related: ["Do you design logos?", "What are your creative packages?", "How do I start a project?"] },
+    { id: "video", triggers: ["do you edit videos", "video editing", "can you edit a video", "video"], answer: "Yes, video editing is one of our services.", related: ["Do you make AI video ads?", "What are your creative packages?", "How do I start a project?"] },
+    { id: "ugc", triggers: ["do you create ugc content", "ugc content", "user generated content"], answer: "Yes, UGC content creation is one of our services.", related: ["What services do you offer?", "Do you edit videos?", "How do I start a project?"] },
+    { id: "captions", triggers: ["do you write captions", "caption writing", "captions"], answer: "Yes, caption writing is one of our services.", related: ["Do you manage social media accounts?", "What services do you offer?", "How do I start a project?"] },
+    { id: "ai-ads", triggers: ["do you make ai video ads", "ai video ads", "short ai video ad"], answer: "Yes. Short AI video ads are priced separately per clip. Contact the team for a quote.", handoff: true, related: ["What services do you offer?", "Can I get a custom quote?", "How do I start a project?"] },
+    { id: "social-management", triggers: ["do you manage social media accounts", "social media management", "manage social media", "online awareness"], answer: "Yes, we offer online awareness and social media management. The team confirms the scope on WhatsApp or email.", related: ["What services do you offer?", "How can I contact you?", "Can I get a custom quote?"] },
+    { id: "creative-prices", triggers: ["how much are your creative packages", "creative package prices", "creative prices", "prices for videos and flyers", "how much are creative packages"], answer: "There are two price lists. Creative packages for videos and flyers are Starter at 35,000 naira, Professional at 75,000 naira and Premium at 150,000 naira. Websites start from 120,000 naira. Ask me about either one for details.", related: ["What is the difference between the creative packages?", "How much is a website?", "Which package should I choose?"] },
+    { id: "creative-starter", triggers: ["what is included in the starter creative package", "starter creative package", "creative starter", "starter flyer package"], answer: "One focused creative deliverable, mobile-first direction and one revision round.", related: ["What is included in the Professional creative package?", "What is included in the Premium creative package?", "What is the cheapest creative package?"] },
+    { id: "creative-professional", triggers: ["what is included in the professional creative package", "professional creative package", "creative professional"], answer: "A connected set of creative deliverables, strategic visual direction, two revision rounds and priority communication.", related: ["What is included in the Starter creative package?", "What is included in the Premium creative package?", "What is the difference between the creative packages?"] },
+    { id: "creative-premium", triggers: ["what is included in the premium creative package", "premium creative package", "creative premium"], answer: "A complete digital and creative system, website-led direction, three revision rounds and launch support.", related: ["What is included in the Starter creative package?", "What is included in the Professional creative package?", "What is the difference between the creative packages?"] },
+    { id: "creative-difference", triggers: ["what is the difference between the creative packages", "difference between starter professional premium", "compare creative packages"], answer: "Starter covers one focused piece of work with one revision round. Professional covers a connected set of deliverables with strategic direction, two revision rounds and priority communication. Premium covers a complete digital and creative system with three revision rounds and launch support.", related: ["How much are your creative packages?", "Which package should I choose?", "How long will my project take?"] },
+    { id: "website-prices", triggers: ["how much is a website", "how much does a website cost", "website prices", "website package prices", "cost of a website"], answer: "Website prices are Starter Site 120,000 to 150,000 naira, Business Site 250,000 to 300,000 naira, Cinematic Site 450,000 to 600,000 naira, and Advanced Site 800,000 to 1,200,000 naira or more. The final price depends on scope, which the team confirms on WhatsApp or email.", related: ["What is included in the Business Site?", "What is the cheapest website package?", "Do you build online ordering, booking or chatbots?"] },
+    { id: "starter-site", triggers: ["what is included in the starter site", "starter site website", "cheapest website package", "starter site price"], answer: "A one-page website with 3 to 4 sections, Call and WhatsApp buttons, mobile-ready design, and Google-friendly setup. It is best for small shops and salons.", related: ["What is included in the Business Site?", "How much is a website?", "Is a domain included?"] },
+    { id: "business-site", triggers: ["what is included in the business site", "business site", "business website package", "what is in the business site"], answer: "Everything in the Starter Site, plus a menu or services gallery, an offers section, Google Business setup and a custom domain. It costs 250,000 to 300,000 naira.", related: ["What is included in the Starter Site?", "What is included in the Cinematic Site?", "Is a domain included?"] },
+    { id: "cinematic-site", triggers: ["what is included in the cinematic site", "cinematic site", "cinematic website"], answer: "Scroll effects, glass design, custom branding, real photos and a custom domain. It costs 450,000 to 600,000 naira.", related: ["What is the Advanced Site?", "What is included in the Business Site?", "Is a domain included?"] },
+    { id: "advanced-site", triggers: ["what is the advanced site", "advanced website", "advanced site"], answer: "It is the Cinematic design plus online ordering or booking, or an AI chatbot for customer questions. It starts at 800,000 naira and is priced per project.", handoff: true, related: ["Do you do online ordering?", "How much is a website?", "Can I get a custom quote?"] },
+    { id: "ordering-booking-chatbot", triggers: ["do you build online ordering booking or chatbots", "do you do online ordering", "online ordering", "online booking", "website chatbot"], answer: "Yes, these come with the Advanced Site, which is priced per project. Contact the team on WhatsApp or email for a quote.", handoff: true, related: ["What is the Advanced Site?", "How much is a website?", "Can I get a custom quote?"] },
+    { id: "care-plan", triggers: ["do you offer website maintenance", "care plan", "website maintenance", "how much is the care plan", "maintenance cost"], answer: "Yes. The care plan costs 10,000 to 25,000 naira a month and covers updates, hosting help and backups.", related: ["Is a domain included?", "How much is a website?", "How can I contact you?"] },
+    { id: "domain", triggers: ["is a domain included", "domain cost", "how much is a domain", "custom domain"], answer: "The Business Site and Cinematic Site include a custom domain. The domain itself costs about 15,000 naira a year, billed at cost.", related: ["What is included in the Business Site?", "What is included in the Cinematic Site?", "How much is a website?"] },
+    { id: "start", triggers: ["how do i start a project", "how do i get started", "start a project", "begin a project", "i want to start"], answer: "Message us on WhatsApp or email with what you need. The team will advise on the right package and next steps.", handoff: true, related: ["What services do you offer?", "How much is a website?", "How can I contact you?"] },
+    { id: "turnaround", triggers: ["how long will my project take", "turnaround time", "how long does it take", "delivery time", "project timeline"], answer: "For creative packages: Starter takes 3 to 5 working days, Professional 7 to 10 working days, and Premium 14 to 21 working days or a timeline agreed per project. The clock starts when payment is confirmed and all materials are received. For websites, the team confirms the timeline after discussing the project.", related: ["How do I pay?", "How many revisions do I get?", "Which package should I choose?"] },
+    { id: "payment", triggers: ["how do i pay", "payment terms", "do i have to pay a deposit", "pay in instalments", "payment"], answer: "For creative packages, Starter is paid in full before work begins, and Professional and Premium need a 50 percent deposit with the balance paid before final files are released. For websites, it is 50 percent upfront and the rest on delivery. The team shares payment details on WhatsApp or email.", handoff: true, related: ["How many revisions do I get?", "What is your refund policy?", "How do I start a project?"] },
+    { id: "revisions", triggers: ["how many revisions do i get", "revisions", "revision rounds", "extra revisions"], answer: "For creative packages, Starter includes 1 revision round, Professional 2 and Premium 3. Extra revisions are quoted separately. For websites, the team confirms the revisions once the scope is agreed.", related: ["How long will my project take?", "How much are your creative packages?", "How do I start a project?"] },
+    { id: "refund", triggers: ["what is your refund policy", "refund", "refund policy", "can i cancel my order", "cancel my order", "deposit refundable"], answer: "Cancel before work starts and you get a full refund. Once work has started, deposits are not refundable because the work is custom. If we cannot deliver the agreed work, you are refunded for the undelivered part.", handoff: true, related: ["How do I pay?", "How many revisions do I get?", "How can I contact you?"] },
+    { id: "portfolio", triggers: ["can i see examples of your work", "portfolio", "see your work", "examples of your work"], answer: "Yes. Open the Portfolio section on our website: https://samlabs-tech251.github.io/amplify-studio-site/", related: ["What services do you offer?", "How do I start a project?", "How can I contact you?"] },
+    { id: "custom-quote", triggers: ["can i get a custom quote", "custom quote", "something different", "outside the packages"], answer: "Yes, the team can discuss custom needs. Contact us on WhatsApp or email.", handoff: true, related: ["What services do you offer?", "How much is a website?", "How do I start a project?"] },
+    { id: "discounts", triggers: ["do you offer discounts", "discount", "cheaper price"], answer: "Pricing is as listed. For anything else, the team confirms on WhatsApp or email.", related: ["How much are your creative packages?", "How much is a website?", "Can I get a custom quote?"] },
+    { id: "outside-lagos", triggers: ["do you work with businesses outside lagos", "outside lagos", "work in another location"], answer: "Amplify Studio is based in Lagos. For availability for your location, contact the team on WhatsApp or email.", related: ["Where are you based?", "How can I contact you?", "Can I get a custom quote?"] }
+  ];
 
   var root = document.getElementById("ams-chat");
   var $ = function (s) { return root.querySelector(s); };
@@ -268,189 +307,70 @@
 
   var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var phone = function () { return window.matchMedia && window.matchMedia("(max-width: 480px)").matches; };
-
   function store(k, v) { try { sessionStorage.setItem(k, v); } catch (e) {} }
   function load(k) { try { return sessionStorage.getItem(k); } catch (e) { return null; } }
-
   var sessionId = load("ams_session");
-  if (!sessionId) {
-    sessionId = "web-" + Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
-    store("ams_session", sessionId);
-  }
-
+  if (!sessionId) { sessionId = "web-" + Math.random().toString(36).slice(2, 10) + Date.now().toString(36); store("ams_session", sessionId); }
   var history = [];
   try { history = JSON.parse(load("ams_history") || "[]"); } catch (e) { history = []; }
   if (!Array.isArray(history)) history = [];
   function saveHistory() { store("ams_history", JSON.stringify(history.slice(-30))); }
+  var busy = false, lastSend = 0;
 
-  var busy = false;
-  var lastSend = 0;
-
-  /* ---------- rendering helpers ---------- */
   function addText(el, text) {
-    var re = /(https?:\/\/[^\s<>"]+[^\s<>".,;:!?)])/g;
-    var last = 0, m;
-    while ((m = re.exec(text)) !== null) {
-      if (m.index > last) el.appendChild(document.createTextNode(text.slice(last, m.index)));
-      var a = document.createElement("a");
-      a.href = m[0]; a.textContent = m[0]; a.target = "_blank"; a.rel = "noopener noreferrer";
-      el.appendChild(a);
-      last = m.index + m[0].length;
-    }
+    var re = /(https?:\/\/[^\s<>"つ]+[^\s<>".,;:!?)])/g, last = 0, m;
+    while ((m = re.exec(text)) !== null) { if (m.index > last) el.appendChild(document.createTextNode(text.slice(last, m.index))); var a = document.createElement("a"); a.href = m[0]; a.textContent = m[0]; a.target = "_blank"; a.rel = "noopener noreferrer"; el.appendChild(a); last = m.index + m[0].length; }
     if (last < text.length) el.appendChild(document.createTextNode(text.slice(last)));
   }
   function scrollDown() { log.scrollTop = log.scrollHeight; }
+  function bubble(text, who) { var el = document.createElement("div"); el.className = "ams-msg " + (who === "user" ? "ams-user" : "ams-bot"); addText(el, text); log.appendChild(el); scrollDown(); return el; }
+  function ctaButton() { var a = document.createElement("a"); a.className = "ams-cta"; a.href = waLink; a.target = "_blank"; a.rel = "noopener"; a.textContent = "Continue on WhatsApp"; log.appendChild(a); scrollDown(); }
+  function typing() { var el = document.createElement("div"); el.className = "ams-msg ams-bot"; el.innerHTML = '<span class="ams-dots" aria-label="Typing"><i></i><i></i><i></i></span>'; log.appendChild(el); scrollDown(); return el; }
+  function reveal(el, text, done) { if (reduced || text.length > 700) { el.textContent = ""; addText(el, text); scrollDown(); done(); return; } var parts = text.split(/(\s+)/), i = 0, per = Math.max(10, Math.min(35, 1400 / parts.length)); el.textContent = ""; (function step() { if (i >= parts.length) { el.textContent = ""; addText(el, text); scrollDown(); done(); return; } el.textContent += parts[i++]; scrollDown(); setTimeout(step, per); })(); }
 
-  function bubble(text, who) {
-    var el = document.createElement("div");
-    el.className = "ams-msg " + (who === "user" ? "ams-user" : "ams-bot");
-    addText(el, text);
-    log.appendChild(el);
-    scrollDown();
-    return el;
+  function normalize(text) { return (text || "").toLowerCase().replace(/[^a-z0-9\s]/g, " ").replace(/\s+/g, " ").trim(); }
+  function distance(a, b) { var prev = [], cur = [], i, j; for (j = 0; j <= b.length; j++) prev[j] = j; for (i = 1; i <= a.length; i++) { cur[0] = i; for (j = 1; j <= b.length; j++) cur[j] = Math.min(cur[j - 1] + 1, prev[j] + 1, prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1)); prev = cur.slice(); } return prev[b.length]; }
+  function scoreTrigger(query, trigger) {
+    var q = normalize(query), t = normalize(trigger); if (!q || !t) return 0;
+    if (q === t) return 1.25; if (q.indexOf(t) >= 0 || t.indexOf(q) >= 0) return .98;
+    var qt = q.split(" "), tt = t.split(" "), hits = 0;
+    tt.forEach(function (word) { if (qt.some(function (candidate) { return candidate === word || (word.length > 3 && distance(candidate, word) <= (word.length > 6 ? 2 : 1)); })) hits++; });
+    if (tt.length > 1 && hits < 2) return 0;
+    var overlap = hits / tt.length; var bonus = qt.some(function (word) { return t.indexOf(word) >= 0 && word.length > 4; }) ? .08 : 0;
+    return overlap * .84 + bonus;
   }
-  function ctaButton() {
-    var a = document.createElement("a");
-    a.className = "ams-cta"; a.href = waLink; a.target = "_blank"; a.rel = "noopener";
-    a.textContent = "Continue on WhatsApp";
-    log.appendChild(a);
-    scrollDown();
+  function isAmbiguousPackage(query) {
+    var q = normalize(query), hasCreative = /(creative|flyer|flyers|video|videos|poster|posters|logo|graphic|graphics|deliverable|revision)/.test(q), hasWebsite = /(website|site|web|ordering|booking|domain|hosting|care plan|chatbot)/.test(q);
+    return /\b(starter|professional|premium)\b/.test(q) && !/\b(starter site|business site|cinematic site|advanced site)\b/.test(q) && !hasCreative && !hasWebsite;
   }
-  function typing() {
-    var el = document.createElement("div");
-    el.className = "ams-msg ams-bot";
-    el.innerHTML = '<span class="ams-dots" aria-label="Typing"><i></i><i></i><i></i></span>';
-    log.appendChild(el);
-    scrollDown();
-    return el;
+  function findAnswer(query) {
+    var q = normalize(query);
+    if (/^(hi|hello|hey|good morning|good afternoon|good evening)\b/.test(q)) return { answer: "Hi, welcome to Amplify Studio. Ask me about our services, packages, or how to get started.", related: CONFIG.quickReplies.slice(0, 3) };
+    if (/^(thanks|thank you|thx)\b/.test(q)) return { answer: "You’re welcome. Is there anything else I can help with?", related: CONFIG.quickReplies.slice(0, 3) };
+    if (/^(bye|goodbye|see you)\b/.test(q)) return { answer: "Thank you. Message us on WhatsApp whenever you are ready.", related: ["How do I get started?", "How can I contact you?"] };
+    if (/(angry|upset|complain|complaint|dispute)/.test(q) && /payment|refund|deposit|money|charge/.test(q)) return { answer: "Refund requests and disputes are handled by the team directly on WhatsApp or email.", handoff: true, related: ["What is your refund policy?", "How do I pay?", "How can I contact you?"] };
+    if (isAmbiguousPackage(q)) return { answer: "Do you mean our creative packages for videos and flyers, or a website package?", related: ["How much are your creative packages?", "How much is a website?"] };
+    var ranked = ENTRIES.map(function (entry) { return { entry: entry, score: Math.max.apply(Math, entry.triggers.map(function (trigger) { return scoreTrigger(q, trigger); })) }; }).sort(function (a, b) { return b.score - a.score; });
+    if (!ranked.length || ranked[0].score < .42) return { answer: CONFIG.errorMessage, related: CONFIG.quickReplies.slice(-3), handoff: false };
+    var best = ranked[0].entry, related = (best.related || []).slice(0, 3);
+    if (ranked[1] && ranked[1].score >= ranked[0].score - .12 && ranked[1].score >= .55) { var alternate = ranked[1].entry.related && ranked[1].entry.related[0]; if (alternate && related.indexOf(alternate) < 0) related[related.length - 1] = alternate; }
+    return { answer: best.answer, related: related, handoff: !!best.handoff };
   }
-  function reveal(el, text, done) {
-    if (reduced || text.length > 700) { el.textContent = ""; addText(el, text); scrollDown(); done(); return; }
-    var parts = text.split(/(\s+)/), i = 0;
-    var per = Math.max(10, Math.min(35, 1400 / parts.length));
-    el.textContent = "";
-    (function step() {
-      if (i >= parts.length) { el.textContent = ""; addText(el, text); scrollDown(); done(); return; }
-      el.textContent += parts[i++];
-      scrollDown();
-      setTimeout(step, per);
-    })();
-  }
+  function renderChips(items) { chips.innerHTML = ""; items = (items || []).filter(Boolean).slice(0, 3); if (!items.length) { chips.hidden = true; return; } chips.hidden = false; items.forEach(function (q) { var b = document.createElement("button"); b.type = "button"; b.className = "ams-chip"; b.textContent = q; b.addEventListener("click", function () { send(q); }); chips.appendChild(b); }); }
 
-  function renderChips() {
-    chips.innerHTML = "";
-    var hasUser = history.some(function (h) { return h.who === "user"; });
-    if (hasUser || !CONFIG.quickReplies.length) { chips.hidden = true; return; }
-    chips.hidden = false;
-    CONFIG.quickReplies.forEach(function (q) {
-      var b = document.createElement("button");
-      b.type = "button"; b.className = "ams-chip"; b.textContent = q;
-      b.addEventListener("click", function () { send(q); });
-      chips.appendChild(b);
-    });
-  }
-
-  /* ---------- open / close ---------- */
   function hideTeaser() { teaser.classList.remove("ams-show"); store("ams_teaser", "1"); }
-  function openPanel() {
-    panel.classList.add("ams-open");
-    root.classList.add("ams-is-open");
-    launcher.setAttribute("aria-expanded", "true");
-    launcher.setAttribute("aria-label", "Close chat");
-    badge.hidden = true; store("ams_seen", "1"); hideTeaser();
-    if (phone()) document.body.style.overflow = "hidden";
-    if (!log.children.length) {
-      history = [{ who: "bot", text: CONFIG.greeting }];
-      saveHistory();
-      bubble(CONFIG.greeting, "bot");
-    }
-    renderChips();
-    scrollDown();
-    if (!phone()) setTimeout(function () { input.focus(); }, 60);
-  }
-  function closePanel() {
-    panel.classList.remove("ams-open");
-    root.classList.remove("ams-is-open");
-    launcher.setAttribute("aria-expanded", "false");
-    launcher.setAttribute("aria-label", "Open chat");
-    document.body.style.overflow = "";
-    launcher.focus();
-  }
-  launcher.addEventListener("click", function () { panel.classList.contains("ams-open") ? closePanel() : openPanel(); });
-  closeBtn.addEventListener("click", closePanel);
-  teaser.addEventListener("click", function (e) { if (e.target !== teaserX) openPanel(); });
-  teaserX.addEventListener("click", function (e) { e.stopPropagation(); hideTeaser(); });
-  root.addEventListener("keydown", function (e) {
-    if (e.key === "Escape" && panel.classList.contains("ams-open")) closePanel();
-  });
+  function openPanel() { panel.classList.add("ams-open"); root.classList.add("ams-is-open"); launcher.setAttribute("aria-expanded", "true"); launcher.setAttribute("aria-label", "Close chat"); badge.hidden = true; store("ams_seen", "1"); hideTeaser(); if (phone()) document.body.style.overflow = "hidden"; if (!log.children.length) { history = [{ who: "bot", text: CONFIG.greeting }]; saveHistory(); bubble(CONFIG.greeting, "bot"); } renderChips(CONFIG.quickReplies.slice(0, 3)); scrollDown(); if (!phone()) setTimeout(function () { input.focus(); }, 60); }
+  function closePanel() { panel.classList.remove("ams-open"); root.classList.remove("ams-is-open"); launcher.setAttribute("aria-expanded", "false"); launcher.setAttribute("aria-label", "Open chat"); document.body.style.overflow = ""; launcher.focus(); }
+  launcher.addEventListener("click", function () { panel.classList.contains("ams-open") ? closePanel() : openPanel(); }); closeBtn.addEventListener("click", closePanel); teaser.addEventListener("click", function (e) { if (e.target !== teaserX) openPanel(); }); teaserX.addEventListener("click", function (e) { e.stopPropagation(); hideTeaser(); }); root.addEventListener("keydown", function (e) { if (e.key === "Escape" && panel.classList.contains("ams-open")) closePanel(); });
 
-  /* ---------- restore earlier messages from this visit ---------- */
-  history.forEach(function (h) {
-    if (h.cta) { ctaButton(); } else { bubble(h.text, h.who); }
-  });
-  log.querySelectorAll(".ams-msg, .ams-cta").forEach(function (n) { n.style.animation = "none"; });
-
-  /* ---------- badge and teaser (first visit only) ---------- */
+  history.forEach(function (h) { if (h.cta) ctaButton(); else bubble(h.text, h.who); }); log.querySelectorAll(".ams-msg, .ams-cta").forEach(function (n) { n.style.animation = "none"; });
   if (!load("ams_seen")) badge.hidden = false;
-  if (!load("ams_teaser")) {
-    setTimeout(function () {
-      if (!panel.classList.contains("ams-open") && !load("ams_teaser")) {
-        teaser.classList.add("ams-show");
-        setTimeout(function () { teaser.classList.remove("ams-show"); }, 12000);
-      }
-    }, CONFIG.teaserDelayMs);
-  }
+  if (!load("ams_teaser")) setTimeout(function () { if (!panel.classList.contains("ams-open") && !load("ams_teaser")) { teaser.classList.add("ams-show"); setTimeout(function () { teaser.classList.remove("ams-show"); }, 12000); } }, CONFIG.teaserDelayMs);
 
-  /* ---------- sending ---------- */
   function send(text) {
-    text = (text || "").trim();
-    if (!text || busy) return;
-    if (Date.now() - lastSend < 1200) return;
-    lastSend = Date.now();
-    busy = true; sendBtn.disabled = true; input.value = "";
-    history.push({ who: "user", text: text }); saveHistory();
-    bubble(text, "user");
-    chips.hidden = true;
-    var dots = typing();
-
-    var headers = { "Content-Type": "application/json" };
-    if (CONFIG.apiKey) headers[CONFIG.apiKeyHeader] = CONFIG.apiKey;
-    var ctrl = typeof AbortController !== "undefined" ? new AbortController() : null;
-    var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, 60000) : null;
-
-    function finish() {
-      if (timer) clearTimeout(timer);
-      busy = false; sendBtn.disabled = false;
-      if (!phone()) input.focus();
-    }
-
-    fetch(CONFIG.url, {
-      method: "POST",
-      headers: headers,
-      body: JSON.stringify({ message: text, business_name: CONFIG.businessName, session_id: sessionId }),
-      signal: ctrl ? ctrl.signal : undefined
-    })
-      .then(function (res) { if (!res.ok) throw new Error("HTTP " + res.status); return res.json(); })
-      .then(function (data) {
-        var reply = data && typeof data.reply === "string" && data.reply.trim() ? data.reply : CONFIG.errorMessage;
-        var human = data && (data.needs_human === true || data.needs_human === "true" || data.category === "escalation");
-        dots.remove();
-        var el = bubble("", "bot");
-        reveal(el, reply, function () {
-          history.push({ who: "bot", text: reply });
-          if (human) { ctaButton(); history.push({ who: "bot", text: "", cta: true }); }
-          saveHistory();
-          finish();
-        });
-      })
-      .catch(function () {
-        dots.remove();
-        bubble(CONFIG.errorMessage, "bot");
-        history.push({ who: "bot", text: CONFIG.errorMessage }); saveHistory();
-        finish();
-      });
+    text = (text || "").trim(); if (!text || busy) return; if (Date.now() - lastSend < 500) return; lastSend = Date.now(); busy = true; sendBtn.disabled = true; input.value = ""; history.push({ who: "user", text: text }); saveHistory(); bubble(text, "user"); chips.hidden = true; var dots = typing(); var result = findAnswer(text);
+    setTimeout(function () { dots.remove(); var el = bubble("", "bot"); reveal(el, result.answer, function () { history.push({ who: "bot", text: result.answer }); if (result.handoff) { ctaButton(); history.push({ who: "bot", text: "", cta: true }); } saveHistory(); renderChips(result.related); busy = false; sendBtn.disabled = false; if (!phone()) input.focus(); }); }, reduced ? 400 : 400 + Math.floor(Math.random() * 301));
   }
-
   form.addEventListener("submit", function (e) { e.preventDefault(); send(input.value); });
 })();
 </script>
