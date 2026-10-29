@@ -3,15 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
-    <meta name="theme-color" content="#0A0F1A" />
+    <meta name="theme-color" content="#000000" />
     <meta name="description" content="Amplify Studio — Nigerian creative studio helping small businesses grow online." />
     <link rel="manifest" href="%BASE_URL%manifest.webmanifest" />
-    <link rel="icon" type="image/svg+xml" href="%BASE_URL%icons/amplify-icon-v3.svg" />
-    <link rel="apple-touch-icon" sizes="192x192" href="%BASE_URL%icons/icon-v3-192.png" />
+    <link rel="icon" type="image/svg+xml" href="%BASE_URL%icons/amplify-icon-v4.svg" />
+    <link rel="apple-touch-icon" sizes="192x192" href="%BASE_URL%icons/icon-v4-192.png" />
     <title>Amplify Studio — Turn up your brand's volume.</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet" />
+      <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   </head>
   <body>
     <div id="root"></div>
@@ -27,15 +28,15 @@
   #ams-chat, #ams-chat * { box-sizing: border-box; }
   #ams-chat {
     /* ---- palette: change these to match the site ---- */
-    --ams-bg: #0A0F1A;
-    --ams-surface: #111827;
-    --ams-surface-2: #172033;
+    --ams-bg: #000000;
+    --ams-surface: #0A0A0A;
+    --ams-surface-2: #111111;
     --ams-line: rgba(255, 255, 255, .09);
-    --ams-text: #F5F1E8;
-    --ams-muted: #9AA3B2;
-    --ams-accent: #C9A24A;
-    --ams-accent-2: #A8832F;
-    --ams-on-accent: #070B14;
+    --ams-text: #FFFFFF;
+    --ams-muted: #A3A3A3;
+    --ams-accent: #C6F51D;
+    --ams-accent-2: #7F9E0F;
+    --ams-on-accent: #000000;
     --ams-online: #34d399;
     --ams-font: inherit;
     --ams-display: "Playfair Display", Georgia, serif;
@@ -71,7 +72,7 @@
   #ams-chat.ams-is-open .ams-ico-close { opacity: 1; transform: none; }
   #ams-chat .ams-badge {
     position: absolute; top: -3px; right: -3px; min-width: 20px; height: 20px; padding: 0 5px;
-    border-radius: 10px; background: #C9A24A; color: #fff; font-size: 12px; font-weight: 700;
+    border-radius: 10px; background: #C6F51D; color: #fff; font-size: 12px; font-weight: 700;
     display: flex; align-items: center; justify-content: center; border: 2px solid var(--ams-bg);
   }
   #ams-chat .ams-badge[hidden] { display: none; }
@@ -96,7 +97,7 @@
     position: fixed; right: 20px; bottom: calc(92px + var(--ams-lift) + env(safe-area-inset-bottom, 0px));
     width: 380px; max-width: calc(100vw - 24px);
     height: 580px; max-height: calc(100vh - 116px - var(--ams-lift)); max-height: calc(100dvh - 116px - var(--ams-lift));
-    background: #0A0F1A;
+    background: #000000;
     border: 1px solid var(--ams-line); border-radius: 20px; overflow: hidden;
     box-shadow: 0 24px 70px rgba(0, 0, 0, .6), 0 0 0 1px rgba(201, 162, 74, .12);
     display: none; flex-direction: column; z-index: 2147483000; transform-origin: bottom right;
@@ -140,7 +141,7 @@
   #ams-chat .ams-msg a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
   #ams-chat .ams-cta {
     align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px;
-    border-radius: 999px; background: #C9A24A; color: #070B14; font-weight: 700; font-size: 14px; text-decoration: none;
+    border-radius: 999px; background: #C6F51D; color: #000000; font-weight: 700; font-size: 14px; text-decoration: none;
     animation: ams-in .22s ease both; transition: transform .15s ease, filter .15s ease;
   }
   #ams-chat .ams-cta:hover { transform: translateY(-1px); filter: none; }
@@ -178,7 +179,7 @@
   #ams-chat .ams-send svg { width: 20px; height: 20px; }
   #ams-chat .ams-note { padding: 0 14px calc(10px + env(safe-area-inset-bottom, 0px)); font-size: 11.5px; color: var(--ams-muted); text-align: center; }
 
-  #ams-chat button:focus-visible, #ams-chat a:focus-visible { outline: 3px solid #D8B35E; outline-offset: 2px; }
+  #ams-chat button:focus-visible, #ams-chat a:focus-visible { outline: 3px solid #D9FF4A; outline-offset: 2px; }
 
   /* Clear the site's bottom navigation dock on small screens */
   @media (max-width: 768px) { #ams-chat { --ams-lift: 84px; } }

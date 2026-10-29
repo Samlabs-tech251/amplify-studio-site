@@ -84,6 +84,10 @@ export default function Home() {
   return (
     <div className="page page-home">
       <section id="home" className="hero-section hero-minimal motion-section">
+        <div className="hero-emblem" aria-label="Amplify Studio creative direction">
+          <span className="hero-emblem-rim">AMPLIFY STUDIO · CREATIVE DIRECTION ·</span>
+          <span className="hero-emblem-core"><i aria-hidden="true" /></span>
+        </div>
         <div className="hero-minimal-copy" data-reveal>
           <p className="eyebrow hero-eyebrow">Creative direction for the next chapter</p>
           <h1 className="display-title hero-title" aria-label="Make your business impossible to miss."><span className="hero-word">Make</span> <span className="hero-word">your</span> <span className="hero-word">business</span><br /><em><span className="hero-word hero-word-gold">impossible</span> <span className="hero-word hero-word-gold">to</span> <span className="hero-word hero-word-gold">miss.</span></em></h1>
