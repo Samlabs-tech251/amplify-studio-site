@@ -3,7 +3,6 @@ import { CalendarDays, CircleHelp, Grid2X2, Home, Menu, MessageCircle, Palette, 
 import { Link, useLocation } from "wouter";
 import { BrandMark } from "./BrandMark";
 import { InstallPrompt } from "./InstallPrompt";
-import { AmbientMotion } from "./AmbientMotion";
 import { InteractiveIntroLoader } from "./InteractiveIntroLoader";
 
 export const WHATSAPP_NUMBER = "2349014350492";
@@ -117,7 +116,6 @@ export function AmplifyShell({ children }: { children: ReactNode }) {
 
   return (
     <div className="site-frame">
-      <AmbientMotion />
       <InteractiveIntroLoader />
       <div className="scroll-progress" style={{ width: `${progress}%` }} aria-hidden="true" />
       <header className={`site-header ${navHidden ? "nav-hidden" : ""}`}>

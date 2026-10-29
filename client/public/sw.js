@@ -1,4 +1,4 @@
-const CACHE_NAME = "amplify-studio-v4-icon-v2";
+const CACHE_NAME = "amplify-studio-v5-navy";
 const BASE_URL = new URL("./", self.registration.scope);
 const OFFLINE_URL = new URL("offline.html", BASE_URL).toString();
 
@@ -6,9 +6,9 @@ self.addEventListener("install", (event) => {
   event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll([
     OFFLINE_URL,
     new URL("manifest.webmanifest", BASE_URL).toString(),
-    new URL("icons/icon-v2-192.png", BASE_URL).toString(),
-    new URL("icons/icon-v2-512.png", BASE_URL).toString(),
-    new URL("icons/icon-v2-512-maskable.png", BASE_URL).toString(),
+    new URL("icons/icon-v3-192.png", BASE_URL).toString(),
+    new URL("icons/icon-v3-512.png", BASE_URL).toString(),
+    new URL("icons/icon-v3-512-maskable.png", BASE_URL).toString(),
   ])));
   self.skipWaiting();
 });

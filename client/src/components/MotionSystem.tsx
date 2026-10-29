@@ -77,19 +77,10 @@ export function MotionSystem() {
     const tiltCleanups = Array.from(document.querySelectorAll<HTMLElement>(".mini-service, .service-row, .portfolio-card, .proof-card, .contact-option")).map(addTilt);
     const magneticCleanups = Array.from(document.querySelectorAll<HTMLElement>(".magnetic")).map(addMagnetic);
 
-    const root = document.documentElement;
-    const finePointer = window.matchMedia("(pointer: fine)").matches;
-    const onPointerMove = finePointer ? (event: PointerEvent) => {
-      root.style.setProperty("--spot-x", `${event.clientX}px`);
-      root.style.setProperty("--spot-y", `${event.clientY}px`);
-    } : undefined;
-    if (onPointerMove) window.addEventListener("pointermove", onPointerMove, { passive: true });
-
     return () => {
       cancelAnimationFrame(frame); lenis.destroy(); delete (window as typeof window & { __amplifyLenis?: Lenis }).__amplifyLenis; context.revert();
       rippleTargets.forEach((target) => target.removeEventListener("click", addRipple));
       tiltCleanups.forEach((cleanup) => cleanup()); magneticCleanups.forEach((cleanup) => cleanup());
-      if (onPointerMove) window.removeEventListener("pointermove", onPointerMove);
     };
   }, [location]);
 
