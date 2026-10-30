@@ -45,9 +45,9 @@ export const studioPromise = [
 ] as const;
 
 export const packages = [
-  { name: "Starter", hint: "For one clear next step", price: "35,000", features: ["One focused creative deliverable", "Mobile-first direction", "One revision round"], message: "Hi, I'm interested in the Starter package" },
-  { name: "Professional", hint: "For a stronger presence", price: "75,000", features: ["A connected set of creative deliverables", "Strategic visual direction", "Two revision rounds", "Priority communication"], message: "Hi, I'm interested in the Professional package" },
-  { name: "Premium", hint: "For the full signal", price: "150,000", features: ["A complete digital and creative system", "Website-led direction", "Three revision rounds", "Launch support"], message: "Hi, I'm interested in the Premium package" },
+  { name: "Starter", hint: "For one clear next step", quoteLabel: "Request a quote", features: ["One focused creative deliverable", "Mobile-first direction", "One revision round"], message: "Hi Amplify Studio, I'd like a quote for the Starter package." },
+  { name: "Professional", hint: "For a stronger presence", quoteLabel: "Request a quote", features: ["A connected set of creative deliverables", "Strategic visual direction", "Two revision rounds", "Priority communication"], message: "Hi Amplify Studio, I'd like a quote for the Professional package." },
+  { name: "Premium", hint: "For the full signal", quoteLabel: "Request a quote", features: ["A complete digital and creative system", "Website-led direction", "Three revision rounds", "Launch support"], message: "Hi Amplify Studio, I'd like a quote for the Premium package." },
 ] as const;
 
 export const premiumFaqs = [
