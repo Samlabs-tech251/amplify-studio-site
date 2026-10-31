@@ -79,9 +79,14 @@ export default function Home() {
   return (
     <div className="page page-home">
       <section id="home" className="hero-section hero-minimal motion-section">
-        <div className="hero-emblem" aria-label="Amplify Studio creative direction">
-          <span className="hero-emblem-rim">AMPLIFY STUDIO · CREATIVE DIRECTION ·</span>
-          <span className="hero-emblem-core"><i aria-hidden="true" /></span>
+        <div className="hero-emblem" role="img" aria-label="Amplify Studio creative direction">
+          <svg className="hero-emblem-svg" viewBox="0 0 200 200" aria-hidden="true">
+            <defs><path id="hero-emblem-path" d="M 100,100 m -76,0 a 76,76 0 1,1 152,0 a 76,76 0 1,1 -152,0" /></defs>
+            <circle className="hero-emblem-ring" cx="100" cy="100" r="91" />
+            <circle className="hero-emblem-core-circle" cx="100" cy="100" r="49" />
+            <text className="hero-emblem-text"><textPath href="#hero-emblem-path">AMPLIFY STUDIO · CREATIVE DIRECTION ·</textPath></text>
+            <circle className="hero-emblem-dot" cx="100" cy="100" r="7" />
+          </svg>
         </div>
         <div className="hero-minimal-copy" data-reveal>
           <p className="eyebrow hero-eyebrow">Creative direction for the next chapter</p>

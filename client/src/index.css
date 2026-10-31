@@ -764,3 +764,26 @@ body.case-study-open { overflow: hidden; }
 .portfolio-live-link { display: inline-flex; align-items: center; gap: 5px; color: var(--gold); font-size: 10px; letter-spacing: .04em; text-decoration: none; }
 .portfolio-live-link:hover { color: var(--gold-bright); }
 .case-study-live-tag { margin: 0 0 13px; }
+
+/* Focused static lime glow pass. */
+.hero-minimal::before { content: ""; position: absolute; z-index: 0; left: 50%; top: 25%; width: 80vw; height: 80vw; max-width: 980px; max-height: 980px; transform: translate(-50%, -50%); pointer-events: none; background: radial-gradient(circle, rgba(198,245,29,.28) 0%, rgba(198,245,29,.13) 30%, rgba(198,245,29,.04) 56%, transparent 72%); }
+.hero-minimal::after { content: ""; position: absolute; z-index: 0; left: 0; right: 0; bottom: -18%; height: 46%; pointer-events: none; background: radial-gradient(ellipse at 50% 100%, rgba(198,245,29,.18), rgba(198,245,29,.05) 42%, transparent 74%); }
+.hero-minimal-copy, .hero-emblem { z-index: 1; }
+.hero-emblem { width: clamp(126px, 18vw, 170px); margin-bottom: 25px; }
+.hero-emblem-svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.hero-emblem-ring { fill: none; stroke: rgba(198,245,29,.72); stroke-width: 1.4; }
+.hero-emblem-core-circle { fill: #000; stroke: rgba(198,245,29,.52); stroke-width: 1.3; }
+.hero-emblem-text { fill: var(--gold); font-family: "Inter", sans-serif; font-size: 8.2px; font-weight: 700; letter-spacing: 1.35px; text-transform: uppercase; }
+.hero-emblem-dot { fill: var(--gold); filter: drop-shadow(0 0 5px rgba(198,245,29,.72)); }
+
+.button-primary { box-shadow: 0 0 36px rgba(198,245,29,.5) !important; }
+.package-card.is-popular { border-color: var(--gold) !important; box-shadow: 0 0 36px rgba(198,245,29,.28) !important; }
+.top-nav-links a.active, .mobile-bottom-dock a.active { text-shadow: 0 0 14px rgba(198,245,29,.55); }
+#ams-chat .ams-launcher { box-shadow: 0 0 36px rgba(198,245,29,.5) !important; }
+.service-bento-card:hover, .service-ring-card:hover, .contact-option:hover, .portfolio-card:hover, .mini-service:hover, .process-card:hover, .promise-card:hover, .package-card:hover, .premium-faq-item:hover { border-color: rgba(198,245,29,.5) !important; box-shadow: 0 0 24px rgba(198,245,29,.14) !important; }
+.premium-final-cta::after { background: radial-gradient(ellipse at 50% 100%, rgba(198,245,29,.22), rgba(198,245,29,.06) 42%, transparent 74%); }
+
+/* Loader uses the same BrandMark component and compact lockup metrics as the header. */
+.intro-loader-content .brand-lockup-compact .brand-wordmark strong { font-family: "Inter", sans-serif !important; font-size: 29px !important; font-weight: 700 !important; letter-spacing: -.055em !important; color: var(--gold) !important; }
+.intro-loader-content .brand-lockup-compact .brand-wordmark small { margin-left: 22px !important; color: var(--cream) !important; font-family: "Inter", sans-serif !important; font-size: 10px !important; font-weight: 600 !important; letter-spacing: .2em !important; text-transform: uppercase !important; }
+.intro-loader-content .brand-dot { background: var(--gold) !important; box-shadow: 0 0 10px 3px rgba(198,245,29,.5) !important; }
