@@ -3,14 +3,9 @@ import { useEffect, useRef } from "react";
 import { Link } from "wouter";
 import { whatsappUrl } from "../components/AmplifyShell";
 import { FinalCtaFooter, PackagesSection, PremiumFaqSection, ProcessSection, SelectedWorkSection, StatsSection, StudioPromiseSection } from "../components/PremiumSections";
+import { selectedWork } from "../data/siteData";
 
-const proofImages = [
-  ["StyleInLagos", "https://raw.githubusercontent.com/Samlabs-tech251/Amplify-studio-assets/main/styleinlagos.jpg"],
-  ["Just Eat & Chill", "https://raw.githubusercontent.com/Samlabs-tech251/Amplify-studio-assets/main/justeatchill.jpg"],
-  ["Mayor Beauty Place", "https://raw.githubusercontent.com/Samlabs-tech251/Amplify-studio-assets/main/mayorbeauty.jpg"],
-  ["Nana Clothing", "https://raw.githubusercontent.com/Samlabs-tech251/Amplify-studio-assets/main/nanaclothing.jpg"],
-  ["Hatz Gadgets Store", "https://raw.githubusercontent.com/Samlabs-tech251/Amplify-studio-assets/main/hatzgadgets.jpg"],
-] as const;
+const proofImages: readonly [string, string][] = selectedWork.map(({ title, image }) => [title, image]);
 
 const services = [
   ["01", "Website Development", "Build a digital home that makes your business easier to trust, find and choose."],

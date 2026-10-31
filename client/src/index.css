@@ -756,3 +756,11 @@ body.case-study-open { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
   .case-study-backdrop, .case-study-sheet { animation: none; }.process-progress-track span { transition: none; }
 }
+
+/* Portfolio live samples: keep the cropped mobile panels top-aligned and easy to open. */
+.portfolio-image-wrap img { object-position: top center; }
+.portfolio-card-footer { min-height: 29px; padding-top: 13px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.portfolio-live-tag { display: inline-flex; align-items: center; min-height: 22px; padding: 4px 8px; border: 1px solid var(--line); border-radius: 999px; color: var(--gold); font-size: 9px; letter-spacing: .08em; text-transform: uppercase; }
+.portfolio-live-link { display: inline-flex; align-items: center; gap: 5px; color: var(--gold); font-size: 10px; letter-spacing: .04em; text-decoration: none; }
+.portfolio-live-link:hover { color: var(--gold-bright); }
+.case-study-live-tag { margin: 0 0 13px; }

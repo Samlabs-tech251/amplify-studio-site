@@ -32,14 +32,20 @@ export default function Portfolio() {
 
   return (
     <div id="portfolio" className="page inner-page portfolio-page">
-      <PageIntro kicker="Selected work / 05 pieces" title={<>Proof, not<br /><em>promises.</em></>} description="A few ways we’ve helped small businesses show up with more clarity, confidence and character. Each piece starts with the same question: what should someone understand or feel within the first few seconds?" />
+      <PageIntro kicker="Selected work / 10 pieces" title={<>Proof, not<br /><em>promises.</em></>} description="A few ways we’ve helped small businesses show up with more clarity, confidence and character. Each piece starts with the same question: what should someone understand or feel within the first few seconds?" />
       <div className="portfolio-filters" role="tablist" aria-label="Filter portfolio projects">{filters.map((value) => <button type="button" role="tab" aria-selected={filter === value} className={filter === value ? "is-active" : ""} onClick={() => updateFilter(value)} key={value}>{filterLabels[value]}</button>)}</div>
       <section className="portfolio-grid motion-section" aria-label="Selected Amplify Studio work">
         {visibleProjects.map((project) => (
-          <button className="portfolio-card portfolio-card-button" data-reveal type="button" onClick={() => setActiveProject(project)} key={project.title}>
-            <div className="portfolio-image-wrap"><img src={project.image} alt={project.title} loading="lazy" /><span className="portfolio-view">View <ArrowUpRight size={15} /></span></div>
-            <figcaption><div><h2>{project.title}</h2><p>{project.result}</p></div><span className="portfolio-caption-mark">✳</span></figcaption>
-          </button>
+          <article className="portfolio-card" data-reveal key={project.title}>
+            <button className="portfolio-card-button" type="button" onClick={() => setActiveProject(project)}>
+              <div className="portfolio-image-wrap"><img src={project.image} alt={project.title} loading="lazy" /><span className="portfolio-view">View case study <ArrowUpRight size={15} /></span></div>
+              <figcaption><div><h2>{project.title}</h2><p>{project.result}</p></div><span className="portfolio-caption-mark">✳</span></figcaption>
+            </button>
+            <div className="portfolio-card-footer">
+              {project.tag && <span className="portfolio-live-tag">{project.tag}</span>}
+              {project.liveUrl && <a className="portfolio-live-link" href={project.liveUrl} target="_blank" rel="noopener noreferrer">Visit live site <ArrowUpRight size={14} /></a>}
+            </div>
+          </article>
         ))}
       </section>
       <div className="portfolio-note" data-reveal><p>Website, caption and video samples are shared directly — message us to see more. We can also talk through the kind of work your own business needs next.</p><a className="text-link" href={whatsappUrl()} target="_blank" rel="noreferrer">Ask for more <ArrowUpRight size={15} /></a></div>
@@ -54,10 +60,10 @@ function CaseStudySheet({ project, onClose, sheetStartY }: { project: Project; o
       <div className="case-study-handle" aria-hidden="true" /><button className="case-study-close" type="button" aria-label="Close case study" onClick={onClose}><X size={20} /></button>
       <div className="case-study-content">
         <div className="case-study-hero-image"><img src={project.image} alt={project.title} /></div>
-        <p className="eyebrow">{project.category} / Case study</p><h2 id="case-study-title">{project.title}</h2><p className="case-study-result">{project.result}</p>
+        <p className="eyebrow">{project.category} / Case study</p><h2 id="case-study-title">{project.title}</h2>{project.tag && <span className="portfolio-live-tag case-study-live-tag">{project.tag}</span>}<p className="case-study-result">{project.result}</p>
         <div className="case-study-copy"><CaseStudyBlock title="Challenge" body={project.challenge} /><CaseStudyBlock title="Approach" body={project.approach} /><CaseStudyBlock title="What we delivered" body={project.deliverables} /></div>
         <BeforeAfterSlider beforeAfter={project.beforeAfter} />
-        <div className="case-study-actions">{project.liveUrl && <a className="button button-quiet" href={project.liveUrl} target="_blank" rel="noreferrer">Visit live site <ArrowUpRight size={15} /></a>}<a className="button button-primary" href={whatsappUrl(`Hi, I'd like to start something like ${project.title}`)} target="_blank" rel="noreferrer">Start something like this <ArrowUpRight size={15} /></a></div>
+        <div className="case-study-actions">{project.liveUrl && <a className="button button-quiet" href={project.liveUrl} target="_blank" rel="noopener noreferrer">Visit live site <ArrowUpRight size={15} /></a>}<a className="button button-primary" href={whatsappUrl(`Hi, I'd like to start something like ${project.title}`)} target="_blank" rel="noreferrer">Start something like this <ArrowUpRight size={15} /></a></div>
       </div>
     </aside>
   </div>;
