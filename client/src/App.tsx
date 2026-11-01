@@ -9,6 +9,7 @@ import FAQ from "./pages/FAQ";
 import Contact from "./pages/Contact";
 import Reviews from "./pages/Reviews";
 import { MotionSystem } from "./components/MotionSystem";
+import { Analytics } from "@vercel/analytics/react";
 
 function RouteScrollReset() {
   const [location] = useLocation();
@@ -50,8 +51,11 @@ const ROUTER_BASE = import.meta.env.BASE_URL === "/"
   : import.meta.env.BASE_URL.replace(/\/$/, "");
 
 export default function App() {
+  const analyticsEnabled = typeof window !== "undefined" && !window.location.hostname.endsWith("github.io");
+
   return (
     <WouterRouter base={ROUTER_BASE}>
+      {analyticsEnabled && <Analytics />}
       <AmplifyShell>
         <MotionSystem />
         <RouteScrollReset />
