@@ -37,7 +37,7 @@ function Router() {
             <div>
               <p className="eyebrow mb-4">404 / lost signal</p>
               <h1 className="display-title text-4xl">This page went quiet.</h1>
-              <a className="button button-primary mt-8" href="/">Back to the studio <span>↗</span></a>
+              <a className="button button-primary mt-8" href="/">Back to Amplify <span>↗</span></a>
             </div>
           </div>
         )}

@@ -34,7 +34,7 @@ export const serviceDetails = {
 } as const;
 
 export const aboutContent = {
-  story: "Amplify Studio is a small, focused creative studio for businesses that are ready to look as credible online as they already are in person. We bring practical digital thinking, clear design and fast personal communication together so the next step feels easier to take.",
+  story: "Amplify is a small, focused creative team for businesses that are ready to look as credible online as they already are in person. We bring practical digital thinking, clear design and fast personal communication together so the next step feels easier to take.",
   tools: ["Figma", "Canva", "Photoshop", "HTML/CSS/JS"],
   principles: [
     { title: "Clarity first", body: "People should understand what you do and why it matters without having to work for it." },
@@ -43,16 +43,16 @@ export const aboutContent = {
   ],
 } as const;
 
-export const studioPromise = [
+export const promiseCards = [
   { title: "Sample first", body: "See a preview of your design before you commit." },
   { title: "Fast turnaround", body: "Most smaller graphics in 24-48 hours." },
   { title: "Direct line", body: "You talk to the person doing the work, on WhatsApp." },
   { title: "Revisions built in", body: "Included in every package." },
 ] as const;
 export const packages = [
-  { name: "Starter", hint: "For one clear next step", quoteLabel: "Request a quote", features: ["One focused creative deliverable", "Mobile-first direction", "One revision round"], message: "Hi Amplify Studio, I'd like a quote for the Starter package." },
-  { name: "Professional", hint: "For a stronger presence", quoteLabel: "Request a quote", features: ["A connected set of creative deliverables", "Strategic visual direction", "Two revision rounds", "Priority communication"], message: "Hi Amplify Studio, I'd like a quote for the Professional package." },
-  { name: "Premium", hint: "For the full signal", quoteLabel: "Request a quote", features: ["A complete digital and creative system", "Website-led direction", "Three revision rounds", "Launch support"], message: "Hi Amplify Studio, I'd like a quote for the Premium package." },
+  { name: "Starter", hint: "For one clear next step", quoteLabel: "Request a quote", features: ["One focused creative deliverable", "Mobile-first direction", "One revision round"], message: "Hi Amplify, I'd like a quote for the Starter package." },
+  { name: "Professional", hint: "For a stronger presence", quoteLabel: "Request a quote", features: ["A connected set of creative deliverables", "Strategic visual direction", "Two revision rounds", "Priority communication"], message: "Hi Amplify, I'd like a quote for the Professional package." },
+  { name: "Premium", hint: "For the full signal", quoteLabel: "Request a quote", features: ["A complete digital and creative system", "Website-led direction", "Three revision rounds", "Launch support"], message: "Hi Amplify, I'd like a quote for the Premium package." },
 ] as const;
 export const premiumFaqs = [
   { question: "How long does a project take?", answer: "Most smaller graphics projects can move in 24–48 hours. Websites and connected packages take longer depending on the scope and how ready the content is." },
@@ -67,7 +67,7 @@ export const faqQuestions = [
   { question: "How long does a project take?", answer: "Most flyers and graphics can move in 24–48 hours; websites take longer depending on the scope and content readiness." },
   { question: "What do you need from me to start?", answer: "Your logo, text, photos and preferred colors are a useful starting point. A rough brief is enough; we can shape the rest together." },
   { question: "Can I see a sample before paying?", answer: "Yes, a preview is shown first." },
-  { question: "Do you design for social media too?", answer: "Yes. Social graphics and caption writing are part of the studio's creative support." },
+  { question: "Do you design for social media too?", answer: "Yes. Social graphics and caption writing are part of Amplify's creative support." },
   { question: "What happens after launch?", answer: "We check the edges, hand things over clearly and help you take the next visible step." },
   { question: "Can I request something outside the packages?", answer: "Yes. Message us on WhatsApp and we can discuss a custom quote." },
 ] as const;

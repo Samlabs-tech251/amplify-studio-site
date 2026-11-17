@@ -6,7 +6,7 @@ import { InstallPrompt } from "./InstallPrompt";
 import { InteractiveIntroLoader } from "./InteractiveIntroLoader";
 
 export const WHATSAPP_NUMBER = "2349014350492";
-export const DEFAULT_WHATSAPP_MESSAGE = "Hi Amplify Studio, I'd like to start a project.";
+export const DEFAULT_WHATSAPP_MESSAGE = "Hi Amplify, I'd like to start a project.";
 export function whatsappUrl(message = DEFAULT_WHATSAPP_MESSAGE) { const base = `https://wa.me/${WHATSAPP_NUMBER}`; return `${base}?text=${encodeURIComponent(message)}`; }
 
 const directNavItems = [
@@ -119,14 +119,14 @@ export function AmplifyShell({ children }: { children: ReactNode }) {
       <InteractiveIntroLoader />
       <div className="scroll-progress" style={{ width: `${progress}%` }} aria-hidden="true" />
       <header className={`site-header ${navHidden ? "nav-hidden" : ""}`}>
-        <Link href="/" aria-label="Amplify Studio home"><BrandMark /></Link>
+        <Link href="/" aria-label="Amplify home"><BrandMark /></Link>
         <nav className="top-nav-links" aria-label="Primary navigation">{directNavItems.map(({ href, sectionId, label }) => <Link href={href} key={href} onClick={(event) => goToSection(event, href, sectionId)} className={location === href ? "active" : undefined} aria-current={location === href ? "page" : undefined}>{label}</Link>)}</nav>
         <div className="site-header-actions">
-          <a className="header-project-button" href={whatsappUrl("Hi Amplify Studio, I'd like to start a project.")} target="_blank" rel="noreferrer"><MessageCircle size={15} /> <span>Start a project</span></a>
+          <a className="header-project-button" href={whatsappUrl("Hi Amplify, I'd like to start a project.")} target="_blank" rel="noreferrer"><MessageCircle size={15} /> <span>Start a project</span></a>
           <div className="menu-wrap" ref={menuRef}><button className={`menu-toggle ${menuOpen ? "is-open" : ""}`} type="button" aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen((open) => !open)}>{menuOpen ? <X size={20} /> : <Menu size={21} />}</button></div>
         </div>
       </header>
-      {menuOpen && <div className="menu-overlay" role="dialog" aria-label="Amplify Studio menu"><div className="menu-overlay-inner"><div className="menu-overlay-kicker">Menu / Choose a direction</div><nav className="menu-overlay-links">{menuItems.map(({ href, sectionId, label }, index) => <Link href={href} key={href} onClick={(event) => goToSection(event, href, sectionId)} className={(href.startsWith("/contact#") ? window.location.hash === `#${sectionId}` : location === href) ? "active" : ""} style={{ "--menu-index": index } as CSSProperties}>{label}<span>↗</span></Link>)}</nav><div className="menu-overlay-footer"><a href={whatsappUrl("Hi Amplify Studio, I'd like to start a project.")} target="_blank" rel="noreferrer">WhatsApp</a><a href="https://www.instagram.com/" target="_blank" rel="noreferrer">Instagram</a><a href="mailto:samstudiohub@gmail.com">samstudiohub@gmail.com</a></div></div></div>}
+      {menuOpen && <div className="menu-overlay" role="dialog" aria-label="Amplify menu"><div className="menu-overlay-inner"><div className="menu-overlay-kicker">Menu / Choose a direction</div><nav className="menu-overlay-links">{menuItems.map(({ href, sectionId, label }, index) => <Link href={href} key={href} onClick={(event) => goToSection(event, href, sectionId)} className={(href.startsWith("/contact#") ? window.location.hash === `#${sectionId}` : location === href) ? "active" : ""} style={{ "--menu-index": index } as CSSProperties}>{label}<span>↗</span></Link>)}</nav><div className="menu-overlay-footer"><a href={whatsappUrl("Hi Amplify, I'd like to start a project.")} target="_blank" rel="noreferrer">WhatsApp</a><a href="https://www.instagram.com/" target="_blank" rel="noreferrer">Instagram</a><a href="mailto:samstudiohub@gmail.com">samstudiohub@gmail.com</a></div></div></div>}
       <main className="site-main">{children}</main>
       <nav className="mobile-bottom-dock" aria-label="Mobile navigation">{directNavItems.map(({ href, sectionId, label, shortLabel, icon: Icon }) => <Link href={href} key={href} onClick={(event) => goToSection(event, href, sectionId)} className={location === href ? "active" : ""}><Icon size={16} /><span>{shortLabel || label}</span></Link>)}</nav>
       <InstallPrompt />

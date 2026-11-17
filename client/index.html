@@ -4,11 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <meta name="description" content="Amplify Studio — Nigerian creative studio helping small businesses grow online." />
+    <meta name="description" content="Amplify — Nigerian creative team helping small businesses grow online." />
     <link rel="manifest" href="%BASE_URL%manifest.webmanifest" />
-    <link rel="icon" type="image/svg+xml" href="%BASE_URL%icons/amplify-icon-v5.svg" />
-    <link rel="apple-touch-icon" sizes="192x192" href="%BASE_URL%icons/icon-v5-192.png" />
-    <title>Amplify Studio — Turn up your brand's volume.</title>
+    <link rel="icon" type="image/svg+xml" href="%BASE_URL%icons/amplify-icon-v6.svg" />
+    <link rel="apple-touch-icon" sizes="192x192" href="%BASE_URL%icons/icon-v6-192.png" />
+    <title>Amplify — Turn up your brand's volume.</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet" />
@@ -19,7 +19,7 @@
     <script type="module" src="/src/main.tsx"></script>
     <script defer src="%VITE_ANALYTICS_ENDPOINT%/umami" data-website-id="%VITE_ANALYTICS_WEBSITE_ID%"></script>
   <!-- ============================================================
-  Amplify Studio chat widget (v3, gold and navy theme)
+  Amplify chat widget (v3, gold and navy theme)
   Paste this whole block right before </body>.
   Colors: edit the --ams-* values at the top of the <style>.
   Settings: edit only the CONFIG section inside the <script>.
@@ -209,11 +209,11 @@
     <span class="ams-badge" hidden>1</span>
   </button>
 
-  <div class="ams-panel" id="ams-panel" role="dialog" aria-label="Chat with Amplify Studio">
+  <div class="ams-panel" id="ams-panel" role="dialog" aria-label="Chat with Amplify">
     <div class="ams-head">
       <div class="ams-avatar" aria-hidden="true">A</div>
       <div class="ams-who">
-        <div class="ams-title">Amplify Studio</div>
+        <div class="ams-title">Amplify</div>
         <div class="ams-sub">AI assistant &middot; online</div>
       </div>
       <a class="ams-iconbtn ams-wa" href="#" target="_blank" rel="noopener" aria-label="Chat on WhatsApp" title="Chat on WhatsApp">
@@ -239,9 +239,9 @@
 (function () {
   /* ---------------- LOCAL CONFIG ---------------- */
   var CONFIG = {
-    businessName: "Amplify Studio",
+    businessName: "Amplify",
     whatsapp: "2349014350492",
-    greeting: "Hi, welcome to Amplify Studio. Ask me about our services, packages, or how to get started.",
+    greeting: "Hi, welcome to Amplify. Ask me about our services, packages, or how to get started.",
     teaser: "Questions about our packages? Ask me here.",
     teaserDelayMs: 6000,
     quickReplies: [
@@ -258,9 +258,9 @@
 
   /* Knowledge-base sections 1-13. Answers are kept in the wording of the supplied source. */
   var ENTRIES = [
-    { id: "business-overview", triggers: ["what does amplify studio do", "what is amplify studio", "business overview", "what kind of business", "what is your tagline"], answer: "Amplify Studio is a creative design and digital marketing agency in Lagos. It helps small businesses look credible and grow online with design, video, content and websites.", related: ["Who runs Amplify Studio?", "Where are you based?", "What services do you offer?"] },
-    { id: "founder", triggers: ["who runs amplify studio", "who is the founder", "who founded amplify studio"], answer: "The founder is Samuel Sunday.", related: ["Where are you based?", "What services do you offer?", "How can I contact you?"] },
-    { id: "location", triggers: ["where are you based", "where is amplify studio", "what city are you in", "location"], answer: "Lagos, Nigeria.", related: ["Who runs Amplify Studio?", "What are your working hours?", "How can I contact you?"] },
+    { id: "business-overview", triggers: ["what does amplify do", "what is amplify", "business overview", "what kind of business", "what is your tagline"], answer: "Amplify is a creative design and digital marketing agency in Lagos. It helps small businesses look credible and grow online with design, video, content and websites.", related: ["Who runs Amplify?", "Where are you based?", "What services do you offer?"] },
+    { id: "founder", triggers: ["who runs amplify", "who is the founder", "who founded amplify"], answer: "The founder is Samuel Sunday.", related: ["Where are you based?", "What services do you offer?", "How can I contact you?"] },
+    { id: "location", triggers: ["where are you based", "where is amplify", "what city are you in", "location"], answer: "Lagos, Nigeria.", related: ["Who runs Amplify?", "What are your working hours?", "How can I contact you?"] },
     { id: "contact", triggers: ["how can i contact you", "contact details", "what is your whatsapp", "what is your email", "phone number", "how do i reach you"], answer: "WhatsApp +2349014350492, phone 09014350492, or email samstudiohub@gmail.com.", related: ["How do I start a project?", "What are your working hours?", "Can I get a custom quote?"] },
     { id: "hours", triggers: ["what are your working hours", "what time do you open", "what time are you open", "are you open on sundays", "when are you open", "opening hours"], answer: "Monday to Saturday, 9am to 7pm. We are closed on Sundays.", related: ["How can I contact you?", "I have an urgent request", "Where are you based?"] },
     { id: "urgent", triggers: ["urgent request", "urgent", "need it urgently", "emergency project"], answer: "Send a WhatsApp message to +2349014350492. Urgent WhatsApp messages are answered at any time.", handoff: true, related: ["How can I contact you?", "How do I start a project?", "What are your working hours?"] },
@@ -293,7 +293,7 @@
     { id: "portfolio", triggers: ["can i see examples of your work", "portfolio", "see your work", "examples of your work"], answer: "Yes. Open the Portfolio section on our website: https://samlabs-tech251.github.io/amplify-studio-site/", related: ["What services do you offer?", "How do I start a project?", "How can I contact you?"] },
     { id: "custom-quote", triggers: ["can i get a custom quote", "custom quote", "something different", "outside the packages"], answer: "Yes, the team can discuss custom needs. Contact us on WhatsApp or email.", handoff: true, related: ["What services do you offer?", "How much is a website?", "How do I start a project?"] },
     { id: "discounts", triggers: ["do you offer discounts", "discount", "cheaper price"], answer: "Pricing is as listed. For anything else, the team confirms on WhatsApp or email.", related: ["How much are your creative packages?", "How much is a website?", "Can I get a custom quote?"] },
-    { id: "outside-lagos", triggers: ["do you work with businesses outside lagos", "outside lagos", "work in another location"], answer: "Amplify Studio is based in Lagos. For availability for your location, contact the team on WhatsApp or email.", related: ["Where are you based?", "How can I contact you?", "Can I get a custom quote?"] }
+    { id: "outside-lagos", triggers: ["do you work with businesses outside lagos", "outside lagos", "work in another location"], answer: "Amplify is based in Lagos. For availability for your location, contact the team on WhatsApp or email.", related: ["Where are you based?", "How can I contact you?", "Can I get a custom quote?"] }
   ];
 
   var root = document.getElementById("ams-chat");
@@ -346,7 +346,7 @@
   }
   function findAnswer(query) {
     var q = normalize(query);
-    if (/^(hi|hello|hey|good morning|good afternoon|good evening)\b/.test(q)) return { answer: "Hi, welcome to Amplify Studio. Ask me about our services, packages, or how to get started.", related: CONFIG.quickReplies.slice(0, 3) };
+    if (/^(hi|hello|hey|good morning|good afternoon|good evening)\b/.test(q)) return { answer: "Hi, welcome to Amplify. Ask me about our services, packages, or how to get started.", related: CONFIG.quickReplies.slice(0, 3) };
     if (/^(thanks|thank you|thx)\b/.test(q)) return { answer: "You’re welcome. Is there anything else I can help with?", related: CONFIG.quickReplies.slice(0, 3) };
     if (/^(bye|goodbye|see you)\b/.test(q)) return { answer: "Thank you. Message us on WhatsApp whenever you are ready.", related: ["How do I get started?", "How can I contact you?"] };
     if (/(angry|upset|complain|complaint|dispute)/.test(q) && /payment|refund|deposit|money|charge/.test(q)) return { answer: "Refund requests and disputes are handled by the team directly on WhatsApp or email.", handoff: true, related: ["What is your refund policy?", "How do I pay?", "How can I contact you?"] };

@@ -19,7 +19,7 @@ export function InteractiveIntroLoader() {
 
   if (!visible) return null;
   return (
-    <div className="intro-loader-v2" role="dialog" aria-label="Loading Amplify Studio">
+    <div className="intro-loader-v2" role="dialog" aria-label="Loading Amplify">
       <div className="intro-loader-content">
         <BrandMark compact />
         <span className="intro-loader-line" aria-hidden="true"><i /></span>

@@ -14,7 +14,7 @@ export default function Reviews() {
           <h2>A few honest<br /><em>words help.</em></h2>
           <form className="contact-form review-form" action={FORMSPREE_ENDPOINT} method="POST">
             <label><span>Business name</span><input name="business_name" type="text" placeholder="Your business name" required /></label>
-            <label><span>Your review</span><textarea name="review" placeholder="Tell us what it was like working with Amplify Studio" rows={7} required /></label>
+            <label><span>Your review</span><textarea name="review" placeholder="Tell us what it was like working with Amplify" rows={7} required /></label>
             <button className="button button-primary" type="submit">Send review <ArrowUpRight size={16} /></button>
           </form>
           <p className="review-privacy">Your review is sent to our inbox for approval. It will not appear publicly until we add it manually.</p>

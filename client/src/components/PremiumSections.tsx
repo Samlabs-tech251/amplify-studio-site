@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, type CSSProperties, type PointerEvent as R
 import { ArrowLeft, ArrowRight, ArrowUpRight, Check, Mail, MessageCircle } from "lucide-react";
 import { Link } from "wouter";
 import { whatsappUrl } from "./AmplifyShell";
-import { impactStats, packages, premiumFaqs, processSteps, selectedWork, studioPromise, trustBar } from "../data/siteData";
+import { impactStats, packages, premiumFaqs, processSteps, selectedWork, promiseCards, trustBar } from "../data/siteData";
 
 export function SelectedWorkSection() {
   const [active, setActive] = useState(0);
@@ -23,7 +23,7 @@ export function SelectedWorkSection() {
 }
 
 export function StatsSection() {
-  return <section className="premium-section stats-section motion-section" aria-label="Amplify Studio impact"><div className="stats-grid">{impactStats.map((stat) => <Stat key={stat.label} {...stat} />)}</div></section>;
+  return <section className="premium-section stats-section motion-section" aria-label="Amplify impact"><div className="stats-grid">{impactStats.map((stat) => <Stat key={stat.label} {...stat} />)}</div></section>;
 }
 
 function Stat({ value, label }: { value: string; label: string }) {
@@ -41,8 +41,8 @@ export function ProcessSection() {
   return <section className="premium-section process-section motion-section" aria-labelledby="process-title"><div className="process-intro" data-reveal><p className="eyebrow">The process / Clear by design</p><h2 id="process-title" className="section-title">From rough idea<br /><em>to ready.</em></h2><p className="section-lede">A good process keeps the work feeling focused. Each step gives the next one something stronger to build on.</p></div><div className="process-timeline" ref={timelineRef}><div className="process-progress-track" aria-hidden="true"><span style={{ height: `${progress * 100}%` }} /></div><div className="process-stack">{processSteps.map((step, index) => <article className="process-card" style={{ "--step-index": index } as CSSProperties} data-reveal key={step.number}><span className="process-number">{step.number}</span><div><h3>{step.title}</h3><p>{step.body}</p><small className="process-client-action">{step.clientAction}</small></div><span className="process-marker">✦</span></article>)}</div></div></section>;
 }
 
-export function StudioPromiseSection() {
-  return <section id="reviews" className="premium-section promise-section motion-section" aria-labelledby="promise-title"><div className="premium-section-heading" data-reveal><div><p className="eyebrow">Studio promise / How we work</p><h2 id="promise-title" className="section-title">What you can<br /><em>count on.</em></h2><p className="section-lede">A clear, human process matters as much as the final piece. These are the standards we bring to every project, whether it starts with a flyer or a full digital presence.</p></div></div><div className="promise-grid">{studioPromise.map((item) => <article className="promise-card" data-reveal key={item.title}><span className="promise-mark">✦</span><h3>{item.title}</h3><p>{item.body}</p></article>)}</div><a className="button button-primary promise-button" href={whatsappUrl("Hi, I'd like to request a free sample")} target="_blank" rel="noreferrer">Request a free sample <ArrowUpRight size={16} /></a></section>;
+export function PromiseSection() {
+  return <section id="reviews" className="premium-section promise-section motion-section" aria-labelledby="promise-title"><div className="premium-section-heading" data-reveal><div><p className="eyebrow">Promise / How we work</p><h2 id="promise-title" className="section-title">What you can<br /><em>count on.</em></h2><p className="section-lede">A clear, human process matters as much as the final piece. These are the standards we bring to every project, whether it starts with a flyer or a full digital presence.</p></div></div><div className="promise-grid">{promiseCards.map((item) => <article className="promise-card" data-reveal key={item.title}><span className="promise-mark">✦</span><h3>{item.title}</h3><p>{item.body}</p></article>)}</div><a className="button button-primary promise-button" href={whatsappUrl("Hi, I'd like to request a free sample")} target="_blank" rel="noreferrer">Request a free sample <ArrowUpRight size={16} /></a></section>;
 }
 
 export function PackagesSection() {
@@ -55,5 +55,5 @@ export function PremiumFaqSection() {
 }
 
 export function FinalCtaFooter() {
-  return <><section className="premium-final-cta motion-section" data-reveal><p className="eyebrow">Ready when you are</p><h2>Let’s build something<br /><em>people remember.</em></h2><a className="button button-primary magnetic" href={whatsappUrl()} target="_blank" rel="noreferrer"><MessageCircle size={17} /> Start a conversation <ArrowUpRight size={16} /></a></section><div className="trust-bar" data-reveal aria-label="Amplify Studio trust points">{trustBar.map((item) => <span key={item}>{item}</span>)}</div><footer className="premium-footer"><div><Link href="/" className="footer-brand">Amplify<span>Studio</span></Link><p>Visual and digital presence for businesses ready for what is next.</p></div><div className="footer-links"><a href={whatsappUrl()} target="_blank" rel="noreferrer"><MessageCircle size={15} /> WhatsApp</a><a href="https://www.instagram.com/" target="_blank" rel="noreferrer">Instagram <ArrowUpRight size={14} /></a><a href="mailto:samstudiohub@gmail.com"><Mail size={15} /> Email</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div><small>© {new Date().getFullYear()} Amplify Studio</small></footer></>;
+  return <><section className="premium-final-cta motion-section" data-reveal><p className="eyebrow">Ready when you are</p><h2>Let’s build something<br /><em>people remember.</em></h2><a className="button button-primary magnetic" href={whatsappUrl()} target="_blank" rel="noreferrer"><MessageCircle size={17} /> Start a conversation <ArrowUpRight size={16} /></a></section><div className="trust-bar" data-reveal aria-label="Amplify trust points">{trustBar.map((item) => <span key={item}>{item}</span>)}</div><footer className="premium-footer"><div><Link href="/" className="footer-brand">Amplify<span></span></Link><p>Visual and digital presence for businesses ready for what is next.</p></div><div className="footer-links"><a href={whatsappUrl()} target="_blank" rel="noreferrer"><MessageCircle size={15} /> WhatsApp</a><a href="https://www.instagram.com/" target="_blank" rel="noreferrer">Instagram <ArrowUpRight size={14} /></a><a href="mailto:samstudiohub@gmail.com"><Mail size={15} /> Email</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div><small>© {new Date().getFullYear()} Amplify</small></footer></>;
 }

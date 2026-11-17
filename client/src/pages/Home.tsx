@@ -2,7 +2,7 @@ import { ArrowDown, ArrowRight, ArrowUpRight, Globe2, MessageCircle, Sparkles } 
 import { useEffect, useRef } from "react";
 import { Link } from "wouter";
 import { whatsappUrl } from "../components/AmplifyShell";
-import { FinalCtaFooter, PackagesSection, PremiumFaqSection, ProcessSection, SelectedWorkSection, StatsSection, StudioPromiseSection } from "../components/PremiumSections";
+import { FinalCtaFooter, PackagesSection, PremiumFaqSection, ProcessSection, SelectedWorkSection, StatsSection, PromiseSection } from "../components/PremiumSections";
 import { selectedWork } from "../data/siteData";
 
 const proofImages: readonly [string, string][] = selectedWork.map(({ title, image }) => [title, image]);
@@ -79,19 +79,19 @@ export default function Home() {
   return (
     <div className="page page-home">
       <section id="home" className="hero-section hero-minimal motion-section">
-        <div className="hero-emblem" role="img" aria-label="Amplify Studio creative direction">
+        <div className="hero-emblem" role="img" aria-label="Amplify creative direction">
           <svg className="hero-emblem-svg" viewBox="0 0 200 200" aria-hidden="true">
             <defs><path id="hero-emblem-path" d="M 100,100 m -76,0 a 76,76 0 1,1 152,0 a 76,76 0 1,1 -152,0" /></defs>
             <circle className="hero-emblem-ring" cx="100" cy="100" r="91" />
             <circle className="hero-emblem-core-circle" cx="100" cy="100" r="49" />
-            <text className="hero-emblem-text"><textPath href="#hero-emblem-path">AMPLIFY STUDIO · CREATIVE DIRECTION ·</textPath></text>
+            <text className="hero-emblem-text"><textPath href="#hero-emblem-path">AMPLIFY · CREATIVE DIRECTION ·</textPath></text>
             <circle className="hero-emblem-dot" cx="100" cy="100" r="7" />
           </svg>
         </div>
         <div className="hero-minimal-copy" data-reveal>
           <p className="eyebrow hero-eyebrow">Creative direction for the next chapter</p>
           <h1 className="display-title hero-title" aria-label="Make your business impossible to miss."><span className="hero-word">Make</span> <span className="hero-word">your</span> <span className="hero-word">business</span><br /><em><span className="hero-word hero-word-gold">impossible</span> <span className="hero-word hero-word-gold">to</span> <span className="hero-word hero-word-gold">miss.</span></em></h1>
-          <p className="hero-subtext">Amplify Studio builds the visual and digital presence small businesses need to look credible, clear and ready for what is next.</p>
+          <p className="hero-subtext">Amplify builds the visual and digital presence small businesses need to look credible, clear and ready for what is next.</p>
           <div className="hero-actions"><a className="button button-primary magnetic" href={whatsappUrl()} target="_blank" rel="noreferrer"><MessageCircle size={17} /> Start a project</a><Link className="button button-quiet magnetic" href="/portfolio">View work <ArrowRight size={16} /></Link></div>
         </div>
         <a className="hero-scroll-cue" href="#proof-of-work" aria-label="Scroll to proof of work"><span>Scroll to explore</span><ArrowDown size={15} /></a>
@@ -125,7 +125,7 @@ export default function Home() {
       <section id="portfolio"><SelectedWorkSection /></section>
       <StatsSection />
       <ProcessSection />
-      <StudioPromiseSection />
+      <PromiseSection />
       <PackagesSection />
       <section id="faq"><PremiumFaqSection /></section>
       <FinalCtaFooter />

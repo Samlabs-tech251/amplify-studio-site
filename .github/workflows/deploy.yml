@@ -1,4 +1,4 @@
-name: Deploy Amplify Studio to GitHub Pages
+name: Deploy Amplify to GitHub Pages
 
 on:
   push:

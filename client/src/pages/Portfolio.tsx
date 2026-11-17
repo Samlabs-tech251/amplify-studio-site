@@ -34,7 +34,7 @@ export default function Portfolio() {
     <div id="portfolio" className="page inner-page portfolio-page">
       <PageIntro kicker="Selected work / 10 pieces" title={<>Proof, not<br /><em>promises.</em></>} description="A few ways we’ve helped small businesses show up with more clarity, confidence and character. Each piece starts with the same question: what should someone understand or feel within the first few seconds?" />
       <div className="portfolio-filters" role="tablist" aria-label="Filter portfolio projects">{filters.map((value) => <button type="button" role="tab" aria-selected={filter === value} className={filter === value ? "is-active" : ""} onClick={() => updateFilter(value)} key={value}>{filterLabels[value]}</button>)}</div>
-      <section className="portfolio-grid motion-section" aria-label="Selected Amplify Studio work">
+      <section className="portfolio-grid motion-section" aria-label="Selected Amplify work">
         {visibleProjects.map((project) => (
           <article className="portfolio-card" data-reveal key={project.title}>
             <button className="portfolio-card-button" type="button" onClick={() => setActiveProject(project)}>

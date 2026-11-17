@@ -62,10 +62,10 @@ export function InstallPrompt() {
   };
 
   return (
-    <aside className="install-prompt" aria-label="Install Amplify Studio">
+    <aside className="install-prompt" aria-label="Install Amplify">
       <button className="install-prompt-main" type="button" onClick={install}>
         <span className="install-prompt-icon"><Download size={15} /></span>
-        <span><strong>Install Amplify Studio</strong><small>Keep us close</small></span>
+        <span><strong>Install Amplify</strong><small>Keep us close</small></span>
       </button>
       <button className="install-prompt-dismiss" type="button" onClick={dismiss} aria-label="Dismiss install prompt"><X size={14} /></button>
     </aside>
