@@ -212,6 +212,7 @@ export default defineConfig({
   plugins,
   base: githubPagesBase,
   resolve: {
+    dedupe: ["react", "react-dom"],
     alias: {
       "@": path.resolve(import.meta.dirname, "client", "src"),
       "@shared": path.resolve(import.meta.dirname, "shared"),
